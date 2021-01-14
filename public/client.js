@@ -2,7 +2,6 @@ async function createAcct() {
     let createAcct = {
       username : document.getElementById('username').value,
       password : document.getElementById('password').value,
-      password2: document.getElementById('passwordConfirm').value,
       email : document.getElementById('email').value,
       admin : false
     };

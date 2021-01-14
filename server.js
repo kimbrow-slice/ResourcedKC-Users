@@ -57,17 +57,15 @@ app.get('/reset', function (req, res) {
     });
 
 app.post('/register', async function (req,res) {
-  var newUser = new User(req.body);
+  
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    newUser.save({
-      email: req.body.email,
-      username: req.body.username,  
-      password: hashedPassword
-    })
-    res.redirect('/login')
+    req.body.password = await bcrypt.hash(req.body.password, 10);
+    var newUser = new User(req.body);
+    newUser.save(function(error,user){
+      res.redirect('/login');
+    });  
   } catch{
-    res.redirect('/register')
+    res.redirect('/register');
   }
-  console.log(newUser)
+  console.log(newUser);
 });

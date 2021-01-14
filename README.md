@@ -1,2 +1,2 @@
 # ResourcedKC-Users
- This will be a communit resouce web application 
+ This will be a community resouce web application 

@@ -1,0 +1,30 @@
+.submit{
+    color: #c7c7c7;
+}
+
+.submit:hover{
+    color:#08cc01;
+}
+  
+.title{
+    padding: 40px 0 40px 0;
+    font-size: 25px;
+    text-align:center;
+}
+
+.login {
+    padding: 40px 0 40px 0;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  i {
+    font-size: 40px;
+    color: #c7c7c7;
+    text-align: center;
+    margin: 40px;
+  }
+  
+  i:hover {
+    color: #08cc01;
+  }

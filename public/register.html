@@ -55,7 +55,6 @@
               <input id="passwordConfirm" name="passwordConfirm" type="password" maxlength="100" minlength="8"  autocomplete="off" required />
               <br />
               <br />
-              <input type="checkbox" onclick="showPass()">Show Password
               <br />
               <br />
               <br />
@@ -97,16 +96,5 @@
       src="https://kit.fontawesome.com/fc5d2b5d29.js"
       crossorigin="anonymous"
     ></script>
-    <script>
-    function showPass() {
-  var x = document.getElementById("password");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
-    </script>
-
   </body>
 </html>

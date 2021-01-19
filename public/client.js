@@ -2,7 +2,7 @@ async function createAcct() {
     let createAcct = {
       username : document.getElementById('username').value,
       password : document.getElementById('password').value,
-      password2: document.getElementById('passwordConfirm').value,
+
       email : document.getElementById('email').value,
       admin : false
     };
@@ -22,6 +22,7 @@ async function createAcct() {
     }
     
     return createAcct;
+
   }
 
   async function findResources() {
@@ -56,4 +57,5 @@ async function createAcct() {
 
   function test (arrayobject1){
     array[0].shelters
+
   }

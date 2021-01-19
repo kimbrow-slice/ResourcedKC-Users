@@ -71,3 +71,25 @@ app.post('/register',function (req,res) {
       });
     });
 });
+
+
+
+// // // // // CLIENT SIDE // // // // //
+
+app.get('/resources/emergency_shelter', function (req,res) {
+  //"if the service of the resource matches the GET, then respond with that resource's information"
+  //"if no resources are categorized to match the GET, respond that no resources exist"
+  //"if error, respond with error"
+});
+
+app.get('/resources/housing', function (req,res) {
+
+});
+
+app.get('/resources/financial_assistance', function (req,res) {
+
+});
+
+app.get('/resources/...', function (req,res) {
+
+});

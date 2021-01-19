@@ -23,3 +23,37 @@ async function createAcct() {
     
     return createAcct;
   }
+
+  async function findResources() {
+    let shelters = document.getElementById('sheltercheck').checked; //any checkmarked services;
+    let finance  = document.getElementById('financecheck').checked;
+    let housing  = document.getElementById('housingcheck').checked;
+
+    let response = [];
+
+    let requestOptions = {
+      method  : "GET",
+      headers : { "Content-Type" : "application/json" },
+    };
+
+    if (shelters) {
+      const shelterresponse = await fetch("/resources/emergency_shelters", requestionOptions);
+      response[0] = { "shelters" : shelterresponse.body }; //[{}, {}, {}]
+    }
+    if (finance) {
+      const financeresponse = await fetch("/resources/financial_assistance", requestOptions);
+      response[1] = { "finance" : financeresponse.body };
+    }
+    if (housing) {
+      const housingresponse = await fetch ("resources/housing", requestOptions);
+      response[2] = { "housing" : housingresponse.body };
+    }
+
+    // [ {"shelters" : [{}, {}, {}]}, {"xresponse":[{},{}] } ]
+   
+    // response.shelters
+  }
+
+  function test (arrayobject1){
+    array[0].shelters
+  })

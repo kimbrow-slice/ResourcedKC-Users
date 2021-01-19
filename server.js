@@ -19,7 +19,7 @@ const mongoDB =
   "mongodb+srv://dbAdmin:SKCstudent@cluster0.ewhdg.mongodb.net/ResourcedKC?retryWrites=true&w=majority";
 
 const User = require('./models/userSchema.js');
-const userSchema = require('./models/userSchema.js');
+
 
 
 

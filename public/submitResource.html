@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <!--META DATA TAGS-->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <!--TITLE-->
+    <title>ResourcedKC</title>
+    <!--STYLESHEETS-->
+    <link rel="stylesheet" href="CSS/admin.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body >
+    <!--NAV-->
+
+    <!--MAIN CONTENT-->
+
+    <section>
+        <div id="container">
+          <div class="row">
+            <div class="col-md-offset-1 col-md-11">
+              
+            </div>
+          </div>
+          <div class="col-md">
+            <h2 class="title">Add your Organaiztion to the <strong>ResourcedKC</strong> list!</h2>
+            <a class="home" href="index.html"
+              ><i class="fas fa-home"></i></a>
+            <div class="createResource">
+
+              <br />
+              <br />
+              <label for="orgName">Organaiztion Name: </label>
+              <input id="orgName" type="text" maxlength="100" onkeypress="return /^[a-zA-Z\s]*$/i.test(event.key)" autocomplete="off" />
+              <br />
+              <br />
+              <label for="services">Services Offered: </label>
+              <input id="services" type="text" maxlength="500" onkeypress="return /^[a-zA-Z\s]*$/i.test(event.key)" autocomplete="off" />
+              <br />
+              <br />
+              <label for="number">Phone Number: </label>
+              <input id="number" type="text" maxlength="11"  autocomplete="off" pattern="[0-9\/]*" /> <!--regex add here for only 0-9 input-->
+              <br />
+              <br />
+              <label for="email">Email: </label>
+              <input id="email" type="text" maxlength="150"  autocomplete="off" />
+              <br />
+              <br />
+              <label for="website">Website: </label>
+              <input id="website" type="text" maxlength="150"  autocomplete="off" />
+              <br />
+              <br />
+              <button class="button" type="submit" onclick="submitResource()"><strong>Submit</strong></button>
+           
+            </div>
+        </div>
+        </div>
+      </section>
+
+    <!--FOOTER-->
+    <footer class="footer">
+
+    </footer>
+
+    <!--SCRIPTS-->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="client.js"></script>
+    <script
+      src="https://kit.fontawesome.com/fc5d2b5d29.js"
+      crossorigin="anonymous"
+    ></script>
+
+  </body>
+</html>

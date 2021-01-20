@@ -12,6 +12,8 @@ const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
 const initalizePassport = require('./passport-config.js');
+const methodOverride = require('method-override');
+
 
 mongoose.set("useFindAndModify", false);
 let port = process.env.PORT || 4050;
@@ -20,9 +22,6 @@ const mongoDB =
 
 const User = require('./models/userSchema.js');
 const Resource = require('./models/filterSchema.js');
-
-
-
 
 mongoose.connect(
   mongoDB,
@@ -41,21 +40,19 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride('_method'));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(session({
-  secret:process.env.SEESION_SECRET,
-  resave: false,
-  saveUninitialized: false
+app.use(session({ 
+  secret : process.env.SEESION_SECRET,
+  resave : false,
+  saveUninitialized : false
 }));
-
 
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error: "));
-
-
 initalizePassport(
   passport, 
   username => User.findOne( {'username':username}).lean(),
@@ -66,50 +63,73 @@ app.get('/', checkAuthed, function (req, res) {
     res.sendFile(__dirname + '/public/index.html');
     });
 
-app.get('/login', function (req, res) {
+
+app.get('/login', checkNotAuthed ,function (req, res) {
     res.sendFile(__dirname + '/public/login.html');
     });
 
+app.post('/login', checkNotAuthed, passport.authenticate('local', {
+      successRedirect : '/',
+      failureRedirect: '/login',
+      failureFlash: true
+    })); 
 
-
-app.post('/login',passport.authenticate('local', {
-  successRedirect : '/',
-  failureRedirect: '/login',
-  failureFlash: true
-})); //req, res) => {
-
-  // let authedUser = req.body.password + req.body.username;
-  // if(req.body.username != username ){
-  //   res.statusCode = 400;
-  //   res.failureFlash = true;
-  //   console.log('Username does not match our records');
-  //   res.failureRedirect = '/login'
-  //   console.log('Welcome to login');
-  // }
-  // if(req.body.password != password){
-  //   res.statusCode = 400;
-  //   res.failureFlash = true;
-  //   console.log('Password does not match our records');
-  //   res.failureRedirect = '/login'
-  //   console.log('Welcome to login');
-  // }
-  // if(req.body.username && req.body.password === authedUser){
-  //   res.statusCode = 200;
-  //   res.successRedirect = '/'
-  //   console.log('Welcome to login');
-  // }
-
-  //   })
+app.delete('/logout', (req,res) => {
+    req.logOut();
+    req.redirect('/login');
+})
+    
+    function checkAuthed(req, res, next){
+      if(req.isAuthenticated()){
+        return next();
+      }
+    
+      res.redirect('/login');
+    }
+    
+    function checkNotAuthed(req, res, next){
+      if(req.isAuthenticated()){
+       return res.redirect('/');
+      }
+      next();
+    }
+    
+    
+    
+    //req, res) => {
+    
+      // let authedUser = req.body.password + req.body.username;
+      // if(req.body.username != username ){
+      //   res.statusCode = 400;
+      //   res.failureFlash = true;
+      //   console.log('Username does not match our records');
+      //   res.failureRedirect = '/login'
+      //   console.log('Welcome to login');
+      // }
+      // if(req.body.password != password){
+      //   res.statusCode = 400;
+      //   res.failureFlash = true;
+      //   console.log('Password does not match our records');
+      //   res.failureRedirect = '/login'
+      //   console.log('Welcome to login');
+      // }
+      // if(req.body.username && req.body.password === authedUser){
+      //   res.statusCode = 200;
+      //   res.successRedirect = '/'
+      //   console.log('Welcome to login');
+      // }
+    
+      //   })
     
 
-app.get('/register', function (req, res) {
+app.get('/register', checkNotAuthed, function (req, res) {
     res.sendFile(__dirname + '/public/register.html');
     });
 app.get('/reset', function (req, res) {
         res.sendFile(__dirname + '/public/reset.html');
     });
 
-app.post('/register', async function (req,res) {
+app.post('/register',checkNotAuthed,  async function (req,res) {
   
   try {
     req.body.password = await bcrypt.hash(req.body.password, 10);
@@ -120,6 +140,7 @@ app.post('/register', async function (req,res) {
   } catch{
     res.redirect('/register');
   }
+  // console.log(newUser);
 });
 
 
@@ -185,10 +206,10 @@ app.get('/resources/rehab', function (req,res) {
       res.send(resources);
 });
 
+
 function checkAuthed(req, res, next){
   if(req.isAuthenticated()){
     return next();
   }
 
-  res.redirect('/login');
-}
+

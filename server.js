@@ -76,10 +76,10 @@ app.post('/login', checkNotAuthed, passport.authenticate('local', {
 
 app.delete('/logout', (req,res) => {
     req.logOut();
-    req.redirect('/login');
-})
+    res.redirect('/login');
+});
     
-    function checkAuthed(req, res, next){
+  function checkAuthed(req, res, next){
       if(req.isAuthenticated()){
         return next();
       }
@@ -87,7 +87,7 @@ app.delete('/logout', (req,res) => {
       res.redirect('/login');
     }
     
-    function checkNotAuthed(req, res, next){
+  function checkNotAuthed(req, res, next){
       if(req.isAuthenticated()){
        return res.redirect('/');
       }
@@ -165,6 +165,7 @@ Resource.find({
     if(err) return console.error(err);
     res.send(resources);
 });
+});
 
 app.get('/resources/financialAssistance', function (req,res) {
   Resource.find({
@@ -172,6 +173,7 @@ app.get('/resources/financialAssistance', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
+});
 });
 
 app.get('/resources/foodPantries', function (req,res) {
@@ -181,6 +183,7 @@ app.get('/resources/foodPantries', function (req,res) {
       if(err) return console.error(err);
       res.send(resources);
 });
+});
 
 app.get('/resources/healthClinics', function (req,res) {
   Resource.find({
@@ -189,6 +192,7 @@ app.get('/resources/healthClinics', function (req,res) {
       if(err) return console.error(err);
       res.send(resources);
 });
+});
 
 app.get('/resources/clothing', function (req,res) {
   Resource.find({
@@ -196,6 +200,7 @@ app.get('/resources/clothing', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
+})
 });
 
 app.get('/resources/rehab', function (req,res) {
@@ -205,11 +210,4 @@ app.get('/resources/rehab', function (req,res) {
       if(err) return console.error(err);
       res.send(resources);
 });
-
-
-function checkAuthed(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  }
-
-
+})});

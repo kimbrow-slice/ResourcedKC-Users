@@ -45,10 +45,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(session({
-  secret:process.env.SEESION_SECRET,
-  resave: false,
-  saveUninitialized: false
+app.use(session({ 
+  secret : process.env.SEESION_SECRET,
+  resave : false,
+  saveUninitialized : false
 }));
 
 

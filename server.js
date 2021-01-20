@@ -21,7 +21,7 @@ const mongoDB =
   "mongodb+srv://dbAdmin:SKCstudent@cluster0.ewhdg.mongodb.net/ResourcedKC?retryWrites=true&w=majority";
 
 const User = require('./models/userSchema.js');
-
+const Resource = require('./models/filterSchema.js');
 
 mongoose.connect(
   mongoDB,
@@ -148,21 +148,68 @@ app.post('/register',checkNotAuthed,  async function (req,res) {
 
 // // // // // CLIENT SIDE // // // // //
 
-app.get('/resources/emergency_shelter', function (req,res) {
-  //"if the service of the resource matches the GET, then respond with that resource's information"
+app.get('/resources/emergencyShelter', function (req,res) {
+  Resource.find({
+    services : 'Housing'
+  }, function (err, resources) {
+    if(err) return console.error(err);
+    res.send(resources);
   //"if no resources are categorized to match the GET, respond that no resources exist"
   //"if error, respond with error"
 });
 
 app.get('/resources/housing', function (req,res) {
-
+Resource.find({
+  services : 'Housing' // finds all resources in db with services listed as housing
+}, function (err, resources) {
+    if(err) return console.error(err);
+    res.send(resources);
 });
 
-app.get('/resources/financial_assistance', function (req,res) {
-
+app.get('/resources/financialAssistance', function (req,res) {
+  Resource.find({
+    services : 'Financial Assistance'
+  }, function (err, resources) {
+      if(err) return console.error(err);
+      res.send(resources);
 });
 
-app.get('/resources/...', function (req,res) {
-
+app.get('/resources/foodPantries', function (req,res) {
+  Resource.find({
+    services : 'Food Pantries'
+  }, function (err, resources) {
+      if(err) return console.error(err);
+      res.send(resources);
 });
+
+app.get('/resources/healthClinics', function (req,res) {
+  Resource.find({
+    services : 'Health Clinics'
+  }, function (err, resources) {
+      if(err) return console.error(err);
+      res.send(resources);
+});
+
+app.get('/resources/clothing', function (req,res) {
+  Resource.find({
+    services : 'Clothing Closets'
+  }, function (err, resources) {
+      if(err) return console.error(err);
+      res.send(resources);
+});
+
+app.get('/resources/rehab', function (req,res) {
+  Resource.find({
+    services : 'Rehab and Detox'
+  }, function (err, resources) {
+      if(err) return console.error(err);
+      res.send(resources);
+});
+
+
+function checkAuthed(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+
 

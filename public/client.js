@@ -26,9 +26,13 @@ async function createAcct() {
   }
 
   async function findResources() {
-    let shelters = document.getElementById('shelterscheck').checked; //any checkmarked services;
-    let finance  = document.getElementById('financecheck').checked;
+    let shelters = document.getElementById('shelterscheck').checked;
     let housing  = document.getElementById('housingcheck').checked;
+    let finance  = document.getElementById('financecheck').checked;
+    let food     = document.getElementById('foodcheck').chekced;
+    let health   = document.getElementById('healthcheck').checked;
+    let clothing = document.getElementById('clothingcheck').checked;
+    let rehab    = document.getElementById('rehabcheck').checked;
 
     let response = [];
 
@@ -46,8 +50,24 @@ async function createAcct() {
       response.push({ "finance" : financeresponse.body });
     }
     if (housing) {
-      const housingresponse = await fetch ("resources/housing", requestOptions);
+      const housingresponse = await fetch ("/resources/housing", requestOptions);
       response.push({ "housing" : housingresponse.body });
+    }
+    if (food) {
+      const foodresponse = await fetch ("/resources/foodpantries", requestOptions);
+      response.push({ "food" : foodresponse.body });
+    }
+    if (health) {
+      const healthresponse = await fetch ("/resources/healthclinics", requestOptions);
+      response.push({ "health" : healthresponse.body });
+    }
+    if (clothing) {
+      const clothingresponse = await fetch ("/resources/clothing", requestOptions);
+      response.push({ "clothing" : clothingresponse.body })
+    }
+    if (rehab)  {
+      const rehabresponse = await fetch ("/resources/clothing", requestOptions);
+      response.push({ "rehab" : rehabresponse.body })
     }
 
     // [ {"shelters" : [{}, {}, {}]}, {"xresponse":[{},{}] } ]
@@ -59,3 +79,30 @@ async function createAcct() {
     array[0].shelters
 
   }
+    
+  async function submitResource() {​​​​​
+  let node = {​​​​​
+  name : document.getElementById('orgName').value,
+  description : document.getElementById("services").value,
+  phone : document.getElementById("number").value,
+  email : document.getElementById("email").value,
+  website : document.getElementById("website").value
+      }​​​​​;
+
+  let requestOptions = {​​​​​
+  method : "POST",
+  body : JSON.stringify(node),
+  headers : {​​​​​ "Content-Type":"application/json" }​​​​​,
+      }​​​​​;
+  alert('You have added in your organizations information');
+  window.location.href = 'index.html';
+  const response = await fetch("/resources", requestOptions);
+  if (res.status != 200) {​​​​​
+  throw Error("Error!");
+      }​​​​​
+  return node;
+    }​​​​​
+
+
+  }
+

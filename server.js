@@ -12,6 +12,7 @@ const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
 const initalizePassport = require('./passport-config.js');
+const methodOverride = require('method-override');
 
 
 mongoose.set("useFindAndModify", false);
@@ -20,9 +21,6 @@ const mongoDB =
   "mongodb+srv://dbAdmin:SKCstudent@cluster0.ewhdg.mongodb.net/ResourcedKC?retryWrites=true&w=majority";
 
 const User = require('./models/userSchema.js');
-
-
-
 
 
 mongoose.connect(
@@ -42,6 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride('_method'));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -65,15 +64,39 @@ app.get('/', checkAuthed, function (req, res) {
     });
 
 
-app.get('/login', function (req, res) {
+app.get('/login', checkNotAuthed ,function (req, res) {
     res.sendFile(__dirname + '/public/login.html');
     });
 
-app.post('/login',passport.authenticate('local', {
+app.post('/login', checkNotAuthed, passport.authenticate('local', {
       successRedirect : '/',
       failureRedirect: '/login',
       failureFlash: true
-    })); //req, res) => {
+    })); 
+
+app.delete('/logout', (req,res) => {
+    req.logOut();
+    req.redirect('/login');
+})
+    
+    function checkAuthed(req, res, next){
+      if(req.isAuthenticated()){
+        return next();
+      }
+    
+      res.redirect('/login');
+    }
+    
+    function checkNotAuthed(req, res, next){
+      if(req.isAuthenticated()){
+       return res.redirect('/');
+      }
+      next();
+    }
+    
+    
+    
+    //req, res) => {
     
       // let authedUser = req.body.password + req.body.username;
       // if(req.body.username != username ){
@@ -99,14 +122,14 @@ app.post('/login',passport.authenticate('local', {
       //   })
     
 
-app.get('/register', function (req, res) {
+app.get('/register', checkNotAuthed, function (req, res) {
     res.sendFile(__dirname + '/public/register.html');
     });
 app.get('/reset', function (req, res) {
         res.sendFile(__dirname + '/public/reset.html');
     });
 
-app.post('/register', async function (req,res) {
+app.post('/register',checkNotAuthed,  async function (req,res) {
   
   try {
     req.body.password = await bcrypt.hash(req.body.password, 10);
@@ -143,10 +166,3 @@ app.get('/resources/...', function (req,res) {
 
 });
 
-function checkAuthed(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  }
-
-  res.redirect('/login');
-}

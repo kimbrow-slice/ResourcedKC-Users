@@ -39,7 +39,7 @@
             <a class="home" href="index.html"
               ><i class="fas fa-home"></i></a>
             <div class="createResource">
-
+            <form>
               <br />
               <br />
               <label for="orgName">Organaiztion Name: </label>
@@ -63,7 +63,10 @@
               <br />
               <br />
               <button class="button" type="submit" onclick="submitResource()"><strong>Submit</strong></button>
-           
+            </form>
+              <form action="/logout?_method=DELETE" method="POST">
+              <button class="button" type="submit">Log Out</button>
+           </form>
             </div>
         </div>
         </div>

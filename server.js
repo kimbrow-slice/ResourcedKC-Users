@@ -71,14 +71,11 @@ app.get('/login',  function (req, res) {
 app.post('/login',  async (req, res) => {
 	const { username, password } = req.body
 	const user = await User.findOne({ username }).lean()
-
 	if (!user) {
 		return res.json({ status: 'error', error: 'Invalid username/password' })
 	}
-
 	if (await bcrypt.compare(password, user.password)) {
 		// the username, password combination is successful
-
 		const token = jwt.sign(
 			{
 				id: user._id,
@@ -86,10 +83,8 @@ app.post('/login',  async (req, res) => {
 			},
 			process.env.secret
 		)
-
 		return res.redirect('/submitResource.html');
 	}
-
 	res.json({ status: 'error', error: 'Invalid username/password' })
 })
 /*********LOGOUT*********/
@@ -102,6 +97,11 @@ app.delete('/logout', (req,res) => {
 app.get('/reset', function (req, res) {
         res.sendFile(__dirname + '/public/reset.html');
     });
+
+
+app.post('/reset', function (req, res) {
+      res.sendFile(__dirname + '/public/reset.html');
+  });
 /*********REGISTER*********/
 app.get('/register',  function (req, res) {
     res.sendFile(__dirname + '/public/register.html');
@@ -201,10 +201,15 @@ app.get('/resources/rehab', function (req,res) {
 })
 });
 
-
-
-function checkAuthed(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  }};
+app.post("/resources", (request, res) => {
+  let node = new Resource(request.body);
+  node.save(function (error, node) {
+    if (error) {
+      res.sendStatus(500);
+      return console.error(error);
+    }
+    // res.redirect('/index.html');
+    return node;
+  });
+});
 

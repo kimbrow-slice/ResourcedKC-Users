@@ -12,7 +12,7 @@
     <!--TITLE-->
     <title>ResourcedKC</title>
     <!--STYLESHEETS-->
-    <link rel="stylesheet" href="CSS/admin.css" />
+    <link rel="stylesheet" href="CSS/login.css" />
 
     <link
       rel="stylesheet"
@@ -39,33 +39,40 @@
             <a class="home" href="index.html"
               ><i class="fas fa-home"></i></a>
             <div class="createResource">
-            <form>
-              <br />
-              <br />
 
-              <label for="orgName">Organaiztion Name: </label>
-              <input id="orgName" type="text" maxlength="100"  autocomplete="off" />
               <br />
               <br />
-              <label for="services">Services Offered: </label>
-              <input id="services" type="text" maxlength="500"  autocomplete="off" />
+              <label for="orgname">Organaiztion Name: </label>
+              <input id="orgname" type="text" maxlength="100" required autocomplete="off" />
               <br />
               <br />
-
-              <label for="number">Phone Number: </label>
-              <input id="number" type="text" maxlength="10"  autocomplete="off" pattern="[0-9\/]*" /> <!--regex add here for only 0-9 input-->
-
+              <label for="description">description: </label>
+              <input id="description" type="text" maxlength="500" required autocomplete="off" />
+              <br />
+              <br />
+              <label for="phone">Phone Number: </label>
+              <input id="phone" type="text" maxlength="10"  required autocomplete="off" pattern="[0-9\/]*" /> 
+              <br />
+              <br />
+              <label for="zipcode">Zipcode: </label>
+              <input id="zipcode" type="text" maxlength="150" required  autocomplete="off" />
+              <br />
+              <br />
+              <label for="hours">Hours: </label>
+              <input id="hours" type="text" maxlength="150" required  autocomplete="off" />
               <br />
               <br />
               <label for="website">Website: </label>
-              <input id="website" type="text" maxlength="150"  autocomplete="off" />
+              <input id="website" type="text" maxlength="150" required autocomplete="off" />
               <br />
-              <br />
-              <button class="button" type="submit" onclick="submitResource()"><strong>Submit</strong></button>
-            </form>
+              <br /> 
+              <button class="button" type="button" id="submitResource"><strong>Submit</strong></button>            
+     
+              
               <form action="/logout?_method=DELETE" method="POST">
               <button class="button" type="submit">Log Out</button>
            </form>
+
             </div>
         </div>
         </div>
@@ -93,6 +100,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="client.js"></script>
+    <script src="submit.js"></script>
     <script
       src="https://kit.fontawesome.com/fc5d2b5d29.js"
       crossorigin="anonymous"

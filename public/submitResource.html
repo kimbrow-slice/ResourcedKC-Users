@@ -12,7 +12,7 @@
     <!--TITLE-->
     <title>ResourcedKC</title>
     <!--STYLESHEETS-->
-    <link rel="stylesheet" href="CSS/login.css" />
+    <link rel="stylesheet" href="CSS/admin.css" />
 
     <link
       rel="stylesheet"
@@ -35,25 +35,38 @@
             </div>
           </div>
           <div class="col-md">
-            <h2 class="title">Reset your<strong>Password</strong></h2>
-            
-            <!-- KEEP  -->
-            <div class="login">
-              <form action="reset" method="POST">
-              <label for="email">Email: </label>
-              <input id="email" name="email" type="email" maxlength="100"  autocomplete="off" />
+            <h2 class="title">Add your Organaiztion to the <strong>ResourcedKC</strong> list!</h2>
+            <a class="home" href="index.html"
+              ><i class="fas fa-home"></i></a>
+            <div class="createResource">
+            <form>
               <br />
+              <br />
+
+              <label for="orgName">Organaiztion Name: </label>
+              <input id="orgName" type="text" maxlength="100"  autocomplete="off" />
+              <br />
+              <br />
+              <label for="services">Services Offered: </label>
+              <input id="services" type="text" maxlength="500"  autocomplete="off" />
+              <br />
+              <br />
+
+              <label for="number">Phone Number: </label>
+              <input id="number" type="text" maxlength="10"  autocomplete="off" pattern="[0-9\/]*" /> <!--regex add here for only 0-9 input-->
 
               <br />
               <br />
-              
-              <a href="/login">Login<i class="fas fa-sign-in-alt"></i></a>
-              <a href="/register" >Register<i class="fas fa-user-plus"></i></a>
-              <a href="/" >Home Page<i class="fas fa-home"></i></a>
-              </form>
+              <label for="website">Website: </label>
+              <input id="website" type="text" maxlength="150"  autocomplete="off" />
+              <br />
+              <br />
+              <button class="button" type="submit" onclick="submitResource()"><strong>Submit</strong></button>
+            </form>
+              <form action="/logout?_method=DELETE" method="POST">
+              <button class="button" type="submit">Log Out</button>
+           </form>
             </div>
-            <!-- KEEP  -->
-
         </div>
         </div>
       </section>

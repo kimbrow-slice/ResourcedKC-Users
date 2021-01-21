@@ -12,6 +12,7 @@ const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
 const initalizePassport = require('./passport-config.js');
+const methodOverride = require('method-override');
 
 
 mongoose.set("useFindAndModify", false);
@@ -20,10 +21,7 @@ const mongoDB =
   "mongodb+srv://dbAdmin:SKCstudent@cluster0.ewhdg.mongodb.net/ResourcedKC?retryWrites=true&w=majority";
 
 const User = require('./models/userSchema.js');
-
-
-
-
+const Resource = require('./models/filterSchema.js');
 
 mongoose.connect(
   mongoDB,
@@ -42,13 +40,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride('_method'));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(session({
-  secret:process.env.SEESION_SECRET,
-  resave: false,
-  saveUninitialized: false
+app.use(session({ 
+  secret : process.env.SEESION_SECRET,
+  resave : false,
+  saveUninitialized : false
 }));
 
 
@@ -65,15 +64,39 @@ app.get('/', checkAuthed, function (req, res) {
     });
 
 
-app.get('/login', function (req, res) {
+app.get('/login', checkNotAuthed ,function (req, res) {
     res.sendFile(__dirname + '/public/login.html');
     });
 
-app.post('/login',passport.authenticate('local', {
+app.post('/login', checkNotAuthed, passport.authenticate('local', {
       successRedirect : '/',
       failureRedirect: '/login',
       failureFlash: true
-    })); //req, res) => {
+    })); 
+
+app.delete('/logout', (req,res) => {
+    req.logOut();
+    res.redirect('/login');
+});
+    
+  function checkAuthed(req, res, next){
+      if(req.isAuthenticated()){
+        return next();
+      }
+    
+      res.redirect('/login');
+    }
+    
+  function checkNotAuthed(req, res, next){
+      if(req.isAuthenticated()){
+       return res.redirect('/');
+      }
+      next();
+    }
+    
+    
+    
+    //req, res) => {
     
       // let authedUser = req.body.password + req.body.username;
       // if(req.body.username != username ){
@@ -99,14 +122,14 @@ app.post('/login',passport.authenticate('local', {
       //   })
     
 
-app.get('/register', function (req, res) {
+app.get('/register', checkNotAuthed, function (req, res) {
     res.sendFile(__dirname + '/public/register.html');
     });
 app.get('/reset', function (req, res) {
         res.sendFile(__dirname + '/public/reset.html');
     });
 
-app.post('/register', async function (req,res) {
+app.post('/register',checkNotAuthed,  async function (req,res) {
   
   try {
     req.body.password = await bcrypt.hash(req.body.password, 10);
@@ -125,28 +148,85 @@ app.post('/register', async function (req,res) {
 
 // // // // // CLIENT SIDE // // // // //
 
-app.get('/resources/emergency_shelter', function (req,res) {
-  //"if the service of the resource matches the GET, then respond with that resource's information"
+app.get('/resources/emergencyShelter', function (req,res) {
+  Resource.find({
+    services : 'Housing'
+  }, function (err, resources) {
+    if(err) return console.error(err);
+    res.send(resources);
   //"if no resources are categorized to match the GET, respond that no resources exist"
   //"if error, respond with error"
-});
+})});
 
 app.get('/resources/housing', function (req,res) {
+Resource.find({
+  services : 'Housing' // finds all resources in db with services listed as housing
+}, function (err, resources) {
+    if(err) return console.error(err);
+    res.send(resources);
 
+})
 });
 
-app.get('/resources/financial_assistance', function (req,res) {
 
+app.get('/resources/financialAssistance', function (req,res) {
+  Resource.find({
+    services : 'Financial Assistance'
+  }, function (err, resources) {
+      if(err) return console.error(err);
+      res.send(resources);
+
+})
 });
 
-app.get('/resources/...', function (req,res) {
 
+app.get('/resources/foodPantries', function (req,res) {
+  Resource.find({
+    services : 'Food Pantries'
+  }, function (err, resources) {
+      if(err) return console.error(err);
+      res.send(resources);
+
+})
 });
+
+
+app.get('/resources/healthClinics', function (req,res) {
+  Resource.find({
+    services : 'Health Clinics'
+  }, function (err, resources) {
+      if(err) return console.error(err);
+      res.send(resources);
+
+})
+});
+
+
+app.get('/resources/clothing', function (req,res) {
+  Resource.find({
+    services : 'Clothing Closets'
+  }, function (err, resources) {
+      if(err) return console.error(err);
+      res.send(resources);
+
+})
+});
+
+
+app.get('/resources/rehab', function (req,res) {
+  Resource.find({
+    services : 'Rehab and Detox'
+  }, function (err, resources) {
+      if(err) return console.error(err);
+      res.send(resources);
+
+})
+});
+
+
 
 function checkAuthed(req, res, next){
   if(req.isAuthenticated()){
     return next();
-  }
+  }};
 
-  res.redirect('/login');
-}

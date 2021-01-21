@@ -40,27 +40,24 @@
             <!-- KEEP  -->    
             <div class="login">
               <form action="login" method="POST">
-              <label for="username">Username: </label>
-              <input id="username" name="username" type="text" maxlength="100" onkeypress="return /^[a-zA-Z\s]*$/i.test(event.key)" autocomplete="off" required />
-              <br />
-              <br />
-              <label for="password">Password: </label>
-              <input id="password" name="password" type="password" maxlength="100" minlength="8"  autocomplete="off" required />
-              <br />
-              <br />
-              <input type="checkbox" onclick="showPass()">Show Password
-              
-              <br />
-              <br />
-              <button type="submit">Login</button> 
-            
-              <br />
-              <br />
-
-              <a href="/register" >Register<i class="fas fa-user-plus"></i></a>
-              <a href="/reset" >Forgot Password<i class="fas fa-question"></i></a>
-           </form>
-            </div>
+                <label for="username">Username: </label>
+                <input id="username" name="username" type="text" maxlength="100"  autocomplete="off" required />
+                <br />
+                <br />
+                <label for="password">Password: </label>
+                <input id="password" name="password" type="password" maxlength="100" minlength="8"  autocomplete="off" required />
+                <br />
+                <br />
+                <input type="checkbox" onclick="showPass()">Show Password 
+                <br />
+                <br />
+                <button type="submit">Login</button> 
+                <br />
+                <br />
+                <a href="/register" >Register<i class="fas fa-user-plus"></i></a>
+                <a href="/reset" >Forgot Password<i class="fas fa-question"></i></a>
+             </form>
+          </div>
             <!-- KEEP  -->
 
         </div>

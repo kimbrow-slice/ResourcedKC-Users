@@ -156,7 +156,7 @@ app.get('/resources/emergencyShelter', function (req,res) {
     res.send(resources);
   //"if no resources are categorized to match the GET, respond that no resources exist"
   //"if error, respond with error"
-});
+})});
 
 app.get('/resources/housing', function (req,res) {
 Resource.find({
@@ -164,8 +164,10 @@ Resource.find({
 }, function (err, resources) {
     if(err) return console.error(err);
     res.send(resources);
+
+})
 });
-});
+
 
 app.get('/resources/financialAssistance', function (req,res) {
   Resource.find({
@@ -173,8 +175,10 @@ app.get('/resources/financialAssistance', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
+
+})
 });
-});
+
 
 app.get('/resources/foodPantries', function (req,res) {
   Resource.find({
@@ -182,8 +186,10 @@ app.get('/resources/foodPantries', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
+
+})
 });
-});
+
 
 app.get('/resources/healthClinics', function (req,res) {
   Resource.find({
@@ -191,8 +197,10 @@ app.get('/resources/healthClinics', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
+
+})
 });
-});
+
 
 app.get('/resources/clothing', function (req,res) {
   Resource.find({
@@ -200,8 +208,10 @@ app.get('/resources/clothing', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
+
 })
 });
+
 
 app.get('/resources/rehab', function (req,res) {
   Resource.find({
@@ -209,5 +219,14 @@ app.get('/resources/rehab', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
+
+})
 });
-})});
+
+
+
+function checkAuthed(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }};
+

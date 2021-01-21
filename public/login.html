@@ -24,7 +24,9 @@
 
   <body >
     <!--NAV-->
-
+    <a href="index.html">
+    <img src="/logo.png" alt="ResourcedKC" height="200" >
+    </a>
     <!--MAIN CONTENT-->
 
     <section>
@@ -34,30 +36,42 @@
               
             </div>
           </div>
+          
           <div class="col-md">
+            <div class="icon-lock" >
+              <div class="lock-top-1" style="background-color: #d31138"></div>
+              <div class="lock-top-2"></div>
+              <div class="lock-body" style="background-color: #e01616"></div>
+              <div class="lock-hole"></div>
+            </div>
             <h2 class="title">Log into <strong>ResourcedKC</strong></h2>
 
             <!-- KEEP  -->    
             <div class="login">
               <form action="login" method="POST">
-                <label for="username">Username: </label>
-                <input id="username" name="username" type="text" maxlength="100"  autocomplete="off" required />
-                <br />
-                <br />
-                <label for="password">Password: </label>
-                <input id="password" name="password" type="password" maxlength="100" minlength="8"  autocomplete="off" required />
-                <br />
-                <br />
-                <input type="checkbox" onclick="showPass()">Show Password 
-                <br />
-                <br />
-                <button type="submit">Login</button> 
-                <br />
-                <br />
-                <a href="/register" >Register<i class="fas fa-user-plus"></i></a>
-                <a href="/reset" >Forgot Password<i class="fas fa-question"></i></a>
-             </form>
-          </div>
+
+              <label for="username">Username: </label>
+              <input id="username" name="username" type="text" maxlength="100"  autocomplete="off" required />
+              <br />
+              <br />
+              <label for="password">Password: </label>
+              <input id="password" name="password" type="password" maxlength="100" minlength="8"  autocomplete="off" required />
+              <br />
+              <br />
+              <input type="checkbox" onclick="showPass()">Show Password
+              
+              <br />
+              <br />
+              <button type="submit">Login</button> 
+            
+              <br />
+              <br />
+
+              <a href="/register.html" >Register<i class="fas fa-user-plus"></i></a>
+              <a href="/reset.html" >Forgot Password<i class="fas fa-question"></i></a>
+           </form>
+            </div>
+
             <!-- KEEP  -->
 
         </div>

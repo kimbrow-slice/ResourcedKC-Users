@@ -50,6 +50,7 @@ app.use(session({
   saveUninitialized : false
 }));
 
+ //test comment
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error: "));

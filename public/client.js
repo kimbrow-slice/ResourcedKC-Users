@@ -2,7 +2,6 @@ async function createAcct() {
     let createAcct = {
       username : document.getElementById('username').value,
       password : document.getElementById('password').value,
-
       email : document.getElementById('email').value,
       admin : false
     };
@@ -42,11 +41,11 @@ async function createAcct() {
     };
 
     if (shelters) {
-      const sheltersresponse = await fetch("/resources/emergency_shelters", requestionOptions);
+      const sheltersresponse = await fetch("/resources/emergencyShelters", requestionOptions);
       response.push({ "shelters" : sheltersresponse.body }); //[{}, {}, {}]
     }
     if (finance) {
-      const financeresponse = await fetch("/resources/financial_assistance", requestOptions);
+      const financeresponse = await fetch("/resources/financialAssistance", requestOptions);
       response.push({ "finance" : financeresponse.body });
     }
     if (housing) {
@@ -54,11 +53,11 @@ async function createAcct() {
       response.push({ "housing" : housingresponse.body });
     }
     if (food) {
-      const foodresponse = await fetch ("/resources/foodpantries", requestOptions);
+      const foodresponse = await fetch ("/resources/foodPantries", requestOptions);
       response.push({ "food" : foodresponse.body });
     }
     if (health) {
-      const healthresponse = await fetch ("/resources/healthclinics", requestOptions);
+      const healthresponse = await fetch ("/resources/healthClinics", requestOptions);
       response.push({ "health" : healthresponse.body });
     }
     if (clothing) {
@@ -66,7 +65,7 @@ async function createAcct() {
       response.push({ "clothing" : clothingresponse.body })
     }
     if (rehab)  {
-      const rehabresponse = await fetch ("/resources/clothing", requestOptions);
+      const rehabresponse = await fetch ("/resources/rehab", requestOptions);
       response.push({ "rehab" : rehabresponse.body })
     }
 
@@ -77,12 +76,11 @@ async function createAcct() {
 
   function test (arrayobject1){
     array[0].shelters
-
   }
     
   async function submitResource() {​​​​​
   let node = {​​​​​
-  name : document.getElementById('orgName').value,
+  name : document.getElementById('orgname').value,
   description : document.getElementById("services").value,
   phone : document.getElementById("number").value,
   email : document.getElementById("email").value,
@@ -102,7 +100,4 @@ async function createAcct() {
       }​​​​​
   return node;
     }​​​​​
-
-
-  
 

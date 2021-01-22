@@ -1,5 +1,4 @@
 
-
   async function findResources() {
     let shelters = document.getElementById('shelterscheck').checked;
     let housing  = document.getElementById('housingcheck').checked;

@@ -13,6 +13,7 @@
     <title>ResourcedKC</title>
     <!--STYLESHEETS-->
     <link rel="stylesheet" href="CSS/login.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
     <link
       rel="stylesheet"
@@ -39,8 +40,7 @@
           </div>
           <div class="col-md">
             <h2 class="title">Add your Organaiztion to the <strong>ResourcedKC</strong> list!</h2>
-            <a class="home" href="index.html"
-              ><i class="fas fa-home"></i></a>
+          
             <div class="createResource">
 
               <br />
@@ -49,7 +49,7 @@
               <input id="orgname" type="text" maxlength="100" required autocomplete="off" />
               <br />
               <br />
-              <label for="description">description: </label>
+              <label for="description">Description: </label>
               <input id="description" type="text" maxlength="500" required autocomplete="off" />
               <br />
               <br />
@@ -70,8 +70,8 @@
               <br />
               <br /> 
               <button class="button" type="button" id="submitResource"><strong>Submit</strong></button>            
-     
-              
+              <br />
+              <br />            
               <form action="/logout?_method=DELETE" method="POST">
               <button class="button" type="submit">Log Out</button>
            </form>

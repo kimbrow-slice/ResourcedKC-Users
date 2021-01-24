@@ -94,14 +94,90 @@ app.delete('/logout', (req,res) => {
 });
     
 /*********RESET*********/
-app.get('/reset', function (req, res) {
-        res.sendFile(__dirname + '/public/reset.html');
-    });
-
-
 app.post('/reset', function (req, res) {
-      res.sendFile(__dirname + '/public/reset.html');
+  const email = req.body.email
+  User
+      .findOne({
+          where: {email: email},//checking if the email address sent by client is present in the db(valid)
+      })
+      .then(function (user) {
+          if (!user) {
+              return throwFailed(res, 'No user found with that email address.')
+          }
+          ResetPassword
+              .findOne({
+                  where: {userId: user.id, status: 0},
+              }).then(function (resetPassword) {
+              if (resetPassword)
+                  resetPassword.destroy({
+                      where: {
+                          id: resetPassword.id
+                      }
+                  })
+              token = crypto.randomBytes(32).toString('hex')//creating the token to be sent to the forgot password form (react)
+              bcrypt.hash(token, null, null, function (err, hash) {//hashing the password to store in the db node.js
+                  ResetPassword.create({
+                      userId: user.id,
+                      resetPasswordToken: hash,
+                      expire: moment.utc().add(config.tokenExpiry, 'seconds'),
+                  }).then(function (item) {
+                      if (!item)
+                          return throwFailed(res, 'Oops problem in creating new password record')
+                      let mailOptions = {
+                          from: '"<Resourced KC Admins>" ResourcedKC@gmail.com',
+                          to: user.email,
+                          subject: 'Reset your account password',
+                          html: '<h4><b>Reset Password</b></h4>' +
+                          '<p>To reset your password, complete this form:</p>' +
+                          '<a href=' + config.clientUrl + 'reset/' + user.id + '/' + token + '">' + config.clientUrl + 'reset/' + user.id + '/' + token + '</a>' +
+                          '<br><br>' +
+                          '<p>--Team</p>'
+                      }
+                      let mailSent = sendMail(mailOptions)//sending mail to the user where he can reset password.User id and the token generated are sent as params in a link
+                      if (mailSent) {
+                          return res.json({success: true, message: 'Check your mail to reset your password.'})
+                      } else {
+                          return throwFailed(error, 'Unable to send email.');
+                      }
+                  })
+              })
+          });
+      })
+})
+
+app.post('/reset', function (req, res) {//handles the new password from react
+  const userId = req.body.userId
+  const token = req.body.token
+  const password = req.body.password
+  ResetPassword.findOne({ where:{ userId: userId ,status : 0 }})
+  .then(function (resetPassword) {
+  if (!resetPassword) {
+  return throwFailed(res, 'Invalid or expired reset token.')
+  }
+  bcrypt.compare(token, resetPassword.token, function (errBcrypt, resBcrypt) {// the token and the hashed token in the db are verified befor updating the password
+  let expireTime = moment.utc(resetPassword.expire)
+  let currentTime = new Date();
+  bcrypt.hash(password, null, null, function (err, hash) {
+  User.update({
+  password: hash,
+  },
+  { where: { id: userId }}
+  ).
+  then(() => {
+  ResetPassword.update({
+  status: 1
+  },{ where: {id : resetPassword.id}}).
+  then((msg) => {
+  if(!msg)
+  throw err
+  else
+  res.json({ success: true, message: 'Password Updated successfully.' })
+  })
+  })
   });
+  });
+  }).catch(error => throwFailed(error, ''))
+  })
 /*********REGISTER*********/
 app.get('/register',  function (req, res) {
     res.sendFile(__dirname + '/public/register.html');

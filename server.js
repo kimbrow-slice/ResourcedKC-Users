@@ -9,6 +9,7 @@ const passport = require('passport');
 const jwtStrategry  = require("./passport-config.js");
 passport.use(jwtStrategry);
 const jwt= require('jsonwebtoken');
+const jwtSimple = require('jwt-simple');
 // const initalizePassport = require('./passport-config.js');
 const methodOverride = require('method-override');
 
@@ -95,24 +96,26 @@ app.delete('/logout', (req,res) => {
 });
     
 /*********RESET*********/
-app.get('/forgotpassword', function (req, res) {
-  res.send('<form action="/passwordreset" method="POST">' +
-      '<input type="email" name="email" value="" placeholder="Enter your email address..." />' +
-      '<input type="submit" value="Reset Password" />' +
-  '</form>');
+app.get('/reset', function (req, res) {
+  //this was all moved into the static reset.html page
+
+  // res.send('<form action="/passwordreset" method="POST">' +
+  //     '<input type="email" name="email" value="" placeholder="Enter your email address..." />' +
+  //     '<input type="submit" value="Reset Password" />' +
+  // '</form>');
 });
 
 app.post('/passwordreset', function (req, res) {
   if (req.body.email !== undefined) {
       var emailAddress = req.body.email;
-
-      var user = new User(req.body);
     
-      var currentUser = User.findOne({_id: emailAddress.id}) 
+      var test =  User.findOne({_id: emailAddress.id}).exec((err, payload) => {
+        if(err) return console.error(err);
+      })
 
       // TODO: Using email, find user from your database.
       var payload = {
-          id: currentUser,        // User ID from database
+          id: test._id,        // User ID from database
           email: emailAddress
       };
       // TODO: Make this a one-time-use token by using the user's
@@ -120,7 +123,7 @@ app.post('/passwordreset', function (req, res) {
       // with the user's created date to make a very unique secret key!
       // For example:
       // var secret = user.password + ‘-' + user.created.getTime();
-      var token = jwt.sign(payload, process.env.RESET_SECRET);
+      var token = jwtSimple.encode(payload, process.env.RESET_SECRET);
       // TODO: Send email containing link to reset password.
       // In our case, will just return a link to click.
       res.send('<a href="/resetpassword/' + payload.id + '/' + token + '">Reset password</a>');
@@ -138,7 +141,7 @@ app.get('/resetpassword/:id/:token', function(req, res) {
   // For example,
   // var secret = user.password + ‘-' + user.created.getTime();
 
-  var payload = jwt.sign(req.params.token, prcoess.env.RESET_SECRET);
+  var payload = jwtSimple.decode(req.params.token, process.env.RESET_SECRET);
 
   // TODO: Gracefully handle decoding issues.
   // Create form to reset password.
@@ -159,12 +162,16 @@ app.post('/resetpassword', function(req, res) {
   // For example,
   // var secret = user.password + ‘-' + user.created.getTime();
 
-  var payload = jwt.decode(req.body.token, process.env.RESET_SECRET);
+  var payload = jwtSimple.decode(req.body.token, process.env.RESET_SECRET);
 
   // TODO: Gracefully handle decoding issues.
   // TODO: Hash password from
   // req.body.password
+  //do some error handling to bcrypt the new password like how we do when we register a user
+
   res.send('Your password has been successfully changed.');
+  //redirect the user back to the login screen after they get the successful message
+  
 });
 
 /*********REGISTER*********/

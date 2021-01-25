@@ -22,6 +22,7 @@ const mongoDB =
 
 const User = require('./models/userSchema.js');
 const Resource = require('./models/filterSchema.js');
+const { urlencoded } = require('body-parser');
 
 mongoose.connect(
   mongoDB,
@@ -145,18 +146,12 @@ app.post('/register',checkNotAuthed,  async function (req,res) {
 });
 
 
-
-
-// // // // // CLIENT SIDE // // // // //
-
 app.get('/resources/emergencyShelter', function (req,res) {
   Resource.find({
-    services : 'Housing'
+    services : 'Emergency Shelter'
   }, function (err, resources) {
     if(err) return console.error(err);
     res.send(resources);
-  //"if no resources are categorized to match the GET, respond that no resources exist"
-  //"if error, respond with error"
 })});
 
 app.get('/resources/housing', function (req,res) {
@@ -165,10 +160,7 @@ Resource.find({
 }, function (err, resources) {
     if(err) return console.error(err);
     res.send(resources);
-
-})
-});
-
+})});
 
 app.get('/resources/financialAssistance', function (req,res) {
   Resource.find({
@@ -176,10 +168,7 @@ app.get('/resources/financialAssistance', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
-
-})
-});
-
+})});
 
 app.get('/resources/foodPantries', function (req,res) {
   Resource.find({
@@ -187,10 +176,7 @@ app.get('/resources/foodPantries', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
-
-})
-});
-
+})});
 
 app.get('/resources/healthClinics', function (req,res) {
   Resource.find({
@@ -198,10 +184,7 @@ app.get('/resources/healthClinics', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
-
-})
-});
-
+})});
 
 app.get('/resources/clothing', function (req,res) {
   Resource.find({
@@ -209,10 +192,7 @@ app.get('/resources/clothing', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
-
-})
-});
-
+})});
 
 app.get('/resources/rehab', function (req,res) {
   Resource.find({
@@ -220,11 +200,21 @@ app.get('/resources/rehab', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
+})});
 
-})
-});
+app.post('/resources/:query', function (req,res) {
+  Resource.find({ 
+    orgname : getNameFromUrl()
+  }, function (err, resources) {
+    if(err) return console.err(err);
+    res.send(resources);
+  })});
 
-
+  function getNameFromUrl() {
+    let query = window.location.search;
+    const urlParams = new URLSearchParams(query);
+    return urlParams.get('name').replace('+', ' ');
+  };
 
 function checkAuthed(req, res, next){
   if(req.isAuthenticated()){

@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const resourceSchema = new Schema({
-    services       : {type: Array},
-    servicesub     : {type: Array},
-    usercategories : {type: Array},
+    services       : [String],
+    servicesub     : [String],
+    usercategories : [String],
     orgname        : {type: String, required: true},
     description    : {type: String, required: true, maxlength: 500},
     zipcode        : {type: Number, required: true, maxlength: 5, minlegth: 5},

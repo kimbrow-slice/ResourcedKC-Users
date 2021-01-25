@@ -69,15 +69,23 @@ async function createAcct() {
       response.push({ "rehab" : rehabresponse.body })
     }
 
+    return response
     // [ {"shelters" : [{}, {}, {}]}, {"xresponse":[{},{}] } ]
    
     // response.shelters
   }
 
-  function test (arrayobject1){
-    array[0].shelters
+  async function searchByName() {
+    let searchByName = document.getElementById('searchbar').value.replace(' ', '+')
+
+    let requestOptions = {
+      method  : "POST",
+      body    : JSON.stringify(searchByName),
+      headers : { "Content-Type" : "application/json" },
+    }
+    const searchresponse = await fetch ('/resources/?name=' + searchByName, requestOptions);
   }
-    
+  
   async function submitResource() {​​​​​
   let node = {​​​​​
   name : document.getElementById('orgname').value,

@@ -45,8 +45,8 @@ i:hover {
 #loginBtn {
   font-size: 25px;
   font-family: 'Montserrat', sans-serif;
-  background-color:#171c24;
-  color:#e4e4e4;
+  background-color: #021936;
+  color: white;
   border-radius: 10px;
   outline:none;
   letter-spacing: 4px;
@@ -56,7 +56,7 @@ i:hover {
   font-family: 'Montserrat', sans-serif;
   font-size: 25px;
   background-color:#ff3d00;
-  color:#171c24;
+  color:white;
   border-radius: 10px;
   outline:none;
 }  
@@ -77,7 +77,7 @@ i:hover {
 
 
 #lock{
-  color: #171c24;
+  color:  #021936;
   font-size: 60px;
   text-align: center;
   margin-left: 49%;

@@ -1,118 +1,130 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <!--META DATA TAGS-->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<head>
+  <!--META DATA TAGS-->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <!--TITLE-->
-    <title>ResourcedKC</title>
-    <!--STYLESHEETS-->
-    <link rel="stylesheet" href="CSS/login.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <!--TITLE-->
+  <title>ResourcedKC</title>
+  <!--STYLESHEETS-->
+  <link rel="stylesheet" href="CSS/login.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-      crossorigin="anonymous"
-    />
-  </head>
+</head>
 
-  <body >
-    <!--NAV-->
-    <a href="index.html">
-    <img src="./pictures/logo.png" alt="ResourcedKC" height="200" >
-    </a>
-    <!--MAIN CONTENT-->
+<body>
+  <!--NAV-->
+  <nav>
+    <div class="menu-icon">
+      <span class="fas fa-bars"></span>
+    </div>
+    <div class="logo">
+      ResourcedKC</div>
+    <div class="nav-items">
 
-    <section>
-        <div id="container">
-          <div class="row">
-            <div class="col-md-offset-1 col-md-11">
-              
-            </div>
-          </div>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="#">About</a></li>
+
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Feedback</a></li>
+
+    </div>
+    <div class="search-icon">
+      <span class="fas fa-search"></span>
+    </div>
+    <div class="cancel-icon">
+      <span class="fas fa-times"></span>
+    </div>
+    <form action="#">
+      <input type="search" class="search-data" placeholder="Search" required>
+      <button type="submit" class="fas fa-search"></button>
+    </form>
+  </nav>
+  <!--MAIN CONTENT-->
+
+  <section>
+    <div id="container">
+      <div class="row">
+        <div class="col-md-offset-1 col-md-11">
           
-
-            <h2 class="title">Log into <strong>ResourcedKC</strong></h2>
-       
-
-            <i id ="lock" class="fa fa-lock" aria-hidden="true"></i>
-
-            <!-- KEEP  -->    
-            <div class="login">
-              <form action="login" method="POST">
-
-              <label for="username">Username: </label>
-              <input id="username" name="username" type="text" maxlength="100"  autocomplete="off" required />
-              <br />
-              <br />
-              <label for="password">Password: </label>
-              <input id="password" name="password" type="password" maxlength="100" minlength="8"  autocomplete="off" required />
-              <br />
-              <br />
-              <input type="checkbox" onclick="showPass()">Show Password
-              
-              <br />
-              <br />
-              <button id ="loginBtn" type="submit">Login</button> 
-            
-              <br />
-              <br />
-
-              <a id="register" href="/register.html" ><i class="fas fa-user-plus"></i>Register</a>
-              <a id="reset" href="/reset.html" ><i class="fas fa-question"></i>Forgot Password</a>
-           </form>
-            </div>
-
-            <!-- KEEP  -->
-
         </div>
-    
-      </section>
+      </div>
 
-    <!--FOOTER-->
-    <footer class="footer">
 
-    </footer>
+      <h2 class="title">Log into <strong>ResourcedKC</strong></h2>
 
-    <!--SCRIPTS-->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <script src="client.js"></script>
-    <script
-      src="https://kit.fontawesome.com/fc5d2b5d29.js"
-      crossorigin="anonymous"
-    ></script>
-    <script>
-        function showPass() {
-  var x = document.getElementById("password");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
-    </script>
 
-  </body>
+      <i id="lock" class="fa fa-lock" aria-hidden="true"></i>
+
+      <!-- KEEP  -->
+      <div class="login">
+        <form action="login" method="POST">
+
+          <label for="username">Username: </label>
+          <input id="username" name="username" type="text" maxlength="100" autocomplete="off" required />
+          <br />
+          <br />
+          <label for="password">Password: </label>
+          <input id="password" name="password" type="password" maxlength="100" minlength="8" autocomplete="off"
+            required />
+          <br />
+          <br />
+          <input type="checkbox" onclick="showPass()">Show Password
+
+          <br />
+          <br />
+          <button id="loginBtn" type="submit">Login</button>
+
+          <br />
+          <br />
+
+          <a id="register" href="/register.html"><i class="fas fa-user-plus"></i>Register</a>
+          <a id="reset" href="/reset.html"><i class="fas fa-question"></i>Forgot Password</a>
+        </form>
+      </div>
+
+      <!-- KEEP  -->
+
+    </div>
+
+  </section>
+
+  <!--FOOTER-->
+  <footer class="footer">
+
+  </footer>
+
+  <!--SCRIPTS-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="client.js"></script>
+  <script src="https://kit.fontawesome.com/fc5d2b5d29.js" crossorigin="anonymous"></script>
+  <script>
+    function showPass() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+  </script>
+  <script src="nav-scripts.js"></script>
+
+</body>
+
 </html>

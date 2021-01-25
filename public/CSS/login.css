@@ -40,6 +40,7 @@ i:hover {
   font-size: 20px;
   text-align: center;
   }
+
 /*These button styles can be changed to however you guys see fit this stuff was just an example working with conor*/
 #loginBtn {
   font-size: 25px;
@@ -92,7 +93,7 @@ i:hover {
   font-family: 'Montserrat', sans-serif;
 }
 body{
-  background: #f2f2f2;
+  background: white;
 }
 nav{
   background: #021936;
@@ -319,4 +320,18 @@ nav .logo.space{
 }
 .content .space{
   margin: 10px 0;
+}
+.banner {
+  width: 100%;
+  height:auto;
+  background-position: center;
+  position: relative;
+ }
+  
+ @media screen and (max-width: 500px) {
+ .banner {
+  width: 100%;
+  height: auto;
+  background-position: center;
+ }
 }

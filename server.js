@@ -109,24 +109,26 @@ app.post('/passwordreset', function (req, res) {
   if (req.body.email !== undefined) {
       var emailAddress = req.body.email;
     
-      var test =  User.findOne({_id: emailAddress.id}).exec((err, payload) => {
+      User.findOne({email: emailAddress}).exec((err, user) => {
         if(err) return console.error(err);
+        // TODO: Using email, find user from your database.
+      var payload = {
+        id: user._id,        // User ID from database
+        email: emailAddress
+    };
+    // TODO: Make this a one-time-use token by using the user's
+    // current password hash from the database, and combine it
+    // with the user's created date to make a very unique secret key!
+    // For example:
+    // var secret = user.password + ‘-' + user.created.getTime();
+    var token = jwtSimple.encode(payload, process.env.RESET_SECRET);
+    // TODO: Send email containing link to reset password.
+    // In our case, will just return a link to click.
+    res.send('<a href="/resetpassword/' + payload.id + '/' + token + '">Reset password</a>');
+
       })
 
-      // TODO: Using email, find user from your database.
-      var payload = {
-          id: test._id,        // User ID from database
-          email: emailAddress
-      };
-      // TODO: Make this a one-time-use token by using the user's
-      // current password hash from the database, and combine it
-      // with the user's created date to make a very unique secret key!
-      // For example:
-      // var secret = user.password + ‘-' + user.created.getTime();
-      var token = jwtSimple.encode(payload, process.env.RESET_SECRET);
-      // TODO: Send email containing link to reset password.
-      // In our case, will just return a link to click.
-      res.send('<a href="/resetpassword/' + payload.id + '/' + token + '">Reset password</a>');
+      
   } else {
       res.send('Email address is missing.');
   }
@@ -153,24 +155,38 @@ app.get('/resetpassword/:id/:token', function(req, res) {
   '</form>');
 });
 
-app.post('/resetpassword', function(req, res) {
+app.post('/resetpassword',  function(req, res) {
   // TODO: Fetch user from database using
   // req.body.id
-  // TODO: Decrypt one-time-use token using the user's
+  User.findOne({_id: req.body.id}).exec(async (err, updatedUser)  => {
+    // TODO: Decrypt one-time-use token using the user's
   // current password hash from the database and combining it
   // with the user's created date to make a very unique secret key!
   // For example,
   // var secret = user.password + ‘-' + user.created.getTime();
 
-  var payload = jwtSimple.decode(req.body.token, process.env.RESET_SECRET);
+  // var payload = jwtSimple.decode(req.body.token, process.env.RESET_SECRET);
 
+    try {  
   // TODO: Gracefully handle decoding issues.
   // TODO: Hash password from
   // req.body.password
   //do some error handling to bcrypt the new password like how we do when we register a user
-
-  res.send('Your password has been successfully changed.');
+  updatedUser.password = await bcrypt.hash(req.body.password, 10);
+  updatedUser.save();
   //redirect the user back to the login screen after they get the successful message
+  res.redirect('/login');
+    } catch {
+      res.redirect('/reset.html')
+    }
+
+
+
+  
+
+
+  })
+  
   
 });
 

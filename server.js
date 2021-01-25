@@ -74,6 +74,7 @@ app.post('/login',  async (req, res) => {
 	const { username, password } = req.body
 	const user = await User.findOne({ username }).lean()
 	if (!user) {
+    // TODO: Create an HTML page to res.redirect to handle the error.....
 		return res.json({ status: 'error', error: 'Invalid username/password' })
 	}
 	if (await bcrypt.compare(password, user.password)) {
@@ -86,7 +87,8 @@ app.post('/login',  async (req, res) => {
 			process.env.secret
 		)
 		return res.redirect('/submitResource.html');
-	}
+  }
+  // TODO: Create an HTML page to res.redirect to handle the error.....
 	res.json({ status: 'error', error: 'Invalid username/password' })
 })
 /*********LOGOUT*********/
@@ -110,7 +112,16 @@ app.post('/passwordreset', function (req, res) {
       var emailAddress = req.body.email;
     
       User.findOne({email: emailAddress}).exec((err, user) => {
-        if(err) return console.error(err);
+        if((err) || (user === null))
+        { 
+
+          console.error(err);
+          // TODO: Create an HTML page to res.redirect to handle the error.....
+          
+          return res.redirect(401, '/reset.html');
+
+         }
+   
         // TODO: Using email, find user from your database.
       var payload = {
         id: user._id,        // User ID from database
@@ -122,13 +133,11 @@ app.post('/passwordreset', function (req, res) {
     // For example:
     // var secret = user.password + ‘-' + user.created.getTime();
     var token = jwtSimple.encode(payload, process.env.RESET_SECRET);
-    // TODO: Send email containing link to reset password.
-    // In our case, will just return a link to click.
+    // TODO: Create an HTML page to do the below task rather than sending a link 
     res.send('<a href="/resetpassword/' + payload.id + '/' + token + '">Reset password</a>');
 
       })
-
-      
+  
   } else {
       res.send('Email address is missing.');
   }
@@ -180,13 +189,7 @@ app.post('/resetpassword',  function(req, res) {
       res.redirect('/reset.html')
     }
 
-
-
-  
-
-
   })
-  
   
 });
 
@@ -196,7 +199,6 @@ app.get('/register',  function (req, res) {
     });
 app.post('/register',  async function (req,res) {
 
-  
   try {
     req.body.password = await bcrypt.hash(req.body.password, 10);
     var newUser = new User(req.body);

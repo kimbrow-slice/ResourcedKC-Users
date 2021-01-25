@@ -1,28 +1,3 @@
-async function createAcct() {
-    let createAcct = {
-      username : document.getElementById('username').value,
-      password : document.getElementById('password').value,
-      email : document.getElementById('email').value,
-      admin : false
-    };
-
-    let requestOptions = {
-      method: "POST",
-      body: JSON.stringify(createAcct),
-      headers: { "Content-Type": "application/json" },
-    };
-    if (confirm("Would like access your account?")) {
-      window.location = "index.html"
-  }
-    const response = await fetch("/register", requestOptions);
-    
-    if (response.status != 200) {
-      throw Error("Error!");
-    }
-    
-    return createAcct;
-
-  }
 
   async function findResources() {
     let shelters = document.getElementById('shelterscheck').checked;
@@ -85,27 +60,32 @@ async function createAcct() {
     }
     const searchresponse = await fetch ('/resources/?name=' + searchByName, requestOptions);
   }
-  
-  async function submitResource() {​​​​​
-  let node = {​​​​​
-  name : document.getElementById('orgname').value,
-  description : document.getElementById("services").value,
-  phone : document.getElementById("number").value,
-  email : document.getElementById("email").value,
-  website : document.getElementById("website").value
-      }​​​​​;
+    
+  async function submitResource() {
+    let node = {
+        orgname : document.getElementById('orgname').value,
+        description : document.getElementById("description").value,
+        phone : document.getElementById("phone").value,
+        hours : document.getElementById("hours").value,
+        zipcode : document.getElementById("zipcode").value,
+        website : document.getElementById("website").value
+    };
 
-  let requestOptions = {​​​​​
-  method : "POST",
-  body : JSON.stringify(node),
-  headers : {​​​​​ "Content-Type":"application/json" }​​​​​,
-      }​​​​​;
-  alert('You have added in your organizations information');
-  window.location.href = 'index.html';
-  const response = await fetch("/resources", requestOptions);
-  if (res.status != 200) {​​​​​
-  throw Error("Error!");
-      }​​​​​
-  return node;
-    }​​​​​
+  
+    let requestOptions = {
+      method: "POST",
+      body: JSON.stringify(node),
+      headers: { "Content-Type": "application/json" },
+    };
+    alert('Thank you submitting your organzations information!');
+    window.location.href = 'index.html';
+    const response = await fetch("/resources", requestOptions);
+    
+    if (response.status != 200) {
+      throw Error ("Error!");
+    } 
+
+    return node;
+    
+  }
 

@@ -20,6 +20,7 @@ const mongoDB =
 
 const User = require('./models/userSchema.js');
 const Resource = require('./models/filterSchema.js');
+const { POINT_CONVERSION_COMPRESSED } = require('constants');
 
 
 
@@ -94,90 +95,78 @@ app.delete('/logout', (req,res) => {
 });
     
 /*********RESET*********/
-app.post('/reset', function (req, res) {
-  const email = req.body.email
-  User
-      .findOne({
-          where: {email: email},//checking if the email address sent by client is present in the db(valid)
-      })
-      .then(function (user) {
-          if (!user) {
-              return throwFailed(res, 'No user found with that email address.')
-          }
-          ResetPassword
-              .findOne({
-                  where: {userId: user.id, status: 0},
-              }).then(function (resetPassword) {
-              if (resetPassword)
-                  resetPassword.destroy({
-                      where: {
-                          id: resetPassword.id
-                      }
-                  })
-              token = crypto.randomBytes(32).toString('hex')//creating the token to be sent to the forgot password form (react)
-              bcrypt.hash(token, null, null, function (err, hash) {//hashing the password to store in the db node.js
-                  ResetPassword.create({
-                      userId: user.id,
-                      resetPasswordToken: hash,
-                      expire: moment.utc().add(config.tokenExpiry, 'seconds'),
-                  }).then(function (item) {
-                      if (!item)
-                          return throwFailed(res, 'Oops problem in creating new password record')
-                      let mailOptions = {
-                          from: '"<Resourced KC Admins>" ResourcedKC@gmail.com',
-                          to: user.email,
-                          subject: 'Reset your account password',
-                          html: '<h4><b>Reset Password</b></h4>' +
-                          '<p>To reset your password, complete this form:</p>' +
-                          '<a href=' + config.clientUrl + 'reset/' + user.id + '/' + token + '">' + config.clientUrl + 'reset/' + user.id + '/' + token + '</a>' +
-                          '<br><br>' +
-                          '<p>--Team</p>'
-                      }
-                      let mailSent = sendMail(mailOptions)//sending mail to the user where he can reset password.User id and the token generated are sent as params in a link
-                      if (mailSent) {
-                          return res.json({success: true, message: 'Check your mail to reset your password.'})
-                      } else {
-                          return throwFailed(error, 'Unable to send email.');
-                      }
-                  })
-              })
-          });
-      })
-})
+app.get('/forgotpassword', function (req, res) {
+  res.send('<form action="/passwordreset" method="POST">' +
+      '<input type="email" name="email" value="" placeholder="Enter your email address..." />' +
+      '<input type="submit" value="Reset Password" />' +
+  '</form>');
+});
 
-app.post('/reset', function (req, res) {//handles the new password from react
-  const userId = req.body.userId
-  const token = req.body.token
-  const password = req.body.password
-  ResetPassword.findOne({ where:{ userId: userId ,status : 0 }})
-  .then(function (resetPassword) {
-  if (!resetPassword) {
-  return throwFailed(res, 'Invalid or expired reset token.')
+app.post('/passwordreset', function (req, res) {
+  if (req.body.email !== undefined) {
+      var emailAddress = req.body.email;
+
+      var user = new User(req.body);
+    
+      var currentUser = User.findOne({_id: emailAddress.id}) 
+
+      // TODO: Using email, find user from your database.
+      var payload = {
+          id: currentUser,        // User ID from database
+          email: emailAddress
+      };
+      // TODO: Make this a one-time-use token by using the user's
+      // current password hash from the database, and combine it
+      // with the user's created date to make a very unique secret key!
+      // For example:
+      // var secret = user.password + ‘-' + user.created.getTime();
+      var token = jwt.sign(payload, process.env.RESET_SECRET);
+      // TODO: Send email containing link to reset password.
+      // In our case, will just return a link to click.
+      res.send('<a href="/resetpassword/' + payload.id + '/' + token + '">Reset password</a>');
+  } else {
+      res.send('Email address is missing.');
   }
-  bcrypt.compare(token, resetPassword.token, function (errBcrypt, resBcrypt) {// the token and the hashed token in the db are verified befor updating the password
-  let expireTime = moment.utc(resetPassword.expire)
-  let currentTime = new Date();
-  bcrypt.hash(password, null, null, function (err, hash) {
-  User.update({
-  password: hash,
-  },
-  { where: { id: userId }}
-  ).
-  then(() => {
-  ResetPassword.update({
-  status: 1
-  },{ where: {id : resetPassword.id}}).
-  then((msg) => {
-  if(!msg)
-  throw err
-  else
-  res.json({ success: true, message: 'Password Updated successfully.' })
-  })
-  })
-  });
-  });
-  }).catch(error => throwFailed(error, ''))
-  })
+});
+
+app.get('/resetpassword/:id/:token', function(req, res) {
+  // TODO: Fetch user from database using
+  // req.params.id
+  // TODO: Decrypt one-time-use token using the user's
+  // current password hash from the database and combine it
+  // with the user's created date to make a very unique secret key!
+  // For example,
+  // var secret = user.password + ‘-' + user.created.getTime();
+
+  var payload = jwt.sign(req.params.token, prcoess.env.RESET_SECRET);
+
+  // TODO: Gracefully handle decoding issues.
+  // Create form to reset password.
+  res.send('<form action="/resetpassword" method="POST">' +
+      '<input type="hidden" name="id" value="' + payload.id + '" />' +
+      '<input type="hidden" name="token" value="' + req.params.token + '" />' +
+      '<input type="password" name="password" value="" placeholder="Enter your new password..." />' +
+      '<input type="submit" value="Reset Password" />' +
+  '</form>');
+});
+
+app.post('/resetpassword', function(req, res) {
+  // TODO: Fetch user from database using
+  // req.body.id
+  // TODO: Decrypt one-time-use token using the user's
+  // current password hash from the database and combining it
+  // with the user's created date to make a very unique secret key!
+  // For example,
+  // var secret = user.password + ‘-' + user.created.getTime();
+
+  var payload = jwt.decode(req.body.token, process.env.RESET_SECRET);
+
+  // TODO: Gracefully handle decoding issues.
+  // TODO: Hash password from
+  // req.body.password
+  res.send('Your password has been successfully changed.');
+});
+
 /*********REGISTER*********/
 app.get('/register',  function (req, res) {
     res.sendFile(__dirname + '/public/register.html');

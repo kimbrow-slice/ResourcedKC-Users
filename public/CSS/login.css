@@ -8,6 +8,13 @@
   font-family: 'Montserrat', sans-serif;
     color:#ff3d00;
 }
+
+#test{
+  margin-top: -18px;
+  margin-left: -60px;
+  width: 100px;
+  height:auto;
+}
   
 .title{
   font-family: 'Montserrat', sans-serif;
@@ -30,10 +37,19 @@ i {
     margin: 35px;
 
   }
+
+p {
+  font-family: 'Montserrat', sans-serif;
+}
   
 i:hover {
     color:#e63600;
   }
+#keywords{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 25px;
+  color:#ff3d00;
+}
 
 .createResource {
   font-family: 'Montserrat', sans-serif;
@@ -338,5 +354,8 @@ nav .logo.space{
  }
 }
 #error-message {
+  text-align: center;
+}
+.Mission,.Vision {
   text-align: center;
 }

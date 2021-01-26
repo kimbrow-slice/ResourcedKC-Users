@@ -212,19 +212,14 @@ app.post('/register',  async function (req,res) {
 });
 
 
-
-
-// // // // // CLIENT SIDE // // // // //
-
 app.get('/resources/emergencyShelter', function (req,res) {
   Resource.find({
-    services : 'Housing'
+    services : 'Emergency Shelter'
   }, function (err, resources) {
     if(err) return console.error(err);
     res.send(resources);
-  //"if no resources are categorized to match the GET, respond that no resources exist"
-  //"if error, respond with error"
-})});
+  })
+});
 
 app.get('/resources/housing', function (req,res) {
 Resource.find({
@@ -232,10 +227,8 @@ Resource.find({
 }, function (err, resources) {
     if(err) return console.error(err);
     res.send(resources);
-
-})
+  })
 });
-
 
 app.get('/resources/financialAssistance', function (req,res) {
   Resource.find({
@@ -243,43 +236,35 @@ app.get('/resources/financialAssistance', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
-
-})
+  })
 });
 
-
-app.get('/resources/foodPantries', function (req,res) {
+app.get('/resources/foodPantry', function (req,res) {
   Resource.find({
-    services : 'Food Pantries'
+    services : 'Food Pantry'
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
-
-})
+  })
 });
 
-
-app.get('/resources/healthClinics', function (req,res) {
+app.get('/resources/healthClinic', function (req,res) {
   Resource.find({
-    services : 'Health Clinics'
+    services : 'Health Clinic'
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
-
-})
+  })
 });
-
 
 app.get('/resources/clothing', function (req,res) {
   Resource.find({
-    services : 'Clothing Closets'
+    services : 'Clothing Closet'
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
-
-})
+  })
 });
-
 
 app.get('/resources/rehab', function (req,res) {
   Resource.find({
@@ -287,8 +272,17 @@ app.get('/resources/rehab', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
+  })
+}); 
 
-})
+app.get('/resources/search', function (req,res) {
+  //console.log(req.query)
+  Resource.find({ 
+    orgname_lower : req.query.name.toLowerCase()
+  }, function (err, resources) {
+    if(err) return console.error(err);
+    res.send(resources);
+  })
 });
 
 app.post("/resources", (request, res) => {

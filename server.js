@@ -123,9 +123,9 @@ app.post('/register',  async function (req,res) {
 });
 
 
-app.get('/resources/emergencyShelter', function (req,res) {
+app.get('/resources/emergencyShelters', function (req,res) {
   Resource.find({
-    services : 'Emergency Shelter'
+    services : 'Emergency Shelters'
   }, function (err, resources) {
     if(err) return console.error(err);
     res.send(resources);

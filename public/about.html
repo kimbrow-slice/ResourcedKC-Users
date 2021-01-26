@@ -14,9 +14,9 @@
   <title>ResourcedKC</title>
   <!--STYLESHEETS-->
   <link rel="stylesheet" href="CSS/login.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="pictures/ResourcedKCfavIcon.png" />
-
 
 </head>
 
@@ -33,7 +33,6 @@
 
       <li><a href="/index.html">Home</a></li>
       <li><a href="/about.html">About</a></li>
-      <li><a href="/login.html">Login</a></li>
       <li><a href="#">Contact</a></li>
       <li><a href="#">Feedback</a></li>
 
@@ -50,52 +49,38 @@
     </form>
   </nav>
   <!--MAIN CONTENT-->
-
-  <section>
-    <div id="container">
-      <div class="row">
-        <div class="col-md-offset-1 col-md-11">
-
+      <!-- KEEP  -->
+      <section>
+        <div>
+            <h2 class="title">Our <strong id="keywords">Mission</strong> Statement</h2>
         </div>
-      </div>
-      <div class="col-md">
-        <h2 class="title">Don't see your Organaiztion? Sign up today!</h2>
-
-        <!-- KEEP  -->
-        <div class="login">
-          <form action="/register" method="POST">
-            <label for="email">Email: </label>
-            <input id="email" name="email" type="email" maxlength="150" autocomplete="off" required />
+        <div class="Mission">
+            <p>Creating a platform to return the most <strong id="keywords">relevant</strong> and <strong id="keywords">current</strong> information to the Kansas City Community.</p>
             <br />
-            <br />
-            <label for="username">Username: </label>
-            <input id="username" name="username" type="text" maxlength="100" autocomplete="off" required />
-            <br />
-            <br />
-            <label for="password">Password: </label>
-            <input id="password" name="password" type="password" maxlength="100" minlength="8" autocomplete="off"
-              required />
-            <br />
-            <br />
-            <input type="checkbox" onclick="showPass()">Show Password
-            <br />
-            <br />
-            <br />
-            <br />
-            <button type="submit">Create Account</button>
-            <br />
-            <br />
-            <a id="reset" href="/login">Login<i class="fas fa-sign-in-alt"></i></a>
-          </form>
+            <p>With the help of many non-profit organizations, this has allowed us to centralize all the information you may need!</p>
         </div>
-        <!-- KEEP  -->
-
-      </div>
-    </div>
-  </section>
-
+        <div>
+            <h2 class="title">Our <strong id="keywords">Vision</strong></h2>
+        </div>
+        <div class="Vision">
+            <p>At ResourcedKC, our mission is to provide valuable resources to the Kansas City Metro Community.</p>
+            <br />
+            <p>With the help of many non-profit organizations, this has allowed us to centralize all the information you may need!</p>
+        </div>
+        <div>
+            <h2 class="title">The <strong id="keywords">ResourcedKC</strong> Development Team</h2>
+        </div>
+        <div class="Mission">
+            <p>Below are the developers who were able to make this site possible with the help of the community.</p>
+            <br />
+            
+            <p>Lorem ipsum etc.........</p>
+        </div>
+      </section>
+      <!-- KEEP  -->
   <!--FOOTER-->
   <footer class="footer">
+
 
   </footer>
 
@@ -111,17 +96,8 @@
     crossorigin="anonymous"></script>
   <script src="client.js"></script>
   <script src="https://kit.fontawesome.com/fc5d2b5d29.js" crossorigin="anonymous"></script>
-  <script>
-    function showPass() {
-      var x = document.getElementById("password");
-      if (x.type === "password") {
-        x.type = "text";
-      } else {
-        x.type = "password";
-      }
-    }
-  </script>
   <script src="nav-scripts.js"></script>
+
 
 </body>
 

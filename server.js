@@ -129,7 +129,8 @@ app.get('/resources/emergencyShelter', function (req,res) {
   }, function (err, resources) {
     if(err) return console.error(err);
     res.send(resources);
-})});
+  })
+});
 
 app.get('/resources/housing', function (req,res) {
 Resource.find({
@@ -137,7 +138,8 @@ Resource.find({
 }, function (err, resources) {
     if(err) return console.error(err);
     res.send(resources);
-})});
+  })
+});
 
 app.get('/resources/financialAssistance', function (req,res) {
   Resource.find({
@@ -145,7 +147,8 @@ app.get('/resources/financialAssistance', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
-})});
+  })
+});
 
 app.get('/resources/foodPantries', function (req,res) {
   Resource.find({
@@ -153,7 +156,8 @@ app.get('/resources/foodPantries', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
-})});
+  })
+});
 
 app.get('/resources/healthClinics', function (req,res) {
   Resource.find({
@@ -161,7 +165,8 @@ app.get('/resources/healthClinics', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
-})});
+  })
+});
 
 app.get('/resources/clothing', function (req,res) {
   Resource.find({
@@ -169,7 +174,8 @@ app.get('/resources/clothing', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
-})});
+  })
+});
 
 app.get('/resources/rehab', function (req,res) {
   Resource.find({
@@ -177,21 +183,26 @@ app.get('/resources/rehab', function (req,res) {
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
-})});
+  })
+}); 
 
-app.post('/resources/:query', function (req,res) {
+app.get('/resources/search', function (req,res) {
+  //console.log(req.query)
   Resource.find({ 
-    orgname : getNameFromUrl()
+    orgname_lower : req.query.name.toLowercase()
   }, function (err, resources) {
-    if(err) return console.err(err);
+    if(err) return console.error(err);
     res.send(resources);
-  })});
+  })
+});
 
+/*
   function getNameFromUrl() {
-    let query = window.location.search;
+    let query;
     const urlParams = new URLSearchParams(query);
     return urlParams.get('name').replace('+', ' ');
   };
+*/
 
 function checkAuthed(req, res, next){
   if(req.isAuthenticated()){

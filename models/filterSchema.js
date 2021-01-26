@@ -8,6 +8,7 @@ const resourceSchema = new Schema({
     servicesub     : [String],
     usercategories : [String],
     orgname        : {type: String, required: true},
+    orgname_lower  : {type: String, required: true},
     description    : {type: String, required: true, maxlength: 500},
     zipcode        : {type: Number, required: true, maxlength: 5, minlegth: 5},
     hours          : {type: String, required: true},

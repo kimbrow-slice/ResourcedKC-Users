@@ -51,19 +51,19 @@
   }
 
   async function searchByName() {
-    let searchByName = document.getElementById('searchbar').value.replace(' ', '+')
+    let searchByName = document.getElementById('searchbar').value
 
     let requestOptions = {
-      method  : "POST",
-      body    : JSON.stringify(searchByName),
-      headers : { "Content-Type" : "application/json" },
+      method  : "GET",
+      headers : { "Content-Type" : "application/json" }
     }
-    const searchresponse = await fetch ('/resources/?name=' + searchByName, requestOptions);
+    const searchresponse = await fetch ('/resources/search?name=' + searchByName, requestOptions);
   }
     
   async function submitResource() {
     let node = {
         orgname : document.getElementById('orgname').value,
+        orgname_lower : document.getElementById('orgname').value.toLowercase(),
         description : document.getElementById("description").value,
         phone : document.getElementById("phone").value,
         hours : document.getElementById("hours").value,

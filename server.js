@@ -285,16 +285,15 @@ app.get('/resources/search', function (req,res) {
   })
 });
 
-/*
-  function getNameFromUrl() {
-    let query;
-    const urlParams = new URLSearchParams(query);
-    return urlParams.get('name').replace('+', ' ');
-  };
-*/
-
-function checkAuthed(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  }};
+app.post("/resources", (request, res) => {
+  let node = new Resource(request.body);
+  node.save(function (error, node) {
+    if (error) {
+      res.sendStatus(500);
+      return console.error(error);
+    }
+    // res.redirect('/index.html');
+    return node;
+  });
+});
 

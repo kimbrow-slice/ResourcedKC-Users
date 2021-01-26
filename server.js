@@ -212,9 +212,9 @@ app.post('/register',  async function (req,res) {
 });
 
 
-app.get('/resources/emergencyShelters', function (req,res) {
+app.get('/resources/emergencyShelter', function (req,res) {
   Resource.find({
-    services : 'Emergency Shelters'
+    services : 'Emergency Shelter'
   }, function (err, resources) {
     if(err) return console.error(err);
     res.send(resources);
@@ -239,18 +239,18 @@ app.get('/resources/financialAssistance', function (req,res) {
   })
 });
 
-app.get('/resources/foodPantries', function (req,res) {
+app.get('/resources/foodPantry', function (req,res) {
   Resource.find({
-    services : 'Food Pantries'
+    services : 'Food Pantry'
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
   })
 });
 
-app.get('/resources/healthClinics', function (req,res) {
+app.get('/resources/healthClinic', function (req,res) {
   Resource.find({
-    services : 'Health Clinics'
+    services : 'Health Clinic'
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
@@ -259,7 +259,7 @@ app.get('/resources/healthClinics', function (req,res) {
 
 app.get('/resources/clothing', function (req,res) {
   Resource.find({
-    services : 'Clothing Closets'
+    services : 'Clothing Closet'
   }, function (err, resources) {
       if(err) return console.error(err);
       res.send(resources);
@@ -278,7 +278,7 @@ app.get('/resources/rehab', function (req,res) {
 app.get('/resources/search', function (req,res) {
   //console.log(req.query)
   Resource.find({ 
-    orgname_lower : req.query.name.toLowercase()
+    orgname_lower : req.query.name.toLowerCase()
   }, function (err, resources) {
     if(err) return console.error(err);
     res.send(resources);

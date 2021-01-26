@@ -3,7 +3,7 @@
     let shelters = document.getElementById('shelterscheck').checked;
     let housing  = document.getElementById('housingcheck').checked;
     let finance  = document.getElementById('financecheck').checked;
-    let food     = document.getElementById('foodcheck').chekced;
+    let food     = document.getElementById('foodcheck').checked;
     let health   = document.getElementById('healthcheck').checked;
     let clothing = document.getElementById('clothingcheck').checked;
     let rehab    = document.getElementById('rehabcheck').checked;
@@ -61,9 +61,11 @@
   }
     
   async function submitResource() {
+    console.log("test");
     let node = {
+        services : [],
         orgname : document.getElementById('orgname').value,
-        orgname_lower : document.getElementById('orgname').value.toLowercase(),
+        orgname_lower : document.getElementById('orgname').value.toLowerCase(),
         description : document.getElementById("description").value,
         phone : document.getElementById("phone").value,
         hours : document.getElementById("hours").value,
@@ -71,7 +73,28 @@
         website : document.getElementById("website").value
     };
 
-  
+    if (document.getElementById("emergencyshelter").checked) {
+      node.services.push("Emergency Shelter")
+    }
+    if (document.getElementById("housing").checked) {
+      node.services.push("Housing")
+    }
+    if (document.getElementById("financialassistance").checked) {
+      node.services.push("Financial Assistance")
+    }
+    if (document.getElementById("foodpantry").checked) {
+      node.services.push("Food Pantry")
+    }
+    if (document.getElementById("healthclinic").checked) {
+      node.services.push("Health Clinic")
+    }
+    if (document.getElementById("clothingcloset").checked) {
+      node.services.push("Clothing Closet")
+    }
+    if (document.getElementById("rehabdetox").checked) {
+      node.services.push("Rehab and Detox")
+    }
+
     let requestOptions = {
       method: "POST",
       body: JSON.stringify(node),

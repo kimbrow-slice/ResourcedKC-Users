@@ -14,9 +14,8 @@
   <title>ResourcedKC</title>
   <!--STYLESHEETS-->
   <link rel="stylesheet" href="CSS/login.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-
-
 
 </head>
 
@@ -50,34 +49,22 @@
   <!--MAIN CONTENT-->
 
   <section>
-    <div id="container">
-      <div class="row">
-        <div class="col-md-offset-1 col-md-11">
-
-        </div>
-      </div>
-      <div class="col-md">
-        <h2 class="title">Reset your<strong> Password</strong></h2>
-
-        <!-- KEEP  -->
-        <div class="login">
-          <form action="/passwordreset" method="POST">
-            <label for="email">Email: </label>
-            <input type="email" id="email" name="email" value="" placeholder="Enter your email address" />
-            <input type="submit" value="Reset Password" />
-            <br />
-            <br />
-            <br />
-            <br />
-            <a id ="reset" href="/login">Login<i class="fas fa-sign-in-alt"></i></a>
-            <a id="register" href="/register">Register<i class="fas fa-user-plus"></i></a>
+    <div class="col-md-offset-1 col-md-11">
+          <h2 class="title">Sorry!</h2>
   
-          </form>
-        </div>
-        <!-- KEEP  -->
 
-      </div>
+    <div id="error-message">
+      <p >Looks like the password or username you entered is invalid. Please try to login again by clicking the icon
+        below.</p>
+   
+    <a id="reset" href="/login">Login<i class="fas fa-sign-in-alt"></i></a>
+  </div>
+      
     </div>
+ </div>
+
+    </div>
+
   </section>
 
   <!--FOOTER-->
@@ -96,8 +83,13 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script src="client.js"></script>
-  <script src="nav-scripts.js"></script>
   <script src="https://kit.fontawesome.com/fc5d2b5d29.js" crossorigin="anonymous"></script>
+  <script>
+
+  </script>
+  <script src="nav-scripts.js"></script>
+  <script src="error.js"></script>
+
 </body>
 
 </html>

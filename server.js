@@ -75,7 +75,7 @@ app.post('/login',  async (req, res) => {
 	const user = await User.findOne({ username }).lean()
 	if (!user) {
     // TODO: Create an HTML page to res.redirect to handle the error.....
-		return res.json({ status: 'error', error: 'Invalid username/password' })
+		return res.sendFile(__dirname + '/public/401.html');
 	}
 	if (await bcrypt.compare(password, user.password)) {
 		// the username, password combination is successful
@@ -89,7 +89,7 @@ app.post('/login',  async (req, res) => {
 		return res.redirect('/submitResource.html');
   }
   // TODO: Create an HTML page to res.redirect to handle the error.....
-	res.json({ status: 'error', error: 'Invalid username/password' })
+	res.sendFile(__dirname + '/public/401.html');
 })
 /*********LOGOUT*********/
 app.delete('/logout', (req,res) => {
@@ -118,7 +118,7 @@ app.post('/passwordreset', function (req, res) {
           console.error(err);
           // TODO: Create an HTML page to res.redirect to handle the error.....
           
-          return res.redirect(401, '/reset.html');
+          return res.sendFile(__dirname + '/public/403.html');
 
          }
    

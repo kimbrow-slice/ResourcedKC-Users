@@ -15,19 +15,33 @@
     <link rel="stylesheet" href="CSS/login.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-      crossorigin="anonymous"
-    />
+
   </head>
 
   <body >
     <!--NAV-->
-    <a href="index.html">
-      <img src="./pictures/logo.png" alt="ResourcedKC" height="200" >
-      </a>
+    <nav>
+      <div class="menu-icon">
+<span class="fas fa-bars"></span></div>
+<div class="logo">
+ResourcedKC</div>
+<div class="nav-items">
+  
+<li><a href="/index.html">Home</a></li>
+<li><a href="#">About</a></li>
+<li><a href="#">Contact</a></li>
+<li><a href="#">Feedback</a></li>
+
+</div>
+<div class="search-icon">
+<span class="fas fa-search"></span></div>
+<div class="cancel-icon">
+<span class="fas fa-times"></span></div>
+<form action="#">
+        <input type="search" class="search-data" placeholder="Search" required>
+        <button type="submit" class="fas fa-search"></button>
+      </form>
+</nav>
 
     <!--MAIN CONTENT-->
 
@@ -40,7 +54,7 @@
           </div>
           <div class="col-md">
             <h2 class="title">Add your Organaiztion to the <strong>ResourcedKC</strong> list!</h2>
-          
+            
             <div class="createResource">
 
               <br />
@@ -71,7 +85,8 @@
               <br /> 
               <button class="button" type="button" id="submitResource"><strong>Submit</strong></button>            
               <br />
-              <br />            
+              <br />
+
               <form action="/logout?_method=DELETE" method="POST">
               <button class="button" type="submit">Log Out</button>
            </form>
@@ -103,6 +118,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="client.js"></script>
+    <script src="nav-scripts.js"></script>
     <script src="submit.js"></script>
     <script
       src="https://kit.fontawesome.com/fc5d2b5d29.js"

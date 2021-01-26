@@ -1,130 +1,127 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <!--META DATA TAGS-->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<head>
+  <!--META DATA TAGS-->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <!--TITLE-->
-    <title>ResourcedKC</title>
-    <!--STYLESHEETS-->
-    <link rel="stylesheet" href="CSS/login.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="pictures/ResourcedKCfavIcon.png" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <!--TITLE-->
+  <title>ResourcedKC</title>
+  <!--STYLESHEETS-->
+  <link rel="stylesheet" href="CSS/login.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="pictures/ResourcedKCfavIcon.png" />
 
 
-  </head>
+</head>
 
-  <body >
-    <!--NAV-->
-    <nav>
-      <div class="menu-icon">
-<span class="fas fa-bars"></span></div>
-<div class="logo">
-ResourcedKC</div>
-<div class="nav-items">
-  
-<li><a href="/index.html">Home</a></li>
-<li><a href="#">About</a></li>
-<li><a href="#">Contact</a></li>
-<li><a href="#">Feedback</a></li>
+<body>
+  <!--NAV-->
+  <nav>
+    <img src="pictures/rotated.png" id="test" alt="ResourcedKC Logo">
+    <div class="menu-icon">
+      <span class="fas fa-bars"></span>
+    </div>
+    <div class="logo">
+      ResourcedKC</div>
+    <div class="nav-items">
 
-</div>
-<div class="search-icon">
-<span class="fas fa-search"></span></div>
-<div class="cancel-icon">
-<span class="fas fa-times"></span></div>
-<form action="#">
-        <input type="search" class="search-data" placeholder="Search" required>
-        <button type="submit" class="fas fa-search"></button>
-      </form>
-</nav>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Feedback</a></li>
 
-    <!--MAIN CONTENT-->
+    </div>
+    <div class="search-icon">
+      <span class="fas fa-search"></span>
+    </div>
+    <div class="cancel-icon">
+      <span class="fas fa-times"></span>
+    </div>
+    <form action="#">
+      <input type="search" class="search-data" placeholder="Search" required>
+      <button type="submit" class="fas fa-search"></button>
+    </form>
+  </nav>
 
-    <section>
-        <div id="container">
-          <div class="row">
-            <div class="col-md-offset-1 col-md-11">
-              
-            </div>
-          </div>
-          <div class="col-md">
-            <h2 class="title">Add your Organaiztion to the <strong>ResourcedKC</strong> list!</h2>
-            
-            <div class="createResource">
+  <!--MAIN CONTENT-->
 
-              <br />
-              <br />
-              <label for="orgname">Organaiztion Name: </label>
-              <input id="orgname" type="text" maxlength="100" required autocomplete="off" />
-              <br />
-              <br />
-              <label for="description">Description: </label>
-              <input id="description" type="text" maxlength="500" required autocomplete="off" />
-              <br />
-              <br />
-              <label for="phone">Phone Number: </label>
-              <input id="phone" type="text" maxlength="10"  required autocomplete="off" pattern="[0-9\/]*" /> 
-              <br />
-              <br />
-              <label for="zipcode">Zipcode: </label>
-              <input id="zipcode" type="text" maxlength="150" required  autocomplete="off" />
-              <br />
-              <br />
-              <label for="hours">Hours: </label>
-              <input id="hours" type="text" maxlength="150" required  autocomplete="off" />
-              <br />
-              <br />
-              <label for="website">Website: </label>
-              <input id="website" type="text" maxlength="150" required autocomplete="off" />
-              <br />
-              <br /> 
-              <button class="button" type="button" id="submitResource"><strong>Submit</strong></button>            
-              <br />
-              <br />
+  <section>
+    <div id="container">
+      <div class="row">
+        <div class="col-md-offset-1 col-md-11">
 
-              <form action="/logout?_method=DELETE" method="POST">
-              <button class="button" type="submit">Log Out</button>
-           </form>
-
-            </div>
         </div>
+      </div>
+      <div class="col-md">
+        <h2 class="title">Add your Organaiztion to the <strong>ResourcedKC</strong> list!</h2>
+
+        <div class="createResource">
+
+          <br />
+          <br />
+          <label for="orgname">Organaiztion Name: </label>
+          <input id="orgname" type="text" maxlength="100" required autocomplete="off" />
+          <br />
+          <br />
+          <label for="description">Description: </label>
+          <input id="description" type="text" maxlength="500" required autocomplete="off" />
+          <br />
+          <br />
+          <label for="phone">Phone Number: </label>
+          <input id="phone" type="text" maxlength="10" required autocomplete="off" pattern="[0-9\/]*" />
+          <br />
+          <br />
+          <label for="zipcode">Zipcode: </label>
+          <input id="zipcode" type="text" maxlength="150" required autocomplete="off" />
+          <br />
+          <br />
+          <label for="hours">Hours: </label>
+          <input id="hours" type="text" maxlength="150" required autocomplete="off" />
+          <br />
+          <br />
+          <label for="website">Website: </label>
+          <input id="website" type="text" maxlength="150" required autocomplete="off" />
+          <br />
+          <br />
+          <button class="button" type="button" id="submitResource"><strong>Submit</strong></button>
+          <br />
+          <br />
+
+          <form action="/logout?_method=DELETE" method="POST">
+            <button class="button" type="submit">Log Out</button>
+          </form>
+
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-    <!--FOOTER-->
-    <footer class="footer">
+  <!--FOOTER-->
+  <footer class="footer">
 
-    </footer>
+  </footer>
 
-    <!--SCRIPTS-->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <script src="client.js"></script>
-    <script src="nav-scripts.js"></script>
-    <script src="submit.js"></script>
-    <script
-      src="https://kit.fontawesome.com/fc5d2b5d29.js"
-      crossorigin="anonymous"
-    ></script>
+  <!--SCRIPTS-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="client.js"></script>
+  <script src="nav-scripts.js"></script>
+  <script src="submit.js"></script>
+  <script src="https://kit.fontawesome.com/fc5d2b5d29.js" crossorigin="anonymous"></script>
 
-  </body>
+</body>
+
 </html>

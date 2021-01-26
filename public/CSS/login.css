@@ -25,14 +25,14 @@
 
 i {
     font-size: 40px;
-    color: #c7c7c7;
+    color: #ff3d00;
     text-align: center;
     margin: 35px;
 
   }
   
 i:hover {
-    color:#ff3d00;
+    color:#e63600;
   }
 
 .createResource {
@@ -42,7 +42,7 @@ i:hover {
   }
 
 /*These button styles can be changed to however you guys see fit this stuff was just an example working with conor*/
-#loginBtn {
+#loginBtn, .button {
   font-size: 25px;
   font-family: 'Montserrat', sans-serif;
   background-color: #021936;
@@ -52,10 +52,10 @@ i:hover {
   letter-spacing: 4px;
   padding: 0 10px 0 10px;
 }  
-#loginBtn:hover {
+#loginBtn:hover, .button:hover {
   font-family: 'Montserrat', sans-serif;
   font-size: 25px;
-  background-color:#ff3d00;
+  background-color: #e63600;
   color:white;
   border-radius: 10px;
   outline:none;
@@ -66,13 +66,15 @@ i:hover {
   color: #171c24;
   font-size: 20px;
   text-align: center;
+  text-decoration: none;
   }
 
 #register:hover, #reset:hover {
     font-family: 'Montserrat', sans-serif;
-    color: #ff3d00;
+    color: #e63600;
     font-size: 20px;
     text-align: center;
+    text-decoration: none;
     }
 
 
@@ -334,4 +336,7 @@ nav .logo.space{
   height: auto;
   background-position: center;
  }
+}
+#error-message {
+  text-align: center;
 }

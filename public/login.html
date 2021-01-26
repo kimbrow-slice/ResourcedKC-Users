@@ -65,15 +65,16 @@
 
       <!-- KEEP  -->
       <div class="login">
-        <form action="login" method="POST">
+        <div id='error'></div>
+        <form  id="login" action="login" method="POST">
 
           <label for="username">Username: </label>
-          <input id="username" name="username" type="text" maxlength="100" autocomplete="off" required />
+          <input id="username" name="username" type="text" maxlength="100" autocomplete="off" required  />
           <br />
           <br />
           <label for="password">Password: </label>
           <input id="password" name="password" type="password" maxlength="100" minlength="8" autocomplete="off"
-            required />
+           required/>
           <br />
           <br />
           <input type="checkbox" onclick="showPass()">Show Password
@@ -124,6 +125,7 @@
     }
   </script>
   <script src="nav-scripts.js"></script>
+
 
 </body>
 

@@ -1,119 +1,59 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <!--META DATA TAGS-->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<head>
+  <!--META DATA TAGS-->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <!--TITLE-->
-    <title>ResourcedKC</title>
-    <!--STYLESHEETS-->
-    <link rel="stylesheet" href="CSS/login.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <!--TITLE-->
+  <title>ResourcedKC</title>
+  <!--STYLESHEETS-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="CSS/login.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
 
-  </head>
+</head>
 
-  <body >
-    <!--NAV-->
-    <nav>
-      <div class="menu-icon">
-<span class="fas fa-bars"></span></div>
-<div class="logo">
-ResourcedKC</div>
-<div class="nav-items">
-  
-<li><a href="/index.html">Home</a></li>
-<li><a href="#">About</a></li>
-<li><a href="#">Contact</a></li>
-<li><a href="#">Feedback</a></li>
+<body>
+  <!--NAV-->
+  <nav>
+    <img src="pictures/rotated.png" id="test" alt="ResourcedKC Logo">
+    <div class="menu-icon">
+      <span class="fas fa-bars"></span>
+    </div>
+    <div class="logo">
+      ResourcedKC</div>
+    <div class="nav-items">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </div>
+    <div class="search-icon">
+      <span class="fas fa-search"></span>
+    </div>
+    <div class="cancel-icon">
+      <span class="fas fa-times"></span>
+    </div>
+    <form action="#">
+      <input type="search" class="search-data" placeholder="Search" required>
+      <button type="submit" class="fas fa-search"></button>
+    </form>
+  </nav>
 
-</div>
-<div class="search-icon">
-<span class="fas fa-search"></span></div>
-<div class="cancel-icon">
-<span class="fas fa-times"></span></div>
-<form action="#">
-        <input type="search" class="search-data" placeholder="Search" required>
-        <button type="submit" class="fas fa-search"></button>
-      </form>
-</nav>
+  <!--MAIN CONTENT-->
 
-    <!--MAIN CONTENT-->
+  <section>
+    <div id="container">
+      <div class="row">
+        <div class="col-md-offset-1 col-md-11">
 
-    <section>
-        <div id="container">
-          <div class="row">
-            <div class="col-md-offset-1 col-md-11">
-              
-            </div>
-          </div>
-          <div class="col-md">
-            <h2 class="title">Add your Organaiztion to the <strong>ResourcedKC</strong> list!</h2>
-            
-            <div class="createResource">
-
-              <br />
-              <br />
-              <label for="orgname">Organization Name: </label>
-              <input id="orgname" type="text" maxlength="100" required autocomplete="off" />
-              <br />
-              <br />
-              <input type="checkbox" id="emergencyshelter" name="emergencyshelter">
-              <label for="emergencyshelter">Emergency Shelter</label>
-              <br/>
-              <input type="checkbox" id="housing" name="housing">
-              <label for="housing">Housing</label>
-              <br/>
-              <input type="checkbox" id="financialassistance" name="financialassistance">
-              <label for="financialassistance">Financial Assistance</label>
-              <br/>
-              <input type="checkbox" id="foodpantry" name="foodpantry">
-              <label for="foodpantry">Food Pantry</label>
-              <br/>
-              <input type="checkbox" id="healthclinic" name="healthclinic">
-              <label for="healthclinic">Health Clinic</label>
-              <br/>
-              <input type="checkbox" id="clothingcloset" name="clothingcloset">
-              <label for="clothingcloset">Clothing Closet</label>
-              <br/>
-              <input type="checkbox" id="rehabdetox" name="rehabdetox">
-              <label for="rehabdetox">Rehab and Detox</label>
-              <br/>
-              <br/>
-              <label for="description">Description: </label>
-              <input id="description" type="text" maxlength="500" required autocomplete="off" />
-              <br />
-              <br />
-              <label for="phone">Phone Number: </label>
-              <input id="phone" type="text" maxlength="10"  required autocomplete="off" pattern="[0-9\/]*" /> 
-              <br />
-              <br />
-              <label for="zipcode">Zipcode: </label>
-              <input id="zipcode" type="text" maxlength="150" required  autocomplete="off" />
-              <br />
-              <br />
-              <label for="hours">Hours: </label>
-              <input id="hours" type="text" maxlength="150" required  autocomplete="off" />
-              <br />
-              <br />
-              <label for="website">Website: </label>
-              <input id="website" type="text" maxlength="150" required autocomplete="off" />
-              <br />
-              <br /> 
-              <button class="button" type="button" id="submitResource"><strong>Submit</strong></button>            
-              <br />
-              <br />
-
-              <form action="/logout?_method=DELETE" method="POST">
-              <button class="button" type="submit">Log Out</button>
-           </form>
-
-            </div>
         </div>
       </div>
       <div class="col-md">
@@ -123,8 +63,30 @@ ResourcedKC</div>
 
           <br />
           <br />
-          <label for="orgname">Organaiztion Name: </label>
+          <label for="orgname">Organization Name: </label>
           <input id="orgname" type="text" maxlength="100" required autocomplete="off" />
+          <br />
+          <br />
+          <input type="checkbox" id="emergencyshelter" name="emergencyshelter">
+          <label for="emergencyshelter">Emergency Shelter</label>
+          <br />
+          <input type="checkbox" id="housing" name="housing">
+          <label for="housing">Housing</label>
+          <br />
+          <input type="checkbox" id="financialassistance" name="financialassistance">
+          <label for="financialassistance">Financial Assistance</label>
+          <br />
+          <input type="checkbox" id="foodpantry" name="foodpantry">
+          <label for="foodpantry">Food Pantry</label>
+          <br />
+          <input type="checkbox" id="healthclinic" name="healthclinic">
+          <label for="healthclinic">Health Clinic</label>
+          <br />
+          <input type="checkbox" id="clothingcloset" name="clothingcloset">
+          <label for="clothingcloset">Clothing Closet</label>
+          <br />
+          <input type="checkbox" id="rehabdetox" name="rehabdetox">
+          <label for="rehabdetox">Rehab and Detox</label>
           <br />
           <br />
           <label for="description">Description: </label>
@@ -158,11 +120,32 @@ ResourcedKC</div>
         </div>
       </div>
     </div>
+
+    </div>
   </section>
 
   <!--FOOTER-->
   <footer class="footer">
+    <div clas="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="footer-content">
 
+              <ul type="circle"><span class="ourEmail"> Our Emails : </span>
+                <li><a href="mailto:kimbrowjeff@gmail.com" id="ourEmails"> kimbrowjeff@gmail.com</a></li>
+                <li><a href="mailto:ash5diyali@gmail.com" id="ourEmails"> ash5diyali@gmail.com</a></li>
+                <li><a href="mailto:kimbrowjeff@gmail.com" id="ourEmails"> kimbrowjeff@gmail.com</a></li>
+                <li><a href="mailto:conorokane225@gmail.com" id="ourEmails"> conorokane225@gmail.com</a></li>        
+              </ul>
+
+             <div class="copyright">
+             <p class="copyright">COPYRIGHT 2021 ResourcedKC</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
   </footer>
 
   <!--SCRIPTS-->

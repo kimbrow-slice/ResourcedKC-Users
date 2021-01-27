@@ -16,8 +16,7 @@ const methodOverride = require('method-override');
 
 mongoose.set("useFindAndModify", false);
 let port = process.env.PORT || 4050;
-const mongoDB =
-  "mongodb+srv://dbAdmin:SKCstudent@cluster0.ewhdg.mongodb.net/ResourcedKC?retryWrites=true&w=majority";
+const mongoDB = process.env.CONNECTION;
 
 const User = require('./models/userSchema.js');
 const Resource = require('./models/filterSchema.js');

@@ -64,10 +64,11 @@
 }
 
 #ourEmails{
-  
-  color:rgb(255, 0, 0);
+  color:#ff3d00;;
 }
-
+#ourEmails:hover{
+  color:#f6f6f6;
+}
 .copyright {
   padding-top: 30px;
   text-align: center;

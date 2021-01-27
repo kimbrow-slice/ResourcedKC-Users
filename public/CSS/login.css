@@ -1,4 +1,7 @@
 
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
+
 .submit{
   font-family: 'Montserrat', sans-serif;
     color: #171c24;
@@ -102,7 +105,6 @@ i:hover {
 }
 
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
 *{
   margin: 0;
   padding: 0;
@@ -358,4 +360,51 @@ nav .logo.space{
 }
 .Mission,.Vision {
   text-align: center;
+}
+
+
+
+* {
+  text-align: center;
+}
+
+
+div.elem-group {
+  margin: 40px 0;
+}
+
+label {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  padding-bottom: 4px;
+  font-size: 1.25em;
+}
+
+input, select, textarea {
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 1.25em;
+  font-family: 'Montserrat', sans-serif;
+  width: 500px;
+  padding: 8px;
+}
+
+textarea {
+  height: 250px;
+}
+
+button {
+  height: 50px;
+  background:#ff3d00;
+  color: white;
+  border: 2px #ff3d00;
+  font-size: 1.25em;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  border: 2px solid black;
 }

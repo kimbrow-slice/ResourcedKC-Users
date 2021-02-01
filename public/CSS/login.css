@@ -10,12 +10,86 @@
 }
 
 #test{
-  margin-top: -18px;
-  margin-left: -60px;
-  width: 100px;
+  margin-top: -8px;
+  margin-right:5px;
+  width: 80px;
   height:auto;
+  background-position: center;
 }
-  
+
+@media (min-width: 1245px) {
+  #test{
+    margin-top: -8px;
+    margin-right:5px;
+    margin-left:-90px;
+    width: 80px;
+    height:auto;
+    background-position: center;
+  }
+}
+ @media screen and (min-width: 1141px){
+  #test{
+    margin-top: -8px;
+    margin-right:5px;
+    margin-left:-50px;
+    width: 80px;
+    height:auto;
+    background-position: center;
+  }
+ }
+
+ .img-fluid{
+   margin:15px 5px 15px 5px;
+   border-radius: 50%;
+   height: 250px;
+   width: 250px;
+ }
+ 
+
+ .footer{
+   position: relative;
+   margin-top:200px;
+   padding-top:60px;
+   text-align:center;
+   background-color: #021936;
+ }
+ #footer{
+   text-align: center;
+   color:#f6f6f6;
+ }
+
+.ourEmail{
+  padding-top: 5%;
+  color:#f6f6f6;
+}
+
+#ourEmails{
+  color:#ff3d00;;
+}
+#ourEmails:hover{
+  color:#f6f6f6;
+}
+.copyright {
+  padding-top: 30px;
+  text-align: center;
+  color: #ffffff41;
+}
+
+
+.DevTeam1{
+  padding-top: 20px;
+  text-align: center;
+  color:#ff3d00;
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+.DevTeam2{
+  padding-top: 40px;
+  text-align: center;
+  color :#171c24;
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
 .title{
   font-family: 'Montserrat', sans-serif;
     padding: 40px 0 40px 0;
@@ -31,20 +105,27 @@
   }
 
 i {
-    font-size: 40px;
+    font-size:40px;
     color: #ff3d00;
     text-align: center;
     margin: 35px;
 
   }
-
-p {
-  font-family: 'Montserrat', sans-serif;
-}
-  
 i:hover {
     color:#e63600;
   }
+p {
+  font-family: 'Montserrat', sans-serif;
+  color:#171c24;
+}
+
+
+#ResourcedKCLogo{
+  width:300px;
+  height:300px;
+}
+  
+
 #keywords{
   font-family: 'Montserrat', sans-serif;
   font-size: 25px;
@@ -58,7 +139,7 @@ i:hover {
   }
 
 /*These button styles can be changed to however you guys see fit this stuff was just an example working with conor*/
-#loginBtn, .button {
+#loginBtn, .button, #registerBtn {
   font-size: 25px;
   font-family: 'Montserrat', sans-serif;
   background-color: #021936;
@@ -68,7 +149,7 @@ i:hover {
   letter-spacing: 4px;
   padding: 0 10px 0 10px;
 }  
-#loginBtn:hover, .button:hover {
+#loginBtn:hover, .button:hover, #registerBtn:hover {
   font-family: 'Montserrat', sans-serif;
   font-size: 25px;
   background-color: #e63600;
@@ -93,12 +174,24 @@ i:hover {
     text-decoration: none;
     }
 
-
 #lock{
   color:  #021936;
   font-size: 60px;
   text-align: center;
   margin-left: 49%;
+}
+#error-message {
+  text-align: center;
+}
+#Mission,#Vision,#Team {
+  text-align: center;
+  padding-bottom: 80px;
+}
+
+
+#Mission {
+  background-color:#171c2410;
+
 }
 
 
@@ -155,7 +248,7 @@ nav form{
   border-radius: 2px;
   border: 1px solid rgba(155,155,155,0.2);
 }
-nav form .search-data{
+.search-data{
   width: 100%;
   height: 100%;
   padding: 0 10px;
@@ -352,10 +445,4 @@ nav .logo.space{
   height: auto;
   background-position: center;
  }
-}
-#error-message {
-  text-align: center;
-}
-.Mission,.Vision {
-  text-align: center;
 }

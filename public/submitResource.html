@@ -18,7 +18,7 @@
 
   </head>
 
-  <body >
+  <body onload='subCategoryCheckboxes()'>
     <!--NAV-->
     <nav>
       <div class="menu-icon">
@@ -53,7 +53,7 @@ ResourcedKC</div>
             </div>
           </div>
           <div class="col-md">
-            <h2 class="title">Add your Organaiztion to the <strong>ResourcedKC</strong> list!</h2>
+            <h2 class="title">Add your Organization to the <strong>ResourcedKC</strong> list!</h2>
             
             <div class="createResource">
 
@@ -63,8 +63,14 @@ ResourcedKC</div>
               <input id="orgname" type="text" maxlength="100" required autocomplete="off" />
               <br />
               <br />
-              <input type="checkbox" id="emergencyshelter" name="emergencyshelter">
+              <input type="checkbox" id="emergencyshelter" name="emergencyshelter" class="needsubcat">
               <label for="emergencyshelter">Emergency Shelter</label>
+              <br/>
+              <input type='checkbox' id='domesticabuse' name='domesticabuse' class='subcat' style='display: none;'>
+              <label for='domesticabuse' id='domesticabuselabel' class='subcat' style='display: none;'>Domestic Abuse Shelter</label>
+              <br/>
+              <input type="checkbox" id="homelessshelter" name="homelessshelter" class="subcat" style='display: none;'>
+              <label for="homelessshelter" id='homelessshelterlabel' class='subcat' style='display: none;'>Homeless Shelter</label>
               <br/>
               <input type="checkbox" id="housing" name="housing">
               <label for="housing">Housing</label>
@@ -116,48 +122,6 @@ ResourcedKC</div>
             </div>
         </div>
       </div>
-      <div class="col-md">
-        <h2 class="title">Add your Organaiztion to the <strong>ResourcedKC</strong> list!</h2>
-
-        <div class="createResource">
-
-          <br />
-          <br />
-          <label for="orgname">Organaiztion Name: </label>
-          <input id="orgname" type="text" maxlength="100" required autocomplete="off" />
-          <br />
-          <br />
-          <label for="description">Description: </label>
-          <input id="description" type="text" maxlength="500" required autocomplete="off" />
-          <br />
-          <br />
-          <label for="phone">Phone Number: </label>
-          <input id="phone" type="text" maxlength="10" required autocomplete="off" pattern="[0-9\/]*" />
-          <br />
-          <br />
-          <label for="zipcode">Zipcode: </label>
-          <input id="zipcode" type="text" maxlength="150" required autocomplete="off" />
-          <br />
-          <br />
-          <label for="hours">Hours: </label>
-          <input id="hours" type="text" maxlength="150" required autocomplete="off" />
-          <br />
-          <br />
-          <label for="website">Website: </label>
-          <input id="website" type="text" maxlength="150" required autocomplete="off" />
-          <br />
-          <br />
-          <button class="button" type="button" id="submitResource"><strong>Submit</strong></button>
-          <br />
-          <br />
-
-          <form action="/logout?_method=DELETE" method="POST">
-            <button class="button" type="submit">Log Out</button>
-          </form>
-
-        </div>
-      </div>
-    </div>
   </section>
 
   <!--FOOTER-->

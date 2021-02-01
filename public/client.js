@@ -117,7 +117,39 @@
 
     if (document.getElementById("family").checked) {
       node.usercategories.push("Family")
-      //this is just an example
+    }
+    if (document.getElementById("women").checked) {
+      node.usercategories.push("Women")
+    }
+    if (document.getElementById("men").checked) {
+      node.usercategories.push("Men")
+    }
+    if (document.getElementById("lgbtq").checked) {
+      node.usercategories.push("LGBTQ")
+    }
+    if (document.getElementById("africanamerican").checked) {
+      node.usercategories.push("African American")
+    }
+    if (document.getElementById("hispanic").checked) {
+      node.usercategories.push("Hispanic")
+    }
+    if (document.getElementById("foreignlanguage").checked) {
+      node.usercategories.push("Foreign Language")
+    }
+    if (document.getElementById("infant").checked) {
+      node.usercategories.push("Infant")
+    }
+    if (document.getElementById("children").checked) {
+      node.usercategories.push("Children")
+    }
+    if (document.getElementById("teen").checked) {
+      node.usercategories.push("Teen")
+    }
+    if (document.getElementById("elderly").checked) {
+      node.usercategories.push("Elderly")
+    }
+    if (document.getElementById("religion").checked) {
+      node.usercategories.push("Religion")
     }
 
     let requestOptions = {

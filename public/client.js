@@ -64,6 +64,8 @@
     console.log("test");
     let node = {
         services : [],
+        servicesub : [],
+        usercategories : [],
         orgname : document.getElementById('orgname').value,
         orgname_lower : document.getElementById('orgname').value.toLowerCase(),
         description : document.getElementById("description").value,
@@ -73,9 +75,18 @@
         website : document.getElementById("website").value
     };
 
+// SERVICES AND SERVICE SUBCATEGORIES
+
     if (document.getElementById("emergencyshelter").checked) {
       node.services.push("Emergency Shelter")
     }
+    if (document.getElementById("domesticabuse").checked && document.getElementById("emergencyshelter").checked) {
+      node.servicesub.push("Domestic Abuse")
+    }
+    if (document.getElementById("homelessshelter").checked && document.getElementById("emergencyshelter").checked) {
+      node.servicesub.push("Homeless Shelter")
+    }
+      //make sure to use && for the subcats so they arent accidentally added if the user decudes to uncheck the primary category!
     if (document.getElementById("housing").checked) {
       node.services.push("Housing")
     }
@@ -93,6 +104,19 @@
     }
     if (document.getElementById("rehabdetox").checked) {
       node.services.push("Rehab and Detox")
+    }
+    if (document.getElementById("domesticabuse").checked) {
+      node.servicesub.push("Domestic Abuse")
+    }
+    if (document.getElementById("homelessshelter").checked) {
+      node.services.push("Homeless Shelter")
+    }
+
+// USER CATEGORIES
+
+    if (document.getElementById("family").checked) {
+      node.usercategories.push("Family")
+      //this is just an example
     }
 
     let requestOptions = {
@@ -112,3 +136,66 @@
     
   }
 
+function subCategoryCheckboxes() {
+  let needsubcat = document.getElementsByClassName('needsubcat')
+  for (i = 0; i < needsubcat.length; i++){
+    needsubcat[i].addEventListener('click', function(){
+      if (document.getElementById('emergencyshelter').checked) {
+        revealEmergencyShelterSub()
+      }
+      if (document.getElementById('emergencyshelter').checked===false) {
+        hideEmergencyShelterSub()
+      }
+      if (document.getElementById('housing').checked) {
+        revealHousingSub()
+      }
+      if (document.getElementById('housing').checked===false) {
+        hideHousingSub()
+      }
+      if (document.getElementById('financialassistance').checked) {
+        revealFinancialAssistanceSub()
+      }
+      if (document.getElementById('financialassistance').checked===false) {
+        hideFinancialAssistanceSub()
+      }
+      if (document.getElementById('foodpantry').checked) {
+        revealFoodPantrySub()
+      }
+      if (document.getElementById('foodpantry').checked===false) {
+        hideFoodPantrySub()
+      }
+      if (document.getElementById('healthclinic').checked) {
+        revealHealthClinicSub()
+      }
+      if (document.getElementById('healthclinic').checked===false) {
+        hideHealthClinicSub()
+      }
+      if (document.getElementById('clothingcloset').checked) {
+        revealClothingClosetSub()
+      }
+      if (document.getElementById('clothingcloset').checked===false) {
+        hideClothingClosetSub()
+      }
+      if (document.getElementById('rehabdetox').checked) {
+        revealRehabDetoxSub()
+      }
+      if (document.getElementById('rehabdetox').checked===false) {
+        hideRehabDetoxSub()
+      }
+    })
+  }
+};
+
+function revealEmergencyShelterSub() {
+  document.getElementById('domesticabuse').style.display="inline";
+  document.getElementById('domesticabuselabel').style.display="inline";
+  document.getElementById('homelessshelter').style.display="inline";
+  document.getElementById('homelessshelterlabel').style.display="inline";
+}
+
+function hideEmergencyShelterSub() {
+  document.getElementById('domesticabuse').style.display="none";
+  document.getElementById('domesticabuselabel').style.display="none";
+  document.getElementById('homelessshelter').style.display="none";
+  document.getElementById('homelessshelterlabel').style.display="none";
+}

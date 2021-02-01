@@ -59,7 +59,7 @@
     }
     const searchresponse = await fetch ('/resources/search?name=' + searchByName, requestOptions);
   }
-    
+
   async function submitResource() {
     console.log("test");
     let node = {
@@ -72,7 +72,8 @@
         phone : document.getElementById("phone").value,
         hours : document.getElementById("hours").value,
         zipcode : document.getElementById("zipcode").value,
-        website : document.getElementById("website").value
+        website : document.getElementById("website").value,
+        
     };
 
 // SERVICES AND SERVICE SUBCATEGORIES

@@ -36,25 +36,23 @@ app.listen(port, function () {
     console.log("The server is up and running at " + port);
   });
 
-app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-
 app.use(passport.initialize());
-// app.use(passport.session());
 
-
- //test comment
+app.use(express.static(path.join(__dirname, "public")));
+app.use("public/authed", function (req, res, next) {
+    if (!req.isAuthenticated()) {
+        return res.redirect('/login.html');
+    }
+    next();    
+});
+//app.use(express.static(path.join(__dirname, "public/authed")));
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error: "));
-// initalizePassport(
-//   passport, 
-//   username => User.findOne( {'username':username}).lean(),
-//   id => User.findOne( { '_id' : id }).lean()
-//  );
 
 /*********INDEX*********/
 app.get('/', function (req, res) {
@@ -66,20 +64,19 @@ app.get('/login',  function (req, res) {
     res.sendFile(__dirname + '/public/login.html');
     });
 
-app.post('/login',  async (req, res) => {
-  let username;
-  let password; 
+app.post('/login', (req, res) => {
+  console.log('test');
+ 
   let form = new formidable.IncomingForm(); 
-  form.parse(req, function(err, fields, files){
+  form.parse(req, async function(err, fields, files){
       console.log(fields); 
-      username = fields.username;
-      password = fields.password;
-      }); 
-
-
+      let username = fields.username;
+      let password = fields.password;
+  console.log(username); 
+      console.log(password); 
 	const user = await User.findOne({ username }).lean()
 	if (!user) {
-    // TODO: Create an HTML page to res.redirect to handle the error.....
+   
 		return res.sendFile(__dirname + '/public/401.html');
 	}
 	if (await bcrypt.compare(password, user.password)) {
@@ -91,43 +88,22 @@ app.post('/login',  async (req, res) => {
 			},
 			process.env.secret
     )
-
     console.log(user._id);
-
     //I need to find a way to send over the user._id to the client side so it can be stored later to allow the user to only update their resources and to view their resources
 		return res.json({id: user._id});
   }
-  // TODO: Create an HTML page to res.redirect to handle the error.....
-	res.sendFile(__dirname + '/public/401.html');
+  res.sendFile(__dirname + '/public/401.html');
+  }); 
 })
-/***GET CURRENT USER***/
-app.get('/welcome', (req,res) => {
-  User.find(function (err, currUser) {
-    if(err) return console.error(err);
-    res.send(currUser);
-  })
-})
-// app.get('/welcome/:id', (req,res) => {
-//   User.findOne({_id: req.params.id}).exec((err, current) => {
-//     if(err) return console.error(err);
-//     console.log(current);
-//     res.send(current);
-//   })
-// })
+
 /*********LOGOUT*********/
 app.delete('/logout', (req,res) => {
     req.logOut();
-    res.redirect('/login');
+    res.sendStatus(204);
 });
     
 /*********RESET*********/
 app.get('/reset', function (req, res) {
-  //this was all moved into the static reset.html page
-
-  // res.send('<form action="/passwordreset" method="POST">' +
-  //     '<input type="email" name="email" value="" placeholder="Enter your email address..." />' +
-  //     '<input type="submit" value="Reset Password" />' +
-  // '</form>');
 });
 
 app.post('/passwordreset', function (req, res) {
@@ -137,26 +113,19 @@ app.post('/passwordreset', function (req, res) {
       User.findOne({email: emailAddress}).exec((err, user) => {
         if((err) || (user === null))
         { 
-
           console.error(err);
-          // TODO: Create an HTML page to res.redirect to handle the error.....
-          
+
           return res.sendFile(__dirname + '/public/403.html');
 
          }
-   
-        // TODO: Using email, find user from your database.
+
       var payload = {
         id: user._id,        // User ID from database
         email: emailAddress
     };
-    // TODO: Make this a one-time-use token by using the user's
-    // current password hash from the database, and combine it
-    // with the user's created date to make a very unique secret key!
-    // For example:
-    // var secret = user.password + ‘-' + user.created.getTime();
+
     var token = jwtSimple.encode(payload, process.env.RESET_SECRET);
-    // TODO: Create an HTML page to do the below task rather than sending a link 
+
     res.send('<a href="/resetpassword/' + payload.id + '/' + token + '">Reset password</a>');
 
       })
@@ -167,18 +136,10 @@ app.post('/passwordreset', function (req, res) {
 });
 
 app.get('/resetpassword/:id/:token', function(req, res) {
-  // TODO: Fetch user from database using
-  // req.params.id
-  // TODO: Decrypt one-time-use token using the user's
-  // current password hash from the database and combine it
-  // with the user's created date to make a very unique secret key!
-  // For example,
-  // var secret = user.password + ‘-' + user.created.getTime();
+
 
   var payload = jwtSimple.decode(req.params.token, process.env.RESET_SECRET);
 
-  // TODO: Gracefully handle decoding issues.
-  // Create form to reset password.
   res.send('<form action="/resetpassword" method="POST">' +
       '<input type="hidden" name="id" value="' + payload.id + '" />' +
       '<input type="hidden" name="token" value="' + req.params.token + '" />' +
@@ -188,22 +149,8 @@ app.get('/resetpassword/:id/:token', function(req, res) {
 });
 
 app.post('/resetpassword',  function(req, res) {
-  // TODO: Fetch user from database using
-  // req.body.id
   User.findOne({_id: req.body.id}).exec(async (err, updatedUser)  => {
-    // TODO: Decrypt one-time-use token using the user's
-  // current password hash from the database and combining it
-  // with the user's created date to make a very unique secret key!
-  // For example,
-  // var secret = user.password + ‘-' + user.created.getTime();
-
-  // var payload = jwtSimple.decode(req.body.token, process.env.RESET_SECRET);
-
     try {  
-  // TODO: Gracefully handle decoding issues.
-  // TODO: Hash password from
-  // req.body.password
-  //do some error handling to bcrypt the new password like how we do when we register a user
   updatedUser.password = await bcrypt.hash(req.body.password, 10);
   updatedUser.save();
   //redirect the user back to the login screen after they get the successful message

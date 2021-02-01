@@ -22,7 +22,7 @@ async function loginUser() {
     }
     else if(response.status === 200) {
       setCookie("currentUser",body.id, 1);
-      window.location.href = 'welcome.html';
+      window.location.href = 'authed/welcome.html';
     }
   }
 

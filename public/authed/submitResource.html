@@ -12,8 +12,11 @@
     <!--TITLE-->
     <title>ResourcedKC</title>
     <!--STYLESHEETS-->
-    <link rel="stylesheet" href="CSS/login.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="../CSS/login.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../pictures/IconONLY.png" />
 
 
   </head>
@@ -27,10 +30,9 @@
 ResourcedKC</div>
 <div class="nav-items">
   
-<li><a href="/index.html">Home</a></li>
-<li><a href="#">About</a></li>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../about.">About</a></li>
 <li><a href="#">Contact</a></li>
-<li><a href="#">Feedback</a></li>
 
 </div>
 <div class="search-icon">
@@ -115,7 +117,7 @@ ResourcedKC</div>
               <br />
               <br />
 
-              <form action="/logout?_method=DELETE" method="POST">
+              <form id="logout">
               <button class="button" type="submit">Log Out</button>
            </form>
            </div>
@@ -128,7 +130,7 @@ ResourcedKC</div>
     <div class="container">
       <div class="row">
         <div class="left-col">
-            <img src="/pictures/NewLogo.png" id="ResourcedKCLogo" alt="ResourcedKC Logo">
+            <img src="../pictures/NewLogo.png" id="ResourcedKCLogo" alt="ResourcedKC Logo">
         </div>
      
         <div class="right-col">
@@ -139,9 +141,9 @@ ResourcedKC</div>
                 <br>
                 
                 <li><a href="mailto:ResourcedKC@resourcedkc.org" id="orgEmail"> ResourcedKC@resourcedkc.org</a></li>
-                <li><a id="footerLinks" href="index.html">Home</a></li>
-                <li><a id="footerLinks" href="about.html">About</a></li>
-                <li><a id="footerLinks" href="contact.html">Contact</a></li>
+                <li><a id="footerLinks" href="../index.html">Home</a></li>
+                <li><a id="footerLinks" href="../about.html">About</a></li>
+                <li><a id="footerLinks" href="../contact.html">Contact</a></li>
               </ul>
 
              <div class="copyright">
@@ -166,9 +168,10 @@ ResourcedKC</div>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-  <script src="client.js"></script>
-  <script src="nav-scripts.js"></script>
-  <script src="submit.js"></script>
+  <script src="../client.js"></script>
+  <script src="../nav-scripts.js"></script>
+  <script src="../submit.js"></script>
+  <script src="logout.js"></script>
 
   <script src="https://kit.fontawesome.com/fc5d2b5d29.js" crossorigin="anonymous"></script>
 

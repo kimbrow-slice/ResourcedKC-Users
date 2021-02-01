@@ -168,66 +168,66 @@
     
   }
 
-function subCategoryCheckboxes() {
-  let needsubcat = document.getElementsByClassName('needsubcat')
-  for (i = 0; i < needsubcat.length; i++){
-    needsubcat[i].addEventListener('click', function(){
-      if (document.getElementById('emergencyshelter').checked) {
-        revealEmergencyShelterSub()
-      }
-      if (document.getElementById('emergencyshelter').checked===false) {
-        hideEmergencyShelterSub()
-      }
-      if (document.getElementById('housing').checked) {
-        revealHousingSub()
-      }
-      if (document.getElementById('housing').checked===false) {
-        hideHousingSub()
-      }
-      if (document.getElementById('financialassistance').checked) {
-        revealFinancialAssistanceSub()
-      }
-      if (document.getElementById('financialassistance').checked===false) {
-        hideFinancialAssistanceSub()
-      }
-      if (document.getElementById('foodpantry').checked) {
-        revealFoodPantrySub()
-      }
-      if (document.getElementById('foodpantry').checked===false) {
-        hideFoodPantrySub()
-      }
-      if (document.getElementById('healthclinic').checked) {
-        revealHealthClinicSub()
-      }
-      if (document.getElementById('healthclinic').checked===false) {
-        hideHealthClinicSub()
-      }
-      if (document.getElementById('clothingcloset').checked) {
-        revealClothingClosetSub()
-      }
-      if (document.getElementById('clothingcloset').checked===false) {
-        hideClothingClosetSub()
-      }
-      if (document.getElementById('rehabdetox').checked) {
-        revealRehabDetoxSub()
-      }
-      if (document.getElementById('rehabdetox').checked===false) {
-        hideRehabDetoxSub()
-      }
-    })
-  }
-};
+// function subCategoryCheckboxes() {
+//   let needsubcat = document.getElementsByClassName('needsubcat')
+//   for (i = 0; i < needsubcat.length; i++){
+//     needsubcat[i].addEventListener('click', function(){
+//       if (document.getElementById('emergencyshelter').checked) {
+//         revealEmergencyShelterSub()
+//       }
+//       if (document.getElementById('emergencyshelter').checked===false) {
+//         hideEmergencyShelterSub()
+//       }
+//       if (document.getElementById('housing').checked) {
+//         revealHousingSub()
+//       }
+//       if (document.getElementById('housing').checked===false) {
+//         hideHousingSub()
+//       }
+//       if (document.getElementById('financialassistance').checked) {
+//         revealFinancialAssistanceSub()
+//       }
+//       if (document.getElementById('financialassistance').checked===false) {
+//         hideFinancialAssistanceSub()
+//       }
+//       if (document.getElementById('foodpantry').checked) {
+//         revealFoodPantrySub()
+//       }
+//       if (document.getElementById('foodpantry').checked===false) {
+//         hideFoodPantrySub()
+//       }
+//       if (document.getElementById('healthclinic').checked) {
+//         revealHealthClinicSub()
+//       }
+//       if (document.getElementById('healthclinic').checked===false) {
+//         hideHealthClinicSub()
+//       }
+//       if (document.getElementById('clothingcloset').checked) {
+//         revealClothingClosetSub()
+//       }
+//       if (document.getElementById('clothingcloset').checked===false) {
+//         hideClothingClosetSub()
+//       }
+//       if (document.getElementById('rehabdetox').checked) {
+//         revealRehabDetoxSub()
+//       }
+//       if (document.getElementById('rehabdetox').checked===false) {
+//         hideRehabDetoxSub()
+//       }
+//     })
+//   }
+// };
 
-function revealEmergencyShelterSub() {
-  document.getElementById('domesticabuse').style.display="inline";
-  document.getElementById('domesticabuselabel').style.display="inline";
-  document.getElementById('homelessshelter').style.display="inline";
-  document.getElementById('homelessshelterlabel').style.display="inline";
-}
+// function revealEmergencyShelterSub() {
+//   document.getElementById('domesticabuse').style.display="inline";
+//   document.getElementById('domesticabuselabel').style.display="inline";
+//   document.getElementById('homelessshelter').style.display="inline";
+//   document.getElementById('homelessshelterlabel').style.display="inline";
+// }
 
-function hideEmergencyShelterSub() {
-  document.getElementById('domesticabuse').style.display="none";
-  document.getElementById('domesticabuselabel').style.display="none";
-  document.getElementById('homelessshelter').style.display="none";
-  document.getElementById('homelessshelterlabel').style.display="none";
-}
+// function hideEmergencyShelterSub() {
+//   document.getElementById('domesticabuse').style.display="none";
+//   document.getElementById('domesticabuselabel').style.display="none";
+//   document.getElementById('homelessshelter').style.display="none";
+//   document.getElementById('homelessshelterlabel').style.display="none";
+// }

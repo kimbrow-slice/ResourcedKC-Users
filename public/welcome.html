@@ -15,10 +15,10 @@
   <!--STYLESHEETS-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link rel="stylesheet" href="CSS/login.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="pictures/IconONLY.png" />
-
-
+ 
 
 </head>
 
@@ -53,32 +53,33 @@
   <section>
     <div id="container">
       <div class="row">
-        <div class="col-md-offset-1 col-md-11">
-
-        </div>
-      </div>
-      <div class="col-md">
-        <h2 class="title">Reset your<strong> Password</strong></h2>
-
-        <!-- KEEP  -->
-        <div class="login">
-          <form action="/passwordreset" method="POST">
-            <label for="email">Email: </label>
-            <input type="email" id="email" name="email" value="" placeholder="Enter your email address" />
-            <input type="submit" value="Reset Password" />
-            <br />
-            <br />
-            <br />
-            <br />
-            <a id="reset" href="/login">Login<i class="fas fa-sign-in-alt"></i></a>
-            <a id="register" href="/register">Register<i class="fas fa-user-plus"></i></a>
-
-          </form>
-        </div>
-        <!-- KEEP  -->
 
       </div>
     </div>
+    <h2 class="title">Welcome to the <strong>ResourcedKC</strong> User Portal</h2>
+
+    <!--KEEP-->
+    <div class="welcoming">
+      <form>
+          <h4>This is our editing a resource page filler text Here</h4>
+        <br>
+        <br>
+          <p>If this is your first time to our page Welcome!</p>
+        <br>
+          <p>Wanting to submit a Resource? Click the link Below</p>
+          <a href="submitResource.html">Submit Here</a>
+        <br>
+        <br>
+          <p>Wanting to update a resource you have previously added?</p>
+        <br>
+          <p>Click the link here!</p>
+          <a href="editResource.html">Update a resource</a>
+        <br>
+        <br>
+      </form>
+    </div>
+
+
   </section>
 
   <!--FOOTER-->
@@ -99,7 +100,7 @@
                 
                 <li><a href="mailto:ResourcedKC@resourcedkc.org" id="orgEmail"> ResourcedKC@resourcedkc.org</a></li>
                 <li><a id="footerLinks" href="index.html">Home</a></li>
-                <li><a id="footerLinks" href="login.html">Login</a></li>
+                <li><a id="footerLinks" href="about.html">About</a></li>
                 <li><a id="footerLinks" href="contact.html">Contact</a></li>
               </ul>
 
@@ -114,6 +115,7 @@
     
   </footer>
 
+
   <!--SCRIPTS-->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -125,8 +127,10 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script src="client.js"></script>
-  <script src="nav-scripts.js"></script>
   <script src="https://kit.fontawesome.com/fc5d2b5d29.js" crossorigin="anonymous"></script>
+  <script src="nav-scripts.js"></script>
+
+
 </body>
 
 </html>

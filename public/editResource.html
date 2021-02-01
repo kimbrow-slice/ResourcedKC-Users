@@ -15,10 +15,10 @@
   <!--STYLESHEETS-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link rel="stylesheet" href="CSS/login.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="pictures/IconONLY.png" />
-
-
+ 
 
 </head>
 
@@ -54,31 +54,36 @@
     <div id="container">
       <div class="row">
         <div class="col-md-offset-1 col-md-11">
-
+          
         </div>
       </div>
-      <div class="col-md">
-        <h2 class="title">Reset your<strong> Password</strong></h2>
 
-        <!-- KEEP  -->
-        <div class="login">
-          <form action="/passwordreset" method="POST">
-            <label for="email">Email: </label>
-            <input type="email" id="email" name="email" value="" placeholder="Enter your email address" />
-            <input type="submit" value="Reset Password" />
-            <br />
-            <br />
-            <br />
-            <br />
-            <a id="reset" href="/login">Login<i class="fas fa-sign-in-alt"></i></a>
-            <a id="register" href="/register">Register<i class="fas fa-user-plus"></i></a>
 
-          </form>
-        </div>
-        <!-- KEEP  -->
+      <h2 class="title">Welcome Back to <strong>ResourcedKC</strong></h2>
 
+
+
+      <!-- KEEP  -->
+      <div class="updating">
+        <form  id="updating" action="updating" method="PUT">
+          <h4>Lorem ipsum</h4>
+          <br>
+          <Br>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas malesuada velit et vulputate mattis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin suscipit purus in eros volutpat, et feugiat justo aliquet. Nullam ut ligula posuere, feugiat nunc ut, scelerisque turpis. Cras in pretium magna. Ut mi diam, condimentum ac lectus et, efficitur dignissim est. Vestibulum porta venenatis mi, et dignissim nisi sollicitudin in. Nullam eu mattis purus, non dapibus lacus. Maecenas a blandit nunc. Duis malesuada iaculis sem at gravida. Integer non ex ac ante maximus lobortis nec nec sapien. Praesent aliquet sem sit amet turpis rhoncus, at semper magna varius. Quisque imperdiet vestibulum purus, quis porta odio aliquam vitae. Ut sit amet dolor in est ultricies facilisis. Vivamus porttitor dui imperdiet nisi bibendum, sit amet consequat sem pharetra.
+
+            </p>
+            <br>
+
+             <p>Quisque dictum venenatis urna. In interdum finibus congue. Fusce vel elementum arcu, ut accumsan nisi. Mauris cursus luctus dapibus. Ut ultrices lorem nec vestibulum lobortis. Cras eu est sem. Morbi id hendrerit mi. Vivamus neque ligula, rutrum lobortis est sit amet, feugiat ullamcorper nisi. Nulla vel elit posuere, euismod nibh a, lobortis lorem. Aenean convallis elementum tempus. Phasellus feugiat condimentum laoreet. Donec laoreet enim mi, non placerat nisi fringilla semper. Proin eu tellus at arcu tincidunt auctor.</p>
+
+
+        </form>
       </div>
+
+      <!-- KEEP  -->
+
     </div>
+
   </section>
 
   <!--FOOTER-->
@@ -99,7 +104,7 @@
                 
                 <li><a href="mailto:ResourcedKC@resourcedkc.org" id="orgEmail"> ResourcedKC@resourcedkc.org</a></li>
                 <li><a id="footerLinks" href="index.html">Home</a></li>
-                <li><a id="footerLinks" href="login.html">Login</a></li>
+                <li><a id="footerLinks" href="about.html">About</a></li>
                 <li><a id="footerLinks" href="contact.html">Contact</a></li>
               </ul>
 
@@ -114,6 +119,7 @@
     
   </footer>
 
+
   <!--SCRIPTS-->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -125,8 +131,11 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script src="client.js"></script>
-  <script src="nav-scripts.js"></script>
   <script src="https://kit.fontawesome.com/fc5d2b5d29.js" crossorigin="anonymous"></script>
+  <script src="nav-scripts.js"></script>
+
+
+
 </body>
 
 </html>

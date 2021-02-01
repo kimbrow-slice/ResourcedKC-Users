@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bcrypt = require('bcrypt');
 const app = express();
+const formidable = require('formidable');
 const path = require('path');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
@@ -22,8 +23,6 @@ const User = require('./models/userSchema.js');
 const Resource = require('./models/filterSchema.js');
 const { POINT_CONVERSION_COMPRESSED } = require('constants');
 
-
-
 mongoose.connect(
   mongoDB,
   { useNewUrlParser: true, useUnifiedTopology: true },
@@ -38,9 +37,9 @@ app.listen(port, function () {
   });
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 app.use(passport.initialize());
@@ -67,10 +66,17 @@ app.get('/login',  function (req, res) {
     res.sendFile(__dirname + '/public/login.html');
     });
 
-
-
 app.post('/login',  async (req, res) => {
-	const { username, password } = req.body
+  let username;
+  let password; 
+  let form = new formidable.IncomingForm(); 
+  form.parse(req, function(err, fields, files){
+      console.log(fields); 
+      username = fields.username;
+      password = fields.password;
+      }); 
+
+
 	const user = await User.findOne({ username }).lean()
 	if (!user) {
     // TODO: Create an HTML page to res.redirect to handle the error.....
@@ -84,12 +90,30 @@ app.post('/login',  async (req, res) => {
 				username: user.username
 			},
 			process.env.secret
-		)
-		return res.redirect('/submitResource.html');
+    )
+
+    console.log(user._id);
+
+    //I need to find a way to send over the user._id to the client side so it can be stored later to allow the user to only update their resources and to view their resources
+		return res.json({id: user._id});
   }
   // TODO: Create an HTML page to res.redirect to handle the error.....
 	res.sendFile(__dirname + '/public/401.html');
 })
+/***GET CURRENT USER***/
+app.get('/welcome', (req,res) => {
+  User.find(function (err, currUser) {
+    if(err) return console.error(err);
+    res.send(currUser);
+  })
+})
+// app.get('/welcome/:id', (req,res) => {
+//   User.findOne({_id: req.params.id}).exec((err, current) => {
+//     if(err) return console.error(err);
+//     console.log(current);
+//     res.send(current);
+//   })
+// })
 /*********LOGOUT*********/
 app.delete('/logout', (req,res) => {
     req.logOut();
@@ -284,7 +308,9 @@ app.get('/resources/search', function (req,res) {
   })
 });
 
-app.post("/resources", (request, res) => {
+app.post("/resources/", (request, res) => {
+
+
   let node = new Resource(request.body);
   node.save(function (error, node) {
     if (error) {

@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="CSS/login.css" />
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="pictures/ResourcedKCfavIcon.png" />
+  <link rel="icon" type="image/png" href="pictures/IconONLY.png" />
  
 
 </head>
@@ -25,7 +25,7 @@
 <body>
   <!--NAV-->
   <nav>
-    <img src="pictures/rotated.png" id="test" alt="ResourcedKC Logo">
+    <img src="pictures/RKCicon.png" id="test" alt="ResourcedKC Logo">
     <div class="menu-icon">
       <span class="fas fa-bars"></span>
     </div>
@@ -67,7 +67,7 @@
       <!-- KEEP  -->
       <div class="login">
         <div id='error'></div>
-        <form  id="login" action="login" method="POST">
+        <form id="login">
 
           <label for="username">Username: </label>
           <input id="username" name="username" type="text" maxlength="100" autocomplete="off" required  />
@@ -100,16 +100,24 @@
 
   <!--FOOTER-->
   <footer class="footer">
-    <div clas="container">
+    <div clas="container"> 
+      <div class="col-lg-12">
       <div class="row">
-        <div class="col-md-12">
+        <div class="left-col">
+            <img src="/pictures/NewLogo.png" id="ResourcedKCLogo" alt="ResourcedKC Logo">
+        </div>
+     
+        <div class="right-col">
           <div class="footer-content">
-
-              <ul type="circle"><span class="ourEmail"> Our Emails : </span>
-                <li><a href="mailto:kimbrowjeff@gmail.com" id="ourEmails"> kimbrowjeff@gmail.com</a></li>
-                <li><a href="mailto:ash5diyali@gmail.com" id="ourEmails"> ash5diyali@gmail.com</a></li>
-                <li><a href="mailto:kimbrowjeff@gmail.com" id="ourEmails"> kimbrowjeff@gmail.com</a></li>
-                <li><a href="mailto:conorokane225@gmail.com" id="ourEmails"> conorokane225@gmail.com</a></li>         
+            
+              <ul type="circle"><span class="ourEmail"> Contact Us At : </span>
+                <br>
+                <br>
+                
+                <li><a href="mailto:ResourcedKC@resourcedkc.org" id="orgEmail"> ResourcedKC@resourcedkc.org</a></li>
+                <li><a id="footerLinks" href="index.html">Home</a></li>
+                <li><a id="footerLinks" href="about.html">About</a></li>
+                <li><a id="footerLinks" href="contact.html">Contact</a></li>
               </ul>
 
              <div class="copyright">
@@ -118,11 +126,17 @@
           </div>
         </div>
       </div>
+      </div>
     </div>
     
   </footer>
 
+
   <!--SCRIPTS-->
+  <script src="cookies.js"></script>
+  <script src="client.js"></script>
+  <script src="login.js"></script>
+ 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -132,7 +146,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-  <script src="client.js"></script>
   <script src="https://kit.fontawesome.com/fc5d2b5d29.js" crossorigin="anonymous"></script>
   <script>
     function showPass() {
@@ -145,6 +158,7 @@
     }
   </script>
   <script src="nav-scripts.js"></script>
+
 
 
 </body>

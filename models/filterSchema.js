@@ -18,13 +18,3 @@ const resourceSchema = new Schema({
 
 module.exports = mongoose.model("resource", resourceSchema);
 
-/*
-const locationSchema = new mongoose.Schema({
-    location: [{
-         city      : String,
-         state     : String,
-         zip       : Number,
-         address   : String,
-     }]
- });
- */

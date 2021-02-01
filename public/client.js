@@ -59,7 +59,7 @@
     }
     const searchresponse = await fetch ('/resources/search?name=' + searchByName, requestOptions);
   }
-    
+
   async function submitResource() {
     console.log("test");
     let node = {
@@ -70,7 +70,8 @@
         phone : document.getElementById("phone").value,
         hours : document.getElementById("hours").value,
         zipcode : document.getElementById("zipcode").value,
-        website : document.getElementById("website").value
+        website : document.getElementById("website").value,
+        
     };
 
     if (document.getElementById("emergencyshelter").checked) {
@@ -112,3 +113,32 @@
     
   }
 
+/**TESTING FOR GETTING USER FOR WELCOME PAGE**/
+async function getLists() {
+  let requestOptions = {
+    method : "GET",
+    headers: { "Content-Type": "application/json"},
+  };
+  const response = await fetch("/welcome", requestOptions);
+  const body = await response.json();
+  if(response.status != 200) {
+    throw Error(body.message);
+  }
+  return body;
+}
+
+async function getCurrentUser(id) {
+  let requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  const response = await fetch('/welcome/' + id, requestOptions);
+  const body = await response.json();
+  console.log(id);
+  if(response.status !=200 ){
+    throw Error(body.message);
+  }
+  return body;
+}
+/****LOGIN***/

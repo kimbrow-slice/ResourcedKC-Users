@@ -16,9 +16,9 @@ async function loginUser() {
     const response = await fetch('/login',requestOptions);
     console.log(response);
     const body = await response.json();
-    console.log(body);
-    if (response.status != 200){
-      console.log(body);
+    // console.log(body);
+    if (response.status !== 200){
+      window.location.href = "401.html"
     }
     else if(response.status === 200) {
       setCookie("currentUser",body.id, 1);

@@ -155,7 +155,7 @@
     if (document.getElementById("religion").checked) {
       node.usercategories.push("Religion")
     }
-    if (document.getElementById("hiv").checked) {
+    if (document.getElementById("HIV").checked) {
       node.usercategories.push("HIV")
     }
 

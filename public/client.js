@@ -151,6 +151,9 @@
     if (document.getElementById("religion").checked) {
       node.usercategories.push("Religion")
     }
+    if (document.getElementById("hiv").checked) {
+      node.usercategories.push("HIV")
+    }
 
     let requestOptions = {
       method: "POST",

@@ -20,7 +20,9 @@ async function loginUser() {
 
    if(response.status === 200) {
       setCookie("currentUser",body.id, 1);
-      window.location.href = 'authed/welcome.html';
+      setTimeout( function(){
+      window.location.href = '/authed/welcome.html'; 
+    console.log("trying to redirect to welcome")}, 1000);
     }
   }
 

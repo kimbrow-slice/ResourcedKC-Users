@@ -31,9 +31,8 @@ mongoose.connect(
     console.log("Connected to database");
   }
 );
-app.listen(port, function () {
-    console.log("The server is up and running at " + port);
-  });
+
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -41,17 +40,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(passport.initialize());
 
-app.use(express.static(path.join(__dirname, "public")));
-app.use("public/authed", function (req, res, next) {
-    if (!req.isAuthenticated()) {
-        return res.redirect('/login.html');
-    }
-    next();    
-});
+
+function loggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    console.log("next");
+     return next();  
+  }
+  console.log("redirected"); 
+  res.redirect('/login.html');  
+}
+
+app.use("/authed", loggedIn, express.static(path.join(__dirname, "/authed")) );
+app.use(express.static(path.join(__dirname, "/public")));
+
 // app.use(express.static(path.join(__dirname, "public/authed")));
+
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error: "));
+
+app.listen(port, function () {
+  console.log("The server is up and running at " + port);
+});
 
 /*********INDEX*********/
 app.get('/', function (req, res) {
@@ -89,6 +99,7 @@ app.post('/login', (req, res) => {
     )
     // console.log(user._id);
     //I need to find a way to send over the user._id to the client side so it can be stored later to allow the user to only update their resources and to view their resources
+    console.log("sending login response");
 		return res.json({id: user._id});
   }
   return res.redirect('/401.html');

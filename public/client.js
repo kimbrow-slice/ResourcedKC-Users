@@ -109,13 +109,7 @@
     if (document.getElementById("sextrafficking").checked) {
       node.services.push("Sex Trafficking")
     }
-    if (document.getElementById("domesticabuse").checked) {
-      node.servicesub.push("Domestic Abuse")
-    }
-    if (document.getElementById("homelessshelter").checked) {
-      node.servicesub.push("Homeless Shelter")
-    }
-    
+   
 
 // USER CATEGORIES
 
@@ -155,7 +149,7 @@
     if (document.getElementById("religion").checked) {
       node.usercategories.push("Religion")
     }
-    if (document.getElementById("HIV").checked) {
+    if (document.getElementById("hiv").checked) {
       node.usercategories.push("HIV")
     }
 

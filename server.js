@@ -21,7 +21,6 @@ const mongoDB = process.env.CONNECTION;
 
 const User = require('./models/userSchema.js');
 const Resource = require('./models/filterSchema.js');
-const { POINT_CONVERSION_COMPRESSED } = require('constants');
 
 mongoose.connect(
   mongoDB,

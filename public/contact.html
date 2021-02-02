@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+
+  <!-- <title>-->
+  <title>ResourcedKC</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="CSS/login.css" />
+  <link rel="stylesheet" href="contact.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link rel="icon" type="image/png" href="pictures/ResourcedKCfavIcon.png" />
+  
+
+
+</head>
+<body>
+    <!--NAV-->
+    <nav>
+        <img src="pictures/RKCicon.png" id="test" alt="ResourcedKC Logo">
+        <div class="menu-icon">
+          <span class="fas fa-bars"></span>
+        </div>
+        <div class="logo">
+          ResourcedKC</div>
+        <div class="nav-items">
+    
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </div>
+        <div class="search-icon">
+          <span class="fas fa-search"></span>
+        </div>
+        <div class="cancel-icon">
+          <span class="fas fa-times"></span>
+        </div>
+        <form action="#">
+          <input type="search" class="search-data" placeholder="Search" required>
+          <button type="submit" class="fas fa-search"></button>
+        </form>
+      </nav>
+<!-- Contact me forum -->
+
+<form action="contact.php" method="post">
+    <div class="elem-group">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="visitor_name" placeholder="Full Name" pattern=[A-Z\sa-z]{3,20} required>
+    </div>
+    <div class="elem-group">
+      <label for="email">Your E-mail</label>
+      <input type="email" id="email" name="visitor_email" placeholder="ResourcedKC@resourcedkc.org" required>
+    </div>
+    <div class="elem-group">
+      <label for="department-selection">Choose Topic </label>
+      <select id="department-selection" name="concerned_topic" required>
+          <option value="">Select a catagory</option>
+          <option value="feedback">Feedback</option>
+          <option value="resource"> About Resources </option>
+          <option value="technical support">Technical Support</option>
+      </select>
+    </div>
+    <div class="elem-group">
+      <label for="title">Subject</label>
+      <input type="text" id="title" name="email_title" required placeholder="" pattern=[A-Za-z0-9\s]{8,60}>
+    </div>
+    <div class="elem-group">
+      <label for="message">Write your message</label>
+      <textarea id="message" name="visitor_message" placeholder="Type here..." required></textarea>
+    </div>
+    <button class="submitBtn" type="submit">Send Message</button>
+  </form>
+  </body>
+  </html>

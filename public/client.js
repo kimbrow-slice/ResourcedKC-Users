@@ -106,12 +106,16 @@
     if (document.getElementById("rehabdetox").checked) {
       node.services.push("Rehab and Detox")
     }
+    if (document.getElementById("sextrafficking").checked) {
+      node.services.push("Sex Trafficking")
+    }
     if (document.getElementById("domesticabuse").checked) {
       node.servicesub.push("Domestic Abuse")
     }
     if (document.getElementById("homelessshelter").checked) {
-      node.services.push("Homeless Shelter")
+      node.servicesub.push("Homeless Shelter")
     }
+    
 
 // USER CATEGORIES
 
@@ -218,6 +222,12 @@ function subCategoryCheckboxes() {
       if (document.getElementById('rehabdetox').checked===false) {
         hideRehabDetoxSub()
       }
+      if (document.getElementById('sextrafficking').checked) {
+        revealSexTraffickingSub()
+      }
+      if (document.getElementById('sextrafficking').checked===false) {
+        hideSexTraffickingSub()
+      }
     })
   }
 };
@@ -282,4 +292,12 @@ function revealRehabDetoxSub() {
 
 function hideRehabDetoxSub() {
 
+}
+
+function revealSexTraffickingSub() {
+
+}
+
+function hideSexTraffickingSub() {
+  
 }

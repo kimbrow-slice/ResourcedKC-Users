@@ -242,7 +242,16 @@ app.get('/resources/rehab', function (req,res) {
       if(err) return console.error(err);
       res.send(resources);
   })
-}); 
+});
+
+app.get('/resources/sextrafficking', function (req,res) {
+  Resource.find({
+    services : 'Sex Trafficking'
+  }, function (err, resources) {
+      if(err) return console.error(err);
+      res.send(resources);
+  })
+});
 
 app.get('/resources/search', function (req,res) {
   //console.log(req.query)

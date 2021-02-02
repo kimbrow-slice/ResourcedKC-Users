@@ -6,7 +6,7 @@ async function loginUser() {
     for (var key of currentUser.entries()) {
         console.log(key[0] + ', ' + key[1]);
     }
-    console.log(currentUser);
+    // console.log(currentUser);
 
     let requestOptions = {
       method : "POST",
@@ -17,10 +17,8 @@ async function loginUser() {
     console.log(response);
     const body = await response.json();
     // console.log(body);
-    if (response.status !== 200){
-      window.location.href = "401.html"
-    }
-    else if(response.status === 200) {
+
+   if(response.status === 200) {
       setCookie("currentUser",body.id, 1);
       window.location.href = 'authed/welcome.html';
     }
@@ -31,7 +29,9 @@ document.getElementById('login').addEventListener('submit', (event) => {
     event.preventDefault();
     loginUser().then( ()=> {
       console.log('success');
-    }).catch((err)=>{
+    }).catch((err, user)=>{
+      if((err) || (user != user) || (user === null))
       console.log(err);
+      window.location.href="401.html"
     });
   })

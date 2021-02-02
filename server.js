@@ -48,7 +48,7 @@ app.use("public/authed", function (req, res, next) {
     }
     next();    
 });
-//app.use(express.static(path.join(__dirname, "public/authed")));
+// app.use(express.static(path.join(__dirname, "public/authed")));
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error: "));

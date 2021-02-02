@@ -109,13 +109,7 @@
     if (document.getElementById("sextrafficking").checked) {
       node.services.push("Sex Trafficking")
     }
-    if (document.getElementById("domesticabuse").checked) {
-      node.servicesub.push("Domestic Abuse")
-    }
-    if (document.getElementById("homelessshelter").checked) {
-      node.servicesub.push("Homeless Shelter")
-    }
-    
+   
 
 // USER CATEGORIES
 

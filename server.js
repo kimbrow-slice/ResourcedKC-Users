@@ -22,7 +22,6 @@ const mongoDB = process.env.CONNECTION;
 const User = require('./models/userSchema.js');
 const Resource = require('./models/filterSchema.js');
 
-
 mongoose.connect(
   mongoDB,
   { useNewUrlParser: true, useUnifiedTopology: true },
@@ -65,19 +64,19 @@ app.get('/login',  function (req, res) {
     });
 
 app.post('/login', (req, res) => {
-  console.log('test');
+  // console.log('test');
  
   let form = new formidable.IncomingForm(); 
   form.parse(req, async function(err, fields, files){
-      console.log(fields); 
+      // console.log(fields); 
       let username = fields.username;
       let password = fields.password;
-  console.log(username); 
-      console.log(password); 
+  // console.log(username); 
+      // console.log(password); 
 	const user = await User.findOne({ username }).lean()
 	if (!user) {
    
-		return res.sendFile(__dirname + '/public/401.html');
+		return res.redirect('/401.html');
 	}
 	if (await bcrypt.compare(password, user.password)) {
 		// the username, password combination is successful
@@ -88,11 +87,11 @@ app.post('/login', (req, res) => {
 			},
 			process.env.secret
     )
-    console.log(user._id);
+    // console.log(user._id);
     //I need to find a way to send over the user._id to the client side so it can be stored later to allow the user to only update their resources and to view their resources
 		return res.json({id: user._id});
   }
-  res.sendFile(__dirname + '/public/401.html');
+  return res.redirect('/401.html');
   }); 
 })
 

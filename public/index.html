@@ -18,7 +18,7 @@
 
 </head>
 
-<body>
+<body onload='subCategoryCheckboxes()'>
 
   <nav>
     <img src="pictures/RKCicon.png" id="test" alt="ResourcedKC Logo">
@@ -41,7 +41,7 @@
       <span class="fas fa-times"></span>
     </div>
     <form action="#">
-      <input type="search" class="search-data" placeholder="Search" required>
+      <input type="search" id='searchbar' class="search-data" placeholder="Search" required>
       <button type="submit" class="fas fa-search"></button>
     </form>
   </nav>
@@ -51,38 +51,74 @@
     <div class="row">
       <h2 class="title">This is just filler text to make sure</h2>
       <p>that our index page and footer is working properly</p>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br><br>
-      <br>
-      <br>
-      <br>
-      <br><br>
-      <br>
-      <br>
-      <br>
-      <br><br>
-      <br>
-      <br>
-      <br>
-      <br><br>
-      <br>
-      <br>
-      <br>
-      <br>
-      
+      <div>
+      <h3>Services:</h1>
+        <input type="checkbox" id="emergencyshelter" name="emergencyshelter" class="needsubcat">
+        <label for="emergencyshelter">Emergency Shelter</label>
+        <br/>
+        <input type='checkbox' id='domesticabuse' name='domesticabuse' class='subcat' style='display: none;'>
+        <label for='domesticabuse' id='domesticabuselabel' class='subcat' style='display: none;'>Domestic Abuse Shelter</label>
+        <br/>
+        <input type="checkbox" id="homelessshelter" name="homelessshelter" class="subcat" style='display: none;'>
+        <label for="homelessshelter" id='homelessshelterlabel' class='subcat' style='display: none;'>Homeless Shelter</label>
+        <br/>
+        <input type="checkbox" id="housing" name="housing">
+        <label for="housing">Housing</label>
+        <br/>
+        <input type="checkbox" id="financialassistance" name="financialassistance">
+        <label for="financialassistance">Financial Assistance</label>
+        <br/>
+        <input type="checkbox" id="foodpantry" name="foodpantry">
+        <label for="foodpantry">Food Pantry</label>
+        <br/>
+        <input type="checkbox" id="healthclinic" name="healthclinic">
+        <label for="healthclinic">Health Clinic</label>
+        <br/>
+        <input type="checkbox" id="clothingcloset" name="clothingcloset">
+        <label for="clothingcloset">Clothing Closet</label>
+        <br/>
+        <input type="checkbox" id="rehabdetox" name="rehabdetox">
+        <label for="rehabdetox">Rehab and Detox</label>
+        <br/>
+        <br>
+        <h3>Demographic Information:</h3>
+        <input type="checkbox" id="family" name="family">
+        <label for="family">Families</label>
+        <br/>
+        <input type="checkbox" id="women" name="women">
+        <label for="family">Women</label>
+        <br/>
+        <input type="checkbox" id="men" name="men">
+        <label for="men">Men</label>
+        <br/>
+        <input type="checkbox" id="lgbtq" name="lgbtq">
+        <label for="family">LGBTQ+</label>
+        <br/>
+        <input type="checkbox" id="africanamerican" name="africanamerican">
+        <label for="africanamerican">African American</label>
+        <br/>
+        <input type="checkbox" id="hispanic" name="hispanic">
+        <label for="hispanic">Hispanic</label>
+        <br/>
+        <input type="checkbox" id="foreignlanguage" name="foreignlanguage">
+        <label for="foreignlanguage">Foreign Language Speakers</label>
+        <br/>
+        <input type="checkbox" id="infant" name="infant">
+        <label for="infant">Infants & Early Childhood</label>
+        <br/>
+        <input type="checkbox" id="children" name="children">
+        <label for="children">Children</label>
+        <br/>
+        <input type="checkbox" id="teen" name="teen">
+        <label for="teen">Teens</label>
+        <br/>
+        <input type="checkbox" id="elderly" name="elderly">
+        <label for="elderly">Elderly</label>
+        <br/>
+        <input type="checkbox" id="religion" name="religion">
+        <label for="religion">Religiously-Affiliated</label>
+        <br/>
+      </div>
     </div>
   </div>
 </section>
@@ -105,7 +141,7 @@
 
   <!--SCRIPTS-->
   <script src="nav-scripts.js"></script>
-
+  <script src="client.js"></script>
 </body>
 
 </html>

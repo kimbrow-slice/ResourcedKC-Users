@@ -22,7 +22,6 @@ const mongoDB = process.env.CONNECTION;
 const User = require('./models/userSchema.js');
 const Resource = require('./models/filterSchema.js');
 
-
 mongoose.connect(
   mongoDB,
   { useNewUrlParser: true, useUnifiedTopology: true },

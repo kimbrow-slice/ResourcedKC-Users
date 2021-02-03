@@ -244,7 +244,7 @@ app.get('/resources/rehab', function (req,res) {
   })
 });
 
-app.get('/resources/sextrafficking', function (req,res) {
+app.get('/resources/sexTrafficking', function (req,res) {
   Resource.find({
     services : 'Sex Trafficking'
   }, function (err, resources) {

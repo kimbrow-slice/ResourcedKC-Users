@@ -1,12 +1,13 @@
 
   async function findResources() {
-    let shelters = document.getElementById('shelterscheck').checked;
-    let housing  = document.getElementById('housingcheck').checked;
-    let finance  = document.getElementById('financecheck').checked;
-    let food     = document.getElementById('foodcheck').checked;
-    let health   = document.getElementById('healthcheck').checked;
-    let clothing = document.getElementById('clothingcheck').checked;
-    let rehab    = document.getElementById('rehabcheck').checked;
+    let shelters   = document.getElementById('shelterscheck').checked;
+    let housing    = document.getElementById('housingcheck').checked;
+    let finance    = document.getElementById('financecheck').checked;
+    let food       = document.getElementById('foodcheck').checked;
+    let health     = document.getElementById('healthcheck').checked;
+    let clothing   = document.getElementById('clothingcheck').checked;
+    let rehab      = document.getElementById('rehabcheck').checked;
+    let sextraffic = document.getElementById('sextraffickcheck').checked;
 
     let response = [];
 
@@ -43,11 +44,13 @@
       const rehabresponse = await fetch ("/resources/rehab", requestOptions);
       response.push({ "rehab" : rehabresponse.body })
     }
+    if (sextraffic) {
+      const sextrafficresponse = await fetch ("/resources/sexTrafficking", requestOptions);
+      response.push({ "sextrafficking" : sextrafficresponse.body })
+    }
 
     return response
     // [ {"shelters" : [{}, {}, {}]}, {"xresponse":[{},{}] } ]
-   
-    // response.shelters
   }
 
   async function searchByName() {
@@ -109,12 +112,6 @@
     if (document.getElementById("sextrafficking").checked) {
       node.services.push("Sex Trafficking")
     }
-    if (document.getElementById("domesticabuse").checked) {
-      node.servicesub.push("Domestic Abuse")
-    }
-    if (document.getElementById("homelessshelter").checked) {
-      node.servicesub.push("Homeless Shelter")
-    }
     
 
 // USER CATEGORIES
@@ -155,7 +152,7 @@
     if (document.getElementById("religion").checked) {
       node.usercategories.push("Religion")
     }
-    if (document.getElementById("HIV").checked) {
+    if (document.getElementById("hiv").checked) {
       node.usercategories.push("HIV")
     }
 
@@ -164,7 +161,7 @@
       body: JSON.stringify(node),
       headers: { "Content-Type": "application/json" },
     };
-    alert('Thank you submitting your organzations information!');
+    alert('Thank you for submitting your organization information!');
     window.location.href = '../index.html';
     const response = await fetch("/resources", requestOptions);
     
@@ -299,5 +296,5 @@ function revealSexTraffickingSub() {
 }
 
 function hideSexTraffickingSub() {
-  
+
 }

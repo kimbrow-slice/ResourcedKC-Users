@@ -3,24 +3,26 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const bcrypt = require('bcrypt');
 const opts = {}
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.jwtFromRequest = ExtractJwt.fromHeader();
 opts.secretOrKey = process.env.secret;
 
 module.exports = new JwtStrategy(opts, async (jwt_payload,done)=> {
-    const user = await (req.body.email);
-    if( jwt_payload.email === req.body.email){
+
+//     const user = await (req.body.email);
+//    if( jwt_payload.email === req.body.email){
+       console.log("middleware")
         return done(null, true)
-    }
+    // }
     
-    try {
-        if (await bcrypt.compare(password, user.password)){
-            return done(null, user);
-         } else {
-             return done(null, false, { message: "Password is incorrect"});
-         }
-    } catch (e) {
-        return done(e);
-    }
+    // try {
+    //     if (await bcrypt.compare(password, user.password)){
+    //         return done(null, user);
+    //      } else {
+    //          return done(null, false, { message: "Password is incorrect"});
+    //      }
+    // } catch (e) {
+    //     return done(e);
+    // }
     
 })
 

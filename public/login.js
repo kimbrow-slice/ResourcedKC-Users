@@ -16,15 +16,17 @@ async function loginUser() {
     const response = await fetch('/login',requestOptions);
     console.log(response);
     const body = await response.json();
-    // console.log(body);
+    console.log(body);
 
    if(response.status === 200) {
-      setCookie("currentUser",body.id, 1);
+      setCookie("cookie",body.token, 1);//body.token?
       setTimeout( function(){
-      window.location.href = '/authed/welcome.html'; 
-    console.log("trying to redirect to welcome")}, 1000);
+      console.log("trying to redirect to welcome")}, 1000);
+      fetch('/authed/welcome', {method : "GET", headers : { 'Authorization' : 'JWT ' + body.token }, credentials : 'include'});
     }
-  }
+    }
+    
+   
 
 
 document.getElementById('login').addEventListener('submit', (event) => {

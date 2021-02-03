@@ -8,7 +8,6 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const passport = require('passport');
 const jwtStrategry  = require("./passport-config.js");
-passport.use(jwtStrategry);
 const jwt= require('jsonwebtoken');
 const jwtSimple = require('jwt-simple');
 // const initalizePassport = require('./passport-config.js');
@@ -38,23 +37,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-app.use(passport.initialize());
-
+passport.use(jwtStrategry);
 
 function loggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    console.log("next");
-     return next();  
-  }
-  console.log("redirected"); 
-  res.redirect('/login.html');  
+  
+  //console.log(req);
+  passport.authenticate('jwt', {session: false}, function(err, id, username){
+    console.log(err);
+    console.log(id);
+    console.log(username);  
+  }); 
+  return next();
 }
-
-app.use("/authed", loggedIn, express.static(path.join(__dirname, "/authed")) );
 app.use(express.static(path.join(__dirname, "/public")));
-
-// app.use(express.static(path.join(__dirname, "public/authed")));
-
+app.use("/authed", loggedIn);
+app.use("/authed", express.static(path.join(__dirname, "/authed")));
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error: "));
@@ -98,13 +95,17 @@ app.post('/login', (req, res) => {
 			process.env.secret
     )
     // console.log(user._id);
-    //I need to find a way to send over the user._id to the client side so it can be stored later to allow the user to only update their resources and to view their resources
     console.log("sending login response");
-		return res.json({id: user._id});
+		return res.json({ token : token }); //send back token rather the just the id
   }
   return res.redirect('/401.html');
   }); 
 })
+/**AUTHED HANDLING**/
+app.get('/authed/welcome', (req,res) => {
+  res.redirect('/authed/welcome.html');
+})
+
 
 /*********LOGOUT*********/
 app.delete('/logout', (req,res) => {

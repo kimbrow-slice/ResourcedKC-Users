@@ -19,6 +19,7 @@ async function loginUser() {
     console.log(body);
 
    if(response.status === 200) {
+     
       setCookie("cookie",body.token, 1);//body.token?
       setTimeout( function(){
       console.log("trying to redirect to welcome")}, 1000);

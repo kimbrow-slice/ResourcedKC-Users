@@ -7,10 +7,8 @@ const path = require('path');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const passport = require('passport');
-const jwtStrategry  = require("./passport-config.js");
 const jwt= require('jsonwebtoken');
 const jwtSimple = require('jwt-simple');
-// const initalizePassport = require('./passport-config.js');
 const methodOverride = require('method-override');
 
 
@@ -37,20 +35,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-passport.use(jwtStrategry);
 
-function loggedIn(req, res, next) {
-  
-  //console.log(req);
-  passport.authenticate('jwt', {session: false}, function(err, id, username){
-    console.log(err);
-    console.log(id);
-    console.log(username);  
-  }); 
-  return next();
-}
+
+
 app.use(express.static(path.join(__dirname, "/public")));
-app.use("/authed", loggedIn);
+
 app.use("/authed", express.static(path.join(__dirname, "/authed")));
 
 const db = mongoose.connection;
@@ -67,44 +56,50 @@ app.get('/', function (req, res) {
 
 /*********LOGIN*********/
 app.get('/login',  function (req, res) {
-    res.sendFile(__dirname + '/public/login.html');
-    });
+  res.sendFile(__dirname + '/public/login.html');
+  });
 
 app.post('/login', (req, res) => {
-  // console.log('test');
- 
-  let form = new formidable.IncomingForm(); 
-  form.parse(req, async function(err, fields, files){
-      // console.log(fields); 
-      let username = fields.username;
-      let password = fields.password;
-  // console.log(username); 
-      // console.log(password); 
-	const user = await User.findOne({ username }).lean()
-	if (!user) {
-   
-		return res.redirect('/401.html');
-	}
-	if (await bcrypt.compare(password, user.password)) {
-		// the username, password combination is successful
-		const token = jwt.sign(
-			{
-				id: user._id,
-				username: user.username
-			},
-			process.env.secret
-    )
-    // console.log(user._id);
-    console.log("sending login response");
-		return res.json({ token : token }); //send back token rather the just the id
-  }
-  return res.redirect('/401.html');
-  }); 
-})
+  passport.authenticate('local', { session: false}, (error, user) => {
+      //this response will be switched later with the response of 401 redirect to the HTML page created to handle this.
+      if( error || !user) {
+          res.status(400).json ({ error });
+      }
+      // creating a payload (what we are taking in liek username and password)
+      const payload = {
+          username: user.username,
+          id: user._id,
+          expires: Date.now() + parseInt(process.env.JWT_EXPIRE_MS),
+      };
+
+      //assigning the payload to req.user for later
+      req.login(payload, {session : false}, (error) => {
+          //this response will be switched later with the response of 401 redirect to the HTML page created to handle this.
+          if(error){
+              res.status(400).send({ error });
+          }
+          //generating a signed JWT and returning with response
+          const token = jwt.sign(JSON.stringify(payload), process.env.secret);
+
+          //assign our jwt to the cookies
+          res.cookie('jwt', jwt, { httpOnly: true, secure : true });
+          //this is where I will redirect them to the route ('/authed')
+          res.status(200).send({ username });
+      });
+  },
+  )(req, res);
+});
 /**AUTHED HANDLING**/
-app.get('/authed/welcome', (req,res) => {
-  res.redirect('/authed/welcome.html');
-})
+
+app.get('/authed', (req,res) => {
+  passport.authenticate('jwt', {session: false}),
+  (req, res) => {
+      const {user} = req;
+      //this is where they will be redirected to ('/authed/welcome.html')
+      res.status(200).send({ user });
+  }
+});
+
 
 
 /*********LOGOUT*********/

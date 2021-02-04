@@ -1,56 +1,40 @@
-// require('dotenv').config();
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const passportJWT = require('passport-jwt');
+const JWTStrategy = passportJWT.Strategy;
 const bcrypt = require('bcrypt');
-const opts = {}
-opts.jwtFromRequest = ExtractJwt.fromHeader();
-opts.secretOrKey = process.env.secret;
 
-module.exports = new JwtStrategy(opts, async (jwt_payload,done)=> {
+const { secret } = process.env.secret;
+const UserSchema = require('./models/userSchema');
 
-//     const user = await (req.body.email);
-//    if( jwt_payload.email === req.body.email){
-       console.log("middleware")
-        return done(null, true)
-    // }
-    
-    // try {
-    //     if (await bcrypt.compare(password, user.password)){
-    //         return done(null, user);
-    //      } else {
-    //          return done(null, false, { message: "Password is incorrect"});
-    //      }
-    // } catch (e) {
-    //     return done(e);
-    // }
-    
-})
+passport.use(new LocalStrategy({
+    username: username,
+    password: password,
+},  async (username, password, done) => {
+    try {
+        const userDoc = await UserSchema.findOne({username: username}).exec();
+        const passwordCheck = await bcrypt.compare(password, userDoc.password);
 
+        if(passwordCheck){
+            return done(null, userDoc);
+        } else {
+            return done ('Incorrect Username or Password');
+        }
+    } catch(error) {
+        done(error);
+    }
+}));
 
-// function initalizePassport(passport, getUserByName, getUserById){
-//     const authenticateUser = async (username, password, done) => {
-//         const user = await getUserByName(username);
-//         //password below isn't being logged
-//         console.log(password); 
-//         if( jwt_payload.username === req.body.username){
-//             return done(null, true)
-//         }
+passport.use(new JWTStrategy({
+    jwtFromRequest : req => req.cookies.jwt,
+    secretOrKey: secret,
+},
 
-//         try {
-//             if (await bcrypt.compare(password, user.password)){
-//                 return done(null, user);
-//              } else {
-//                  return done(null, false, { message: "Password is incorrect"});
-//              }
-//         } catch (e) {
-//             return done(e);
-//         }
-//     }
-    
+(jwtPayload, done) =>{
+    if (Date.now() > jwtPayload.expires) {
+        return done('jwt expired');
+    }
 
-//     });
-// }
-
-
-// initalizePassport();
-
+    return done(null, jwtPayload);
+    }
+));

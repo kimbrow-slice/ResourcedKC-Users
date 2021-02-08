@@ -181,7 +181,7 @@ app.post('/register',  async function (req,res) {
 });
 
 
-app.get('/resources/emergencyShelter', function (req,res) {
+app.get('/resources/emergencyshelter', function (req,res) {
   Resource.find({
     services : 'Emergency Shelter'
   }, function (err, resources) {
@@ -199,7 +199,7 @@ Resource.find({
   })
 });
 
-app.get('/resources/financialAssistance', function (req,res) {
+app.get('/resources/financialassistance', function (req,res) {
   Resource.find({
     services : 'Financial Assistance'
   }, function (err, resources) {
@@ -208,7 +208,7 @@ app.get('/resources/financialAssistance', function (req,res) {
   })
 });
 
-app.get('/resources/foodPantry', function (req,res) {
+app.get('/resources/foodpantry', function (req,res) {
   Resource.find({
     services : 'Food Pantry'
   }, function (err, resources) {
@@ -217,7 +217,7 @@ app.get('/resources/foodPantry', function (req,res) {
   })
 });
 
-app.get('/resources/healthClinic', function (req,res) {
+app.get('/resources/healthclinic', function (req,res) {
   Resource.find({
     services : 'Health Clinic'
   }, function (err, resources) {
@@ -226,7 +226,7 @@ app.get('/resources/healthClinic', function (req,res) {
   })
 });
 
-app.get('/resources/clothing', function (req,res) {
+app.get('/resources/clothingcloset', function (req,res) {
   Resource.find({
     services : 'Clothing Closet'
   }, function (err, resources) {
@@ -235,7 +235,7 @@ app.get('/resources/clothing', function (req,res) {
   })
 });
 
-app.get('/resources/rehab', function (req,res) {
+app.get('/resources/rehabdetox', function (req,res) {
   Resource.find({
     services : 'Rehab and Detox'
   }, function (err, resources) {
@@ -244,7 +244,7 @@ app.get('/resources/rehab', function (req,res) {
   })
 });
 
-app.get('/resources/sexTrafficking', function (req,res) {
+app.get('/resources/sextrafficking', function (req,res) {
   Resource.find({
     services : 'Sex Trafficking'
   }, function (err, resources) {

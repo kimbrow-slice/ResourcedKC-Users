@@ -136,17 +136,9 @@ main {
 h3{
   color: #ff3d00;
 }
-label{
-  font-size: 25px;
-  font-family: 'Montserrat', sans-serif;
-  background-color: #021936;
-  color: white;
-  border-radius: 10px;
-  outline:none;
-  letter-spacing: 4px;
-  padding: 0 10px 0 10px;
 
-}
+
+
 .demo{
   float:right;
  margin-top: -475px;
@@ -213,7 +205,16 @@ p {
   border-radius: 10px;
   outline:none;
 }  
-
+#loginBtn:active{
+  background-color: #ff3d00;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+#registerBtn:active{
+  background-color: #ff3d00;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 #register, #reset {
   font-family: 'Montserrat', sans-serif;
   color: #171c24;

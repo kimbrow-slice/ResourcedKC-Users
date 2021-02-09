@@ -142,17 +142,7 @@ main {
 h3{
   color: #ff3d00;
 }
-label{
-  font-size: 25px;
-  font-family: 'Montserrat', sans-serif;
-  background-color: #021936;
-  color: white;
-  border-radius: 10px;
-  outline:none;
-  letter-spacing: 4px;
-  padding: 0 10px 0 10px;
 
-}
 .demo{
   float:right;
  margin-top: -475px;

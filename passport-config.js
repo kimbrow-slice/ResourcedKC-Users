@@ -1,33 +1,14 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const passportJWT = require('passport-jwt');
-const JWTStrategy = passportJWT.Strategy;
 const bcrypt = require('bcrypt');
-
-const { secret } = process.env.secret;
+const passportJWT = require("passport-jwt");
+const JWTStrategy   = passportJWT.Strategy;
+// const ExtractJWT = passportJWT.ExtractJwt;
 const UserSchema = require('./models/userSchema');
 
-passport.use(new LocalStrategy({
-    username: username,
-    password: password,
-},  async (username, password, done) => {
-    try {
-        const userDoc = await UserSchema.findOne({username: username}).exec();
-        const passwordCheck = await bcrypt.compare(password, userDoc.password);
-
-        if(passwordCheck){
-            return done(null, userDoc);
-        } else {
-            return done ('Incorrect Username or Password');
-        }
-    } catch(error) {
-        done(error);
-    }
-}));
-
-passport.use(new JWTStrategy({
+passport.use('jwt', new JWTStrategy({
     jwtFromRequest : req => req.cookies.jwt,
-    secretOrKey: secret,
+    secretOrKey: process.env.secret
 },
 
 (jwtPayload, done) =>{
@@ -38,3 +19,23 @@ passport.use(new JWTStrategy({
     return done(null, jwtPayload);
     }
 ));
+
+passport.use('local', new LocalStrategy( async (username, password, done) => {
+    console.log(username);
+    try {
+        const userDoc = await UserSchema.findOne({username}).exec();
+        const passwordCheck = await bcrypt.compare(password, userDoc.password);
+        console.log(userDoc);
+        console.log(passwordCheck);
+        
+        
+
+        if(passwordCheck){
+            return done(null, userDoc);
+        } else {
+            return done ('Incorrect Username or Password');
+        }
+    }
+    catch{ (err) => done(err) }
+}));
+

@@ -10,7 +10,8 @@ const passport = require('passport');
 const jwt= require('jsonwebtoken');
 const jwtSimple = require('jwt-simple');
 const methodOverride = require('method-override');
-
+const cors = require('cors');
+require('./passport-config');
 
 mongoose.set("useFindAndModify", false);
 let port = process.env.PORT || 4050;
@@ -35,12 +36,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-
+app.use(cors());
 
 
 app.use(express.static(path.join(__dirname, "/public")));
 
-app.use("/authed", express.static(path.join(__dirname, "/authed")));
+// app.use(express.static(path.join(__dirname, "/authed")));
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error: "));
@@ -59,47 +60,53 @@ app.get('/login',  function (req, res) {
   res.sendFile(__dirname + '/public/login.html');
   });
 
-app.post('/login', (req, res) => {
-  passport.authenticate('local', { session: false}, (error, user) => {
-      //this response will be switched later with the response of 401 redirect to the HTML page created to handle this.
-      if( error || !user) {
-          res.status(400).json ({ error });
+app.post('/login',  (req,res,next) => {
+  console.log(req.body);
+  passport.authenticate(
+    'local',
+    { session: false },
+    (error, user) => {
+
+      if (error || !user) {
+        console.log(user);
+
+       res.status(400).json({ error });
       }
-      // creating a payload (what we are taking in liek username and password)
+
+      /** This is what ends up in our JWT */
       const payload = {
-          username: user.username,
-          id: user._id,
-          expires: Date.now() + parseInt(process.env.JWT_EXPIRE_MS),
+        username: user.username,
+        expires: Date.now() + parseInt(process.env.JWT_EXPIRE_MS),
       };
 
-      //assigning the payload to req.user for later
-      req.login(payload, {session : false}, (error) => {
-          //this response will be switched later with the response of 401 redirect to the HTML page created to handle this.
-          if(error){
-              res.status(400).send({ error });
-          }
-          //generating a signed JWT and returning with response
-          const token = jwt.sign(JSON.stringify(payload), process.env.secret);
+      /** assigns payload to req.user */
+      req.login(payload, {session: false}, (error) => {
+        if (error) {
+          res.status(400).send({ error });
+        }
 
-          //assign our jwt to the cookies
-          res.cookie('jwt', jwt, { httpOnly: true, secure : true });
-          //this is where I will redirect them to the route ('/authed')
-          res.status(200).send({ username });
+        /** generate a signed json web token and return it in the response */
+        const token = jwt.sign(JSON.stringify(payload), process.env.secret);
+
+        /** assign our jwt to the cookie */
+        console.log(token);
+        res.cookie('jwt', token, { httpOnly: true, secure: true });
+        res.status(200).send({ username });
       });
-  },
-  )(req, res);
+    },
+  )(req, res, next);
 });
+
 /**AUTHED HANDLING**/
 
-app.get('/authed', (req,res) => {
+app.get('/protected',
   passport.authenticate('jwt', {session: false}),
   (req, res) => {
-      const {user} = req;
-      //this is where they will be redirected to ('/authed/welcome.html')
-      res.status(200).send({ user });
-  }
-});
+    const { user } = req;
 
+    res.status(200).send({ user });
+    return res.redirect('/authed/welcome.html');
+  });
 
 
 /*********LOGOUT*********/

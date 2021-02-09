@@ -3,11 +3,20 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const passportJWT = require("passport-jwt");
 const JWTStrategy   = passportJWT.Strategy;
-// const ExtractJWT = passportJWT.ExtractJwt;
+const ExtractJwt = passportJWT.ExtractJwt;
 const UserSchema = require('./models/userSchema');
 
+
+var cookieExtractor = function(req){
+    var token = null;
+    if(req && req.cookies) token = req.cookies['jwt'];
+    console.log("extrated: ");
+    console.log(token);
+    return token; 
+};
+
 passport.use('jwt', new JWTStrategy({
-    jwtFromRequest : req => req.cookies.jwt,
+    jwtFromRequest :  cookieExtractor,
     secretOrKey: process.env.secret
 },
 
@@ -15,7 +24,8 @@ passport.use('jwt', new JWTStrategy({
     if (Date.now() > jwtPayload.expires) {
         return done('jwt expired');
     }
-
+    console.log("authed:");
+    console.log(jwtPayload);
     return done(null, jwtPayload);
     }
 ));

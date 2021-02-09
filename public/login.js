@@ -13,16 +13,24 @@ async function loginUser() {
   }),
     headers: {"Content-Type" : "application/json"}
   };
-  console.log('Y NO WORK');
+  // console.log('Y NO WORK');
   const response = await fetch('/login',requestOptions);
-  console.log(response);
+  // console.log(response);
   const body = await response.json();
-  console.log(body);
+  // console.log(body);
 
  if(response.status === 200) {
-    setCookie("cookie",body.token, 1);
+    
     alert("Trying to redirect to authed route");
-    fetch('/protected', {method: "GET", headers: {'Authorization': 'jwt' + body.token}, credentials: "include"})
+    window.location.href= "/authed/welcome.html";
+    // fetch('/protected', {method: "GET", headers: {'Authorization': 'Bearer ' + body.token}, credentials: "same-origin", redirect:"follow"}).then(function(data){
+    //   console.log("redirect res");
+    //   console.log(data); 
+    //   if(data.redirected){
+    //     window.location.href=data.url;
+    //   }
+    // })
+    //window.location.href="/authed/welcome.html"
   }
 }
 

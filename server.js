@@ -10,7 +10,7 @@ const passport = require('passport');
 const jwt= require('jsonwebtoken');
 const jwtSimple = require('jwt-simple');
 const methodOverride = require('method-override');
-const cors = require('cors');
+
 require('./passport-config');
 
 mongoose.set("useFindAndModify", false);
@@ -19,6 +19,7 @@ const mongoDB = process.env.CONNECTION;
 
 const User = require('./models/userSchema.js');
 const Resource = require('./models/filterSchema.js');
+const cookieParser = require('cookie-parser');
 
 mongoose.connect(
   mongoDB,
@@ -36,12 +37,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-app.use(cors());
+app.use(cookieParser());
 
 
 app.use(express.static(path.join(__dirname, "/public")));
-
-// app.use(express.static(path.join(__dirname, "/authed")));
+app.use("/authed", passport.authenticate('jwt', {session: false}));
+app.use("/authed", express.static(path.join(__dirname, "/authed")));
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error: "));
@@ -78,7 +79,7 @@ app.post('/login',  (req,res,next) => {
         username: user.username,
         expires: Date.now() + parseInt(process.env.JWT_EXPIRE_MS),
       };
-
+      
       /** assigns payload to req.user */
       req.login(payload, {session: false}, (error) => {
         if (error) {
@@ -89,9 +90,9 @@ app.post('/login',  (req,res,next) => {
         const token = jwt.sign(JSON.stringify(payload), process.env.secret);
 
         /** assign our jwt to the cookie */
-        console.log(token);
-        res.cookie('jwt', token, { httpOnly: true, secure: true });
-        res.status(200).send({ username });
+        // console.log(token);
+        res.cookie('jwt', token, { httpOnly: true});
+        res.status(200).send({ token });
       });
     },
   )(req, res, next);
@@ -103,15 +104,17 @@ app.get('/protected',
   passport.authenticate('jwt', {session: false}),
   (req, res) => {
     const { user } = req;
+    
+    console.log("redirect is trash");
+    res.redirect( '/authed/welcome.html');
 
-    res.status(200).send({ user });
-    return res.redirect('/authed/welcome.html');
+    //res.redirect('/authed/welcome.html');
   });
 
 
 /*********LOGOUT*********/
 app.delete('/logout', (req,res) => {
-    req.logOut();
+    req.logout();
     res.sendStatus(204);
 });
     

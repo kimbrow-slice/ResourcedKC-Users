@@ -30,20 +30,26 @@ div.elem-group {
     height: 250px;
   }
   
-  .submitBtn{
-    height: 50px;
-    background: green;
+  .submitBtn{font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #021936;
     color: white;
-    border: 2px solid darkgreen;
-    font-size: 1.25em;
-    font-family: 'Aleo';
-    border-radius: 4px;
-    cursor: pointer;
+    border-radius: 10px;
+    outline:none;
+    letter-spacing: 4px;
+    padding: 0 10px 0 10px;
+    cursor:pointer;
   }
+  .submitBtn:hover{
+      background-color: #ff3d00;
+      outline: none;
+  }
+  .submitBtn:active {
+      background-color: #ff3d00;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
   
-  .submitBtn:hover {
-    border: 2px solid black;
-  }
    
   @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
 *{

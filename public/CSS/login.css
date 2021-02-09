@@ -209,7 +209,16 @@ p {
   border-radius: 10px;
   outline:none;
 }  
-
+#loginBtn:active{
+  background-color: #ff3d00;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+#registerBtn:active{
+  background-color: #ff3d00;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 #register, #reset {
   font-family: 'Montserrat', sans-serif;
   color: #171c24;

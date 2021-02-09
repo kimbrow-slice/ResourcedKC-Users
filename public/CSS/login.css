@@ -47,8 +47,14 @@
  
  .welcoming {
    text-align: center;
-   padding: 50px 0 50px 0;
+   padding: 30px 0 50px 0;
  }
+ .welcomeLinks {
+   color:#ff3d00;
+ }
+ .welcomeLinks:hover {
+  color:#021936;
+}
  #ourEmails{
   color:#ff3d00;;
 }
@@ -136,8 +142,6 @@ main {
 h3{
   color: #ff3d00;
 }
-
-
 
 .demo{
   float:right;

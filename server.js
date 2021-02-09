@@ -7,13 +7,11 @@ const path = require('path');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const passport = require('passport');
-const jwtStrategry  = require("./passport-config.js");
-passport.use(jwtStrategry);
 const jwt= require('jsonwebtoken');
 const jwtSimple = require('jwt-simple');
-// const initalizePassport = require('./passport-config.js');
 const methodOverride = require('method-override');
 
+require('./passport-config');
 
 mongoose.set("useFindAndModify", false);
 let port = process.env.PORT || 4050;
@@ -21,6 +19,7 @@ const mongoDB = process.env.CONNECTION;
 
 const User = require('./models/userSchema.js');
 const Resource = require('./models/filterSchema.js');
+const cookieParser = require('cookie-parser');
 
 mongoose.connect(
   mongoDB,
@@ -31,27 +30,26 @@ mongoose.connect(
     console.log("Connected to database");
   }
 );
-app.listen(port, function () {
-    console.log("The server is up and running at " + port);
-  });
+
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-app.use(passport.initialize());
+app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, "public")));
-app.use("public/authed", function (req, res, next) {
-    if (!req.isAuthenticated()) {
-        return res.redirect('/login.html');
-    }
-    next();    
-});
-// app.use(express.static(path.join(__dirname, "public/authed")));
+
+app.use(express.static(path.join(__dirname, "/public")));
+app.use("/authed", passport.authenticate('jwt', {session: false}));
+app.use("/authed", express.static(path.join(__dirname, "/authed")));
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error: "));
+
+app.listen(port, function () {
+  console.log("The server is up and running at " + port);
+});
 
 /*********INDEX*********/
 app.get('/', function (req, res) {
@@ -60,44 +58,63 @@ app.get('/', function (req, res) {
 
 /*********LOGIN*********/
 app.get('/login',  function (req, res) {
-    res.sendFile(__dirname + '/public/login.html');
-    });
+  res.sendFile(__dirname + '/public/login.html');
+  });
 
-app.post('/login', (req, res) => {
-  // console.log('test');
- 
-  let form = new formidable.IncomingForm(); 
-  form.parse(req, async function(err, fields, files){
-      // console.log(fields); 
-      let username = fields.username;
-      let password = fields.password;
-  // console.log(username); 
-      // console.log(password); 
-	const user = await User.findOne({ username }).lean()
-	if (!user) {
-   
-		return res.redirect('/401.html');
-	}
-	if (await bcrypt.compare(password, user.password)) {
-		// the username, password combination is successful
-		const token = jwt.sign(
-			{
-				id: user._id,
-				username: user.username
-			},
-			process.env.secret
-    )
-    // console.log(user._id);
-    //I need to find a way to send over the user._id to the client side so it can be stored later to allow the user to only update their resources and to view their resources
-		return res.json({id: user._id});
-  }
-  return res.redirect('/401.html');
-  }); 
-})
+app.post('/login',  (req,res,next) => {
+  console.log(req.body);
+  passport.authenticate(
+    'local',
+    { session: false },
+    (error, user) => {
+
+      if (error || !user) {
+        console.log(user);
+
+       res.status(400).json({ error });
+      }
+
+      /** This is what ends up in our JWT */
+      const payload = {
+        username: user.username,
+        expires: Date.now() + parseInt(process.env.JWT_EXPIRE_MS),
+      };
+      
+      /** assigns payload to req.user */
+      req.login(payload, {session: false}, (error) => {
+        if (error) {
+          res.status(400).send({ error });
+        }
+
+        /** generate a signed json web token and return it in the response */
+        const token = jwt.sign(JSON.stringify(payload), process.env.secret);
+
+        /** assign our jwt to the cookie */
+        // console.log(token);
+        res.cookie('jwt', token, { httpOnly: true});
+        res.status(200).send({ token });
+      });
+    },
+  )(req, res, next);
+});
+
+/**AUTHED HANDLING**/
+
+app.get('/protected',
+  passport.authenticate('jwt', {session: false}),
+  (req, res) => {
+    const { user } = req;
+    
+    console.log("redirect is trash");
+    res.redirect( '/authed/welcome.html');
+
+    //res.redirect('/authed/welcome.html');
+  });
+
 
 /*********LOGOUT*********/
 app.delete('/logout', (req,res) => {
-    req.logOut();
+    req.logout();
     res.sendStatus(204);
 });
     

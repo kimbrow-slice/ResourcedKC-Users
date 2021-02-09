@@ -48,7 +48,7 @@ if($_POST) {
     if($concerned_topic == "Feedback") {
         $recipient = "ResourcedKC@resourcedkc.org";
     }
-    else if($concerned_topic == "About Resources") {
+    else if($concerned_topic == "Update Resources") {
         $recipient = "ResourcedKC@resourcedkc.org";
     }
     else if($concerned_topic == "technical support") {

@@ -16,3 +16,25 @@ label:active {
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }
+  #searchBtn{font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #021936;
+    color: white;
+    border-radius: 10px;
+    outline:none;
+    letter-spacing: 4px;
+    padding: 0 10px 0 10px;
+    cursor:pointer;
+    margin-left: 600px;
+    margin-top: 400px;
+    
+  }
+  #searchBtn:hover{
+      background-color: #ff3d00;
+      outline:none;
+  }
+  #searchBtn:active {
+      background-color: #ff3d00;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }

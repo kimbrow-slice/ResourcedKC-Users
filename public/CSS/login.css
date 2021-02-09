@@ -141,8 +141,8 @@ h3{
 
 .demo{
   float:right;
- margin-top: -475px;
- padding-bottom: 100px;
+ margin-top: -685px;
+ padding-bottom: 300px;
 }
 .checkboxtitle{
   padding-left: 375px;
@@ -248,7 +248,7 @@ p {
 
 #Mission {
   background-color:#171c2410;
-
+  width: 100%;
 }
 
 

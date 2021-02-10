@@ -47,8 +47,14 @@
  
  .welcoming {
    text-align: center;
-   padding: 50px 0 50px 0;
+   padding: 30px 0 50px 0;
  }
+ .welcomeLinks {
+   color:#ff3d00;
+ }
+ .welcomeLinks:hover {
+  color:#021936;
+}
  #ourEmails{
   color:#ff3d00;;
 }
@@ -119,11 +125,33 @@ main {
 }
 .title{
   font-family: 'Montserrat', sans-serif;
-    padding: 40px 0 40px 0;
+    padding-left: 60px;
+    padding-bottom: 100px;
     font-size: 25px;
     text-align:center;
+    color: #ff3d00 ;
+}
+.titlehome{
+  font-family: 'Montserrat', sans-serif;
+    padding-left: 400px;
+    padding-bottom: 100px;
+    font-size: 25px;
+    text-align:center;
+    color: #ff3d00 ;
+}
+h3{
+  color: #ff3d00;
 }
 
+.demo{
+  float:right;
+ margin-top: -685px;
+ padding-bottom: 300px;
+}
+.checkboxtitle{
+  padding-left: 375px;
+  padding-bottom: 50px;
+}
 .login {
     padding: 40px 0 40px 0;
     font-size: 20px;
@@ -181,7 +209,16 @@ p {
   border-radius: 10px;
   outline:none;
 }  
-
+#loginBtn:active{
+  background-color: #ff3d00;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+#registerBtn:active{
+  background-color: #ff3d00;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 #register, #reset {
   font-family: 'Montserrat', sans-serif;
   color: #171c24;
@@ -215,7 +252,7 @@ p {
 
 #Mission {
   background-color:#171c2410;
-
+  width: 100%;
 }
 
 
@@ -469,4 +506,8 @@ nav .logo.space{
   height: auto;
   background-position: center;
  }
+}
+section {
+  padding-top: 100px;
+  margin-right: 55px;
 }

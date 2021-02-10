@@ -1,37 +1,47 @@
 async function loginUser() {
-    let currentUser =  new FormData();
-    currentUser.append('username', document.getElementById('username').value);
-    currentUser.append('password', document.getElementById('password').value);
+  
 
-    for (var key of currentUser.entries()) {
-        console.log(key[0] + ', ' + key[1]);
-    }
-    // console.log(currentUser);
 
-    let requestOptions = {
-      method : "POST",
-      body : currentUser,
-    };
+
+  // console.log(currentUser);
+
+  let requestOptions = {
+    method : "POST",
+    body : JSON.stringify({  
+    'username' : document.getElementById('username').value,
+    'password' : document.getElementById('password').value
+  }),
+    headers: {"Content-Type" : "application/json"}
+  };
+  // console.log('Y NO WORK');
+  const response = await fetch('/login',requestOptions);
+  // console.log(response);
+  const body = await response.json();
+  // console.log(body);
+
+ if(response.status === 200) {
     
-    const response = await fetch('/login',requestOptions);
-    console.log(response);
-    const body = await response.json();
-    // console.log(body);
-
-   if(response.status === 200) {
-      setCookie("currentUser",body.id, 1);
-      window.location.href = 'authed/welcome.html';
-    }
+    alert("Trying to redirect to authed route");
+    window.location.href= "/authed/welcome.html";
+    // fetch('/protected', {method: "GET", headers: {'Authorization': 'Bearer ' + body.token}, credentials: "same-origin", redirect:"follow"}).then(function(data){
+    //   console.log("redirect res");
+    //   console.log(data); 
+    //   if(data.redirected){
+    //     window.location.href=data.url;
+    //   }
+    // })
+    //window.location.href="/authed/welcome.html"
   }
+}
 
 
 document.getElementById('login').addEventListener('submit', (event) => {
-    event.preventDefault();
-    loginUser().then( ()=> {
-      console.log('success');
-    }).catch((err, user)=>{
-      if((err) || (user != user) || (user === null))
-      console.log(err);
-      window.location.href="401.html"
-    });
-  })
+  event.preventDefault();
+  loginUser().then( ()=> {
+    console.log('success');
+  }).catch((err, user)=>{
+    if((err) || (user != user) || (user === null))
+    console.log(err);
+    window.location.href="401.html"
+  });
+})

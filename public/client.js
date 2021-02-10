@@ -8,6 +8,7 @@
     let clothing   = document.getElementById('clothingcloset').checked;
     let rehab      = document.getElementById('rehabdetox').checked;
     let sextraffic = document.getElementById('sextrafficking').checked;
+    
 
     let response = [];
 
@@ -19,44 +20,44 @@
     if (shelter) {
       const shelterresponse = await fetch("/resources/emergencyshelter", requestOptions);
       const body = await shelterresponse.json();
-      response.push(body);
+      response = response.concat(body);
     }
     if (finance) {
       const financeresponse = await fetch("/resources/financialassistance", requestOptions);
       const body = await financeresponse.json();
-      response.push(body);
+      response = response.concat(body);
     }
     if (housing) {
       const housingresponse = await fetch ("/resources/housing", requestOptions);
       const body = await housingresponse.json();
-      response.push(body);
+      response = response.concat(body);
     }
     if (food) {
       const foodresponse = await fetch ("/resources/foodpantry", requestOptions);
       const body = await foodresponse.json();
-      response.push(body);
+      response =  response.concat(body);
     }
     if (health) {
       const healthresponse = await fetch ("/resources/healthclinic", requestOptions);
       const body = await healthresponse.json();
-      response.push(body);
+      response = response.concat(body);
     }
     if (clothing) {
       const clothingresponse = await fetch ("/resources/clothingcloset", requestOptions);
       const body = await clothingresponse.json();
-      response.push(body)
+      response = response.concat(body)
     }
     if (rehab)  {
       const rehabresponse = await fetch ("/resources/rehabdetox", requestOptions);
       const body = await rehabresponse.json();
-      response.push(body)
+      response = response.concat(body)
     }
     if (sextraffic) {
       const sextrafficresponse = await fetch ("/resources/sextrafficking", requestOptions);
       const body =await sextrafficresponse.json();
-      response.push(body)
+      response = response.concat(body)
     }
-
+    console.log(response);
     let family          = document.getElementById('family').checked;
     let women           = document.getElementById('women').checked;
     let men             = document.getElementById('men').checked;
@@ -112,40 +113,20 @@
     if (hiv) {
       demographics.push('HIV')
     }
-    // let searchresults = [];
-    // console.log(response);
 
-    // if (demographics.length === 0){
-    //   console.log(response.length);
-    // } 
-    // else {
-    //   console.log(response);
-    //   let searchresults = response.filter(function(obj) {
-    //     console.log(obj);
-    //     console.log(obj[0].usercategories);
-    //     for(i =0; i < demographics.length; i ++){
-    //       if(obj.usercategories.includes(demographics[i])){
-    //         return obj;
-    //       }
-    //     }
-    //   });
-    //   console.log(searchresults.length);
-    //   sessionStorage.setItem('usersearch', (JSON.stringify(searchresults)));
-    // }
-
-    // let filteredArr =[];
     
     if(demographics.length === 0){
       console.log(response.length);
     }
     else{
-      console.log(response);
+      //console.log(response);
       let newResponse = response.filter(
         function(obj){
+          console.log("obj: ")
           console.log(obj);
           for(i = 0; i <  response.length; i ++){
-            if(obj[i].usercategories.includes(demographics[i])){
-               return obj[i];
+            if(obj.usercategories.includes(demographics[i])){
+               return obj;
             }
           }
         }
@@ -154,22 +135,34 @@
       sessionStorage.setItem('usersearch', (JSON.stringify(newResponse)));
     }
     
-    // let searchresults = response.filter(
-    //   function (e) {
-
-    //     return this.indexOf(e) < 0;
-    //   },
-    //   demographics
-    // );
-    // console.log(searchresults);
 
     
     
     window.location.href = '../searchresults.html';
-    // console.log(searchresults);
+
     return response;
     // [ {"shelters" : [{}, {}, {}]}, {"xresponse":[{},{}] } ]
   }
+  
+  //displaying the search results into the HTML 
+function searchResult() {
+  let resultContainer = document.getElementById('resultsPage');
+  //  alert(sessionStorage.getItem('usersearch'));
+   let variable = JSON.parse(sessionStorage.getItem('usersearch'));
+  let results = document.createElement('p');
+    for(i = 0; i < variable.length; i++){
+  resultContainer.appendChild(results).innerHTML += "Organization Name: " + variable[i].orgname + "<br><br>" 
+  + "Services: " + variable[i].services + "<br><br>" 
+  +"Demographics: " + variable[i].usercategories + "<br><br>" 
+  + "Description: " + variable[i].description + "<br><br>" 
+  + "Zip Code: " + variable[i].zipcode + "<br>"
+  + "Hours: " + variable[i].hours + "<br><br>"
+   + "Phone: " + variable[i].phone + "<br>" 
+   + "Website: " + variable[i].website + '<a href="https://www.google.com"</a>'+ '<i class="fas fa-globe"></i></a>' + "<br><br><hr>"
+
+}
+
+}
   
 
 

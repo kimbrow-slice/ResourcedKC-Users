@@ -18,35 +18,35 @@
 
     if (shelter) {
       const shelterresponse = await fetch("/resources/emergencyshelter", requestOptions);
-      response.push({ "shelters" : shelterresponse.body.json });
+      response.push({ "shelters" : shelterresponse.json() });
     }
     if (finance) {
       const financeresponse = await fetch("/resources/financialassistance", requestOptions);
-      response.push({ "finance" : financeresponse.body.json });
+      response.push({ "finance" : financeresponse.json() });
     }
     if (housing) {
       const housingresponse = await fetch ("/resources/housing", requestOptions);
-      response.push({ "housing" : housingresponse.body.json });
+      response.push({ "housing" : housingresponse.json() });
     }
     if (food) {
       const foodresponse = await fetch ("/resources/foodpantry", requestOptions);
-      response.push({ "food" : foodresponse.body.json });
+      response.push({ "food" : foodresponse.json() });
     }
     if (health) {
       const healthresponse = await fetch ("/resources/healthclinic", requestOptions);
-      response.push({ "health" : healthresponse.body.json });
+      response.push({ "health" : healthresponse.json() });
     }
     if (clothing) {
       const clothingresponse = await fetch ("/resources/clothingcloset", requestOptions);
-      response.push({ "clothing" : clothingresponse.body.json })
+      response.push({ "clothing" : clothingresponse.json() })
     }
     if (rehab)  {
       const rehabresponse = await fetch ("/resources/rehabdetox", requestOptions);
-      response.push({ "rehab" : rehabresponse.body.json })
+      response.push({ "rehab" : rehabresponse.json() })
     }
     if (sextraffic) {
       const sextrafficresponse = await fetch ("/resources/sextrafficking", requestOptions);
-      response.push({ "sextrafficking" : sextrafficresponse.body.json })
+      response.push({ "sextrafficking" : sextrafficresponse.json() })
     }
 
     let family          = document.getElementById('family').checked;
@@ -105,11 +105,18 @@
       demographics.push('HIV')
     }
 
-    Storage.prototype.setObj = function(usercats, demographics) {
-      return this.setItem(usercats, JSON.stringify(demographics))
-  }
+    let searchresults = response.filter(
+      function (e) {
+        return this.indexOf(e) < 0;
+      },
+      demographics
+    );
+    console.log(searchresults);
 
+    sessionStorage.setItem('usersearch', (searchresults))
+    
     window.location.href = '../searchresults.html';
+    console.log(searchresults);
     return response
     // [ {"shelters" : [{}, {}, {}]}, {"xresponse":[{},{}] } ]
   }

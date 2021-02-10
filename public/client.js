@@ -1,12 +1,13 @@
 
   async function findResources() {
-    let shelters = document.getElementById('shelterscheck').checked;
-    let housing  = document.getElementById('housingcheck').checked;
-    let finance  = document.getElementById('financecheck').checked;
-    let food     = document.getElementById('foodcheck').checked;
-    let health   = document.getElementById('healthcheck').checked;
-    let clothing = document.getElementById('clothingcheck').checked;
-    let rehab    = document.getElementById('rehabcheck').checked;
+    let shelter    = document.getElementById('emergencyshelter').checked;
+    let housing    = document.getElementById('housing').checked;
+    let finance    = document.getElementById('financialassistance').checked;
+    let food       = document.getElementById('foodpantry').checked;
+    let health     = document.getElementById('healthclinic').checked;
+    let clothing   = document.getElementById('clothingcloset').checked;
+    let rehab      = document.getElementById('rehabdetox').checked;
+    let sextraffic = document.getElementById('sextrafficking').checked;
 
     let response = [];
 
@@ -15,39 +16,109 @@
       headers : { "Content-Type" : "application/json" },
     };
 
-    if (shelters) {
-      const sheltersresponse = await fetch("/resources/emergencyShelters", requestionOptions);
-      response.push({ "shelters" : sheltersresponse.body }); //[{}, {}, {}]
+    if (shelter) {
+      const shelterresponse = await fetch("/resources/emergencyshelter", requestOptions);
+      response.push({ "shelters" : shelterresponse.json() });
     }
     if (finance) {
-      const financeresponse = await fetch("/resources/financialAssistance", requestOptions);
-      response.push({ "finance" : financeresponse.body });
+      const financeresponse = await fetch("/resources/financialassistance", requestOptions);
+      response.push({ "finance" : financeresponse.json() });
     }
     if (housing) {
       const housingresponse = await fetch ("/resources/housing", requestOptions);
-      response.push({ "housing" : housingresponse.body });
+      response.push({ "housing" : housingresponse.json() });
     }
     if (food) {
-      const foodresponse = await fetch ("/resources/foodPantries", requestOptions);
-      response.push({ "food" : foodresponse.body });
+      const foodresponse = await fetch ("/resources/foodpantry", requestOptions);
+      response.push({ "food" : foodresponse.json() });
     }
     if (health) {
-      const healthresponse = await fetch ("/resources/healthClinics", requestOptions);
-      response.push({ "health" : healthresponse.body });
+      const healthresponse = await fetch ("/resources/healthclinic", requestOptions);
+      response.push({ "health" : healthresponse.json() });
     }
     if (clothing) {
-      const clothingresponse = await fetch ("/resources/clothing", requestOptions);
-      response.push({ "clothing" : clothingresponse.body })
+      const clothingresponse = await fetch ("/resources/clothingcloset", requestOptions);
+      response.push({ "clothing" : clothingresponse.json() })
     }
     if (rehab)  {
-      const rehabresponse = await fetch ("/resources/rehab", requestOptions);
-      response.push({ "rehab" : rehabresponse.body })
+      const rehabresponse = await fetch ("/resources/rehabdetox", requestOptions);
+      response.push({ "rehab" : rehabresponse.json() })
+    }
+    if (sextraffic) {
+      const sextrafficresponse = await fetch ("/resources/sextrafficking", requestOptions);
+      response.push({ "sextrafficking" : sextrafficresponse.json() })
     }
 
+    let family          = document.getElementById('family').checked;
+    let women           = document.getElementById('women').checked;
+    let men             = document.getElementById('men').checked;
+    let lgbtq           = document.getElementById('lgbtq').checked;
+    let africanamerican = document.getElementById('africanamerican').checked;
+    let hispanic        = document.getElementById('hispanic').checked;
+    let foreignlanguage = document.getElementById('foreignlanguage').checked;
+    let infant          = document.getElementById('infant').checked;
+    let children        = document.getElementById('children').checked;
+    let teen            = document.getElementById('teen').checked;
+    let elderly         = document.getElementById('elderly').checked;
+    let religion        = document.getElementById('religion').checked;
+    let hiv             = document.getElementById('hiv').checked;
+
+    let demographics = [];
+
+    if (family) {
+      demographics.push('Family')
+    }
+    if (women) {
+      demographics.push('Women')
+    }
+    if (men) {
+      demographics.push('Men')
+    }
+    if (lgbtq) {
+      demographics.push('LGBTQ')
+    }
+    if (africanamerican) {
+      demographics.push('African American')
+    }
+    if (hispanic) {
+      demographics.push('Hispanic')
+    }
+    if (foreignlanguage) {
+      demographics.push('Foreign Language')
+    }
+    if (infant) {
+      demographics.push('Infant')
+    }
+    if (children) {
+      demographics.push('Children')
+    }
+    if (teen) {
+      demographics.push('Teen')
+    }
+    if (elderly){
+      demographics.push('Elderly')
+    }
+    if (religion) {
+      demographics.push('Religion')
+    }
+    if (hiv) {
+      demographics.push('HIV')
+    }
+
+    let searchresults = response.filter(
+      function (e) {
+        return this.indexOf(e) < 0;
+      },
+      demographics
+    );
+    console.log(searchresults);
+
+    sessionStorage.setItem('usersearch', (searchresults))
+    
+    window.location.href = '../searchresults.html';
+    console.log(searchresults);
     return response
     // [ {"shelters" : [{}, {}, {}]}, {"xresponse":[{},{}] } ]
-   
-    // response.shelters
   }
 
   async function searchByName() {
@@ -81,13 +152,12 @@
     if (document.getElementById("emergencyshelter").checked) {
       node.services.push("Emergency Shelter")
     }
-    if (document.getElementById("domesticabuse").checked && document.getElementById("emergencyshelter").checked) {
+    if (document.getElementById("domesticabuse").checked) {
       node.servicesub.push("Domestic Abuse")
     }
-    if (document.getElementById("homelessshelter").checked && document.getElementById("emergencyshelter").checked) {
+    if (document.getElementById("homelessshelter").checked) {
       node.servicesub.push("Homeless Shelter")
     }
-      //make sure to use && for the subcats so they arent accidentally added if the user decudes to uncheck the primary category!
     if (document.getElementById("housing").checked) {
       node.services.push("Housing")
     }
@@ -109,7 +179,7 @@
     if (document.getElementById("sextrafficking").checked) {
       node.services.push("Sex Trafficking")
     }
-   
+    
 
 // USER CATEGORIES
 
@@ -158,10 +228,10 @@
       body: JSON.stringify(node),
       headers: { "Content-Type": "application/json" },
     };
-    alert('Thank you submitting your organzations information!');
+    alert('Thank you for submitting your organization information!');
     window.location.href = '../index.html';
     const response = await fetch("/resources", requestOptions);
-    
+    //const data = await response.json()
     if (response.status != 200) {
       throw Error ("Error!");
     } 
@@ -178,6 +248,8 @@ function subCategoryCheckboxes() {
         revealEmergencyShelterSub()
       }
       if (document.getElementById('emergencyshelter').checked===false) {
+        document.getElementById('domesticabuse').checked = false;
+        document.getElementById('homelessshelter').checked = false;
         hideEmergencyShelterSub()
       }
       if (document.getElementById('housing').checked) {
@@ -293,5 +365,16 @@ function revealSexTraffickingSub() {
 }
 
 function hideSexTraffickingSub() {
-  
+
 }
+
+
+
+// async function searchByService() {
+//   var arr = []
+//   var checkedboxes = document.querySelectorAll('input[type=checkbox]:checked')
+
+//   for (i = 0; i < checkedboxes.length; i++) {
+//     arr.push(await fetch('/resources/' + (checkedboxes[i].id), requestOptions).json)
+//   }
+// }

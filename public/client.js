@@ -18,35 +18,43 @@
 
     if (shelter) {
       const shelterresponse = await fetch("/resources/emergencyshelter", requestOptions);
-      response.push({ "shelters" : shelterresponse.json() });
+      const body = await shelterresponse.json();
+      response.push(body);
     }
     if (finance) {
       const financeresponse = await fetch("/resources/financialassistance", requestOptions);
-      response.push({ "finance" : financeresponse.json() });
+      const body = await financeresponse.json();
+      response.push(body);
     }
     if (housing) {
       const housingresponse = await fetch ("/resources/housing", requestOptions);
-      response.push({ "housing" : housingresponse.json() });
+      const body = await housingresponse.json();
+      response.push(body);
     }
     if (food) {
       const foodresponse = await fetch ("/resources/foodpantry", requestOptions);
-      response.push({ "food" : foodresponse.json() });
+      const body = await foodresponse.json();
+      response.push(body);
     }
     if (health) {
       const healthresponse = await fetch ("/resources/healthclinic", requestOptions);
-      response.push({ "health" : healthresponse.json() });
+      const body = await healthresponse.json();
+      response.push(body);
     }
     if (clothing) {
       const clothingresponse = await fetch ("/resources/clothingcloset", requestOptions);
-      response.push({ "clothing" : clothingresponse.json() })
+      const body = await clothingresponse.json();
+      response.push(body)
     }
     if (rehab)  {
       const rehabresponse = await fetch ("/resources/rehabdetox", requestOptions);
-      response.push({ "rehab" : rehabresponse.json() })
+      const body = await rehabresponse.json();
+      response.push(body)
     }
     if (sextraffic) {
       const sextrafficresponse = await fetch ("/resources/sextrafficking", requestOptions);
-      response.push({ "sextrafficking" : sextrafficresponse.json() })
+      const body =await sextrafficresponse.json();
+      response.push(body)
     }
 
     let family          = document.getElementById('family').checked;
@@ -104,22 +112,66 @@
     if (hiv) {
       demographics.push('HIV')
     }
+    // let searchresults = [];
+    // console.log(response);
 
-    let searchresults = response.filter(
-      function (e) {
-        return this.indexOf(e) < 0;
-      },
-      demographics
-    );
-    console.log(searchresults);
+    // if (demographics.length === 0){
+    //   console.log(response.length);
+    // } 
+    // else {
+    //   console.log(response);
+    //   let searchresults = response.filter(function(obj) {
+    //     console.log(obj);
+    //     console.log(obj[0].usercategories);
+    //     for(i =0; i < demographics.length; i ++){
+    //       if(obj.usercategories.includes(demographics[i])){
+    //         return obj;
+    //       }
+    //     }
+    //   });
+    //   console.log(searchresults.length);
+    //   sessionStorage.setItem('usersearch', (JSON.stringify(searchresults)));
+    // }
 
-    sessionStorage.setItem('usersearch', (searchresults))
+    // let filteredArr =[];
+    
+    if(demographics.length === 0){
+      console.log(response.length);
+    }
+    else{
+      console.log(response);
+      let newResponse = response.filter(
+        function(obj){
+          console.log(obj);
+          for(i = 0; i <  response.length; i ++){
+            if(obj[i].usercategories.includes(demographics[i])){
+               return obj[i];
+            }
+          }
+        }
+      );
+      console.log(newResponse);
+      sessionStorage.setItem('usersearch', (JSON.stringify(newResponse)));
+    }
+    
+    // let searchresults = response.filter(
+    //   function (e) {
+
+    //     return this.indexOf(e) < 0;
+    //   },
+    //   demographics
+    // );
+    // console.log(searchresults);
+
+    
     
     window.location.href = '../searchresults.html';
-    console.log(searchresults);
-    return response
+    // console.log(searchresults);
+    return response;
     // [ {"shelters" : [{}, {}, {}]}, {"xresponse":[{},{}] } ]
   }
+  
+
 
   async function searchByName() {
     let searchByName = document.getElementById('searchbar').value

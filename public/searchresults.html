@@ -10,10 +10,80 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
   <link rel="stylesheet" href="CSS/login.css" />
+  <link rel="stylesheet" href="result.css"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="pictures/ResourcedKCfavIcon.png" />
+  <link rel="icon" type="image/png" href="pictures/IconONLY.png" />
 
 
 </head>
+<body onload="searchResult()">
+<nav>
+  <img src="pictures/RKCicon.png" id="test" alt="ResourcedKC Logo">
+  <div class="menu-icon">
+    <span class="fas fa-bars"></span>
+  </div>
+  <div class="logo">
+    ResourcedKC</div>
+  <div class="nav-items">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="login.html">Login</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </div>
+  <div class="search-icon">
+    <span class="fas fa-search"></span>
+  </div>
+  <div class="cancel-icon">
+    <span class="fas fa-times"></span>
+  </div>
+  <form action="#">
+    <input type="search" id='searchbar' class="search-data" placeholder="Search" required>
+    <button type="submit" class="fas fa-search"></button>
+  </form>
+</nav>
+<main>
+  <section>
+    <div class="container">
+      <div class="row">
+        <h2 class ="resultsTitle">Here are your results!</h2>
+        <br>
+        
+      </div>
+      <div class="row">
+        <div id="resultsPage">
+         
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+  <!--FOOTER-->
+  
+  <footer>
+    <div class = "footer">
+      <a href="index.html" ><img src="pictures/NewLogo.png" id="ResourcedKCLogo" alt="ResourcedKC Logo"></a>
+      <div class="right-col">
+      <p><a href="mailto:ResourcedKC@resourcedkc.org" id="orgEmail"> ResourcedKC@resourcedkc.org</a></p>
+                <p><a class="footerLinks" href="index.html">Home</a></p>
+                <p><a class="footerLinks" href="login.html">Login</a></p>
+                <p><a class="footerLinks" href="contact.html">Contact</a></p>
+              </div>
+              <p class="copyright">COPYRIGHT 2021 ResourcedKC</p>
+    </div>
+  </footer>
+    
+
+  <!--SCRIPTS-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js" integrity="sha384-5h4UG+6GOuV9qXh6HqOLwZMY4mnLPraeTrjT5v07o347pj6IkfuoASuGBhfDsp3d" crossorigin="anonymous"></script>
+  <script src="nav-scripts.js"></script>
+  <script src="client.js"></script>
+  <script src="https://kit.fontawesome.com/fc5d2b5d29.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

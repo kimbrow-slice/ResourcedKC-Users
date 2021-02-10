@@ -18,7 +18,7 @@ label:active {
   }
   #searchBtn{font-size: 25px;
     font-family: 'Montserrat', sans-serif;
-    background-color: #021936;
+    background-color: #ff3d00;
     color: white;
     border-radius: 10px;
     outline:none;
@@ -30,11 +30,11 @@ label:active {
     
   }
   #searchBtn:hover{
-      background-color: #ff3d00;
+      background-color: #021936;
       outline:none;
   }
   #searchBtn:active {
-      background-color: #ff3d00;
+      background-color: #021936;
       box-shadow: 0 5px #666;
       transform: translateY(4px);
     }

@@ -158,7 +158,7 @@ function searchResult() {
   + "Zip Code: " + variable[i].zipcode + "<br>"
   + "Hours: " + variable[i].hours + "<br><br>"
    + "Phone: " + variable[i].phone + "<br>" 
-   + "Website: " + variable[i].website + '<a href="https://www.google.com"</a>'+ '<i class="fas fa-globe"></i></a>' + "<br><br><hr>"
+   + "Website: " + variable[i].website + '<a href="' +variable[i].website+'"</a>'+ '<i class="fas fa-globe"></i></a>' + "<br><br><hr>"
 
 }
 
